@@ -482,7 +482,7 @@ $ git commit -m "& simple"
 
 现在，`master`分支和`feature1`分支各自都分别有新的提交，变成了这样：
 
-![](E:\Linux-learn\merge_conflict.png)
+![](./images/merge_conflict.png)
 
 这种情况下，Git无法执行“快速合并”，只能试图把各自的修改合并起来，但这种合并就可能会有冲突，我们试试看：
 
@@ -547,7 +547,7 @@ $ git commit -m "conflict fixed"
 
 现在，`master`分支和`feature1`分支变成了下图所示：
 
-![](E:\Linux-learn\merge_out.png)
+![](./images/merge_out.png)
 
 最后，可以正常删除`feature1`分支：
 
@@ -942,13 +942,13 @@ logs/
 
 使用此工作流的优点是，Git 功能分支工作流使你可以在代码上进行协作，而不必担心代码冲突。
 
-![](E:\Linux-learn\Git_featuret.png)
+![](./images/Git_featuret.png)
 
 ### 2. Git Flow工作流
 
 [Git之GitFlow工作流 | Gitflow Workflow（万字整理，已是最详）-CSDN博客](https://blog.csdn.net/sunyctf/article/details/130587970)
 
-![](E:\Linux-learn\Git Flow.png)
+![](./images/Git Flow.png)
 
 ### 3. Github Flow工作流
 
@@ -958,7 +958,7 @@ Github Flow是Git flow的简化版，专门配合"持续发布"。它是 Github.
 
 官方推荐的[流程](https://guides.github.com/introduction/flow/index.html)如下。
 
-![](E:\Linux-learn\Github Flow.png)
+![](./images/Github Flow.png)
 
 第一步：根据需求，从`master`拉出新分支，不区分功能分支或补丁分支。
 

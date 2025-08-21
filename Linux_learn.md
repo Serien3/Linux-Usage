@@ -4,7 +4,7 @@
 
 Linux只有一个根目录`/`，
 
-![struct](struct.png)
+![struct](./images/struct.png)
 
 Linux下一切皆文件，即使是windows系统下的文件夹，我们也看作是文件，只不过它叫目录文件，抽象的看，在逻辑上它是树的一个节点，记录了该节点下的文件的位置，信息等。“一切皆是文件”是 Unix/Linux 的基本哲学之一
 
@@ -124,7 +124,7 @@ shell：shell的意思是“壳”，这个翻译十分生动形象。计算机�
 
  Bash（GNU Bourne-Again Shell）是一个为 GNU 计划编写的 Unix shell，Bash 是大多数 Linux 系统的缺省 Shell。
 
-![](E:\Linux-learn\shell.png)
+![](./images/shell.png)
 
 命令：即执行Linux程序
 
@@ -1701,7 +1701,7 @@ ssh vm20
   # 使用 ssh 连接到 connectToHost ，并将所有到本地 sourcePort 的连接尝试转发到名为 forwardToHost 的机器上的 onPort 端口，该机器可以从 connectToHost 机器访问。
   ```
 
-  ![](E:\Linux-learn\local.png)
+  ![](./images/local.png)
 
 - 反向转发 / 远程端口转发：把自己本地机器上的一个端口映射到对方服务器上的一个端口，这样传递给对方服务器上该端口的流量（信息，请求，...）会被转发到你的本地机器上，让操作者觉得是在远程服务器上进行操作（实际上进程、服务运行在本地机器上）
 
@@ -1714,4 +1714,4 @@ ssh vm20
 
   
 
-  ![](E:\Linux-learn\remote.png)
+  ![](./images/remote.png)
