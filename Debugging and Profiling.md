@@ -18,7 +18,7 @@
 
 **代码不能完全按照您的想法运行，它只能完全按照您的写法运行，这是编程界的一条金科玉律。**
 
-A programming language is more than just a means for instructing a computer to perform tasks. The language also serves as a framework within which we organize our ideas about computational processes. Programs serve to communicate those ideas among the members of a programming community. Thus, programs must be written for people to read, and only incidentally for machines to execute.
+A programming language is more than just a means for instructing a computer to perform tasks. The language also serves as a framework within which we organize our ideas about computational processes. Programs serve to communicate those ideas among the members of a programming community. **Thus, programs must be written for people to read, and only incidentally for machines to execute.**
 
 
 
@@ -82,3 +82,17 @@ journalctl --since "1m ago" | grep Hello
 
 我们可以理解为，调试器能够让我们以状态机的视角去逐步观察一个程序的运行，来查找出不符合我们预期的状态映射！
 
+
+
+## 专门工具
+
+即使您需要调试的程序是一个二进制的黑盒程序，仍然有一些工具可以帮助到您。当您的程序需要执行一些只有操作系统内核才能完成的操作时，它需要使用 [系统调用](https://en.wikipedia.org/wiki/System_call)。有一些命令可以帮助您追踪您的程序执行的系统调用。在 Linux 中可以使用 [`strace`](http://man7.org/linux/man-pages/man1/strace.1.html) ，在 macOS 和 BSD 中可以使用 [`dtrace`](http://dtrace.org/blogs/about/)。`dtrace` 用起来可能有些别扭，因为它使用的是它自有的 `D` 语言，但是我们可以使用一个叫做 [`dtruss`](https://www.manpagez.com/man/1/dtruss/) 的封装使其具有和 `strace` (更多信息参考 [这里](https://8thlight.com/blog/colin-jones/2015/11/06/dtrace-even-better-than-strace-for-osx.html))类似的接口
+
+下面的例子展现来如何使用 `strace` 或 `dtruss` 来显示 `ls` 执行时，对 [`stat`](http://man7.org/linux/man-pages/man2/stat.2.html) 系统调用进行追踪对结果。若需要深入了解 `strace`，[这篇文章](https://blogs.oracle.com/linux/strace-the-sysadmins-microscope-v2) 值得一读。
+
+```bash
+# On Linux
+sudo strace -e lstat ls -l > /dev/null
+# On macOS
+sudo dtruss -t lstat64_extended ls -l > /dev/null
+```

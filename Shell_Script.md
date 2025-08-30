@@ -1,5 +1,23 @@
 # Shell Script
 
+
+
+---
+
+**Resources：**
+
+[【2024最新版】花费90分钟一口气学完！带你掌握shell脚本所有核心知识点，全程干货，无废话！_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV14L4y157Bv/?spm_id_from=333.337.search-card.all.click&vd_source=4cf1248054c659cc46bc5bafc9e804af)
+
+[Shell 教程 | 菜鸟教程](https://www.runoob.com/linux/linux-shell.html)
+
+[Shell 工具和脚本 · the missing semester of your cs education](https://missing-semester-cn.github.io/2020/shell-tools/)
+
+
+
+---
+
+
+
 Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。
 
 Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。
@@ -27,7 +45,7 @@ Linux 的 Shell 种类众多，常见的有：
 - Shell for Root（/sbin/sh）
 - ……
 
-本教程关注的是 Bash，也就是 Bourne Again Shell，由于易用和免费，Bash 在日常工作中被广泛使用。同时，Bash 也是大多数Linux 系统默认的 Shell。
+我们需要关注的是 Bash，也就是 Bourne Again Shell，由于易用和免费，Bash 在日常工作中被广泛使用。同时，Bash 也是大多数Linux 系统默认的 Shell。
 
 在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 **#!/bin/sh**，它同样也可以改为 **#!/bin/bash**。
 
@@ -48,7 +66,7 @@ echo 命令用于向窗口输出文本。
 
 注意，脚本并不一定只有用 bash 写才能在终端里调用。比如说，这是一段 Python 脚本，作用是将输入的参数倒序输出：
 
-```
+```python
 #!/usr/local/bin/python
 import sys
 for arg in reversed(sys.argv[1:]):
@@ -57,7 +75,7 @@ for arg in reversed(sys.argv[1:]):
 
 内核知道去用 python 解释器而不是 shell 命令来运行这段脚本，是因为脚本的开头第一行的 [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix))。
 
-在 `shebang` 行中使用 [`env`](https://man7.org/linux/man-pages/man1/env.1.html) 命令是一种好的实践，它会利用环境变量中的程序来解析该脚本，这样就提高了您的脚本的可移植性。`env` 会利用我们第一节讲座中介绍过的 `PATH` 环境变量来进行定位。 例如，使用了 `env` 的 shebang 看上去是这样的 `#!/usr/bin/env python`。
+在 `shebang` 行中使用 [`env`](https://man7.org/linux/man-pages/man1/env.1.html) 命令是一种好的实践，它会利用环境变量中的程序来解析该脚本，这样就提高了您的脚本的可移植性。`env` 会利用 `PATH` 环境变量来进行定位。 例如，使用了 `env` 的 shebang 看上去是这样的 `#!/usr/bin/env python`，它的意思是启动 `env` 程序，并让它在你当前的系统 `PATH` 里寻找名为 `python` 的程序，然后运行它，这能提升程序的可移植性和灵活性。
 
 **运行 Shell 脚本有两种方法：**
 
@@ -524,3 +542,34 @@ COMMENT
 
 例如可以使用 `$1` ,`$2` 等来引用传递给脚本的参数，其中 **$1** 表示第一个参数，**$2** 表示第二个参数，依此类推。
 
+
+
+
+
+## Shell基本运算符
+
+Shell 和其他编程语言一样，支持多种运算符，包括：
+
+- 算数运算符
+- 关系运算符
+- 布尔运算符
+- 字符串运算符
+- 文件测试运算符
+
+原生bash不支持简单的数学运算，但是可以通过其他命令来实现，例如 awk 和 expr，expr 最常用。
+
+expr 是一款表达式计算工具，使用它能完成表达式的求值操作。
+
+例如，两个数相加(**注意使用的是反引号 \**`\** 而不是单引号 \**'\****)：
+
+```shell
+#!/bin/bash
+
+val = `expr 32 + 6`
+echo "两数之和为： $val"
+```
+
+**两点注意：**
+
+- 表达式和运算符之间要有空格，例如 2+2 是不对的，必须写成 2 + 2，这与我们熟悉的大多数编程语言不一样。
+- 完整的表达式要被 **` `** 包含，注意这个字符不是常用的单引号，在 Esc 键下边。
