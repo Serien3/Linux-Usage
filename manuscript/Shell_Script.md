@@ -120,7 +120,7 @@ your_name="runoob"
 
 有效的 Shell 变量名示例如下：
 
-```
+```shell
 RUNOOB="www.runoob.com"
 LD_LIBRARY_PATH="/bin/"
 _var="123"
@@ -129,7 +129,7 @@ var2="abc"
 
 无效的变量命名：
 
-```
+```shell
 # 避免使用if作为变量名
 if="some_value"
 # 避免使用 $ 等特殊符号
@@ -142,7 +142,7 @@ variable with space="value"
 
 等号两侧避免使用空格：
 
-```
+```shell
 # 正确的赋值
 variable_name=value
 
@@ -217,7 +217,7 @@ myUrl="https://www.runoob.com"
 
 使用 unset 命令可以删除变量。语法：
 
-```
+```shell
 unset variable_name
 ```
 

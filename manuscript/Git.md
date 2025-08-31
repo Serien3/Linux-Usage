@@ -172,7 +172,7 @@ def load_reference(name_or_id):
 
 ---
 
-**Summary:**
+xxxxxxxxxx4 1# On Linux2sudo strace -e lstat ls -l > /dev/null3# On macOS4sudo dtruss -t lstat64_extended ls -l > /dev/nullbash
 
 抽象：利用组合形成的层次关系如下
 
@@ -193,6 +193,8 @@ Git 中还包括一个和数据模型完全不相关的概念，但它确是创�
 就上面介绍的快照系统来说，您也许会期望它的实现里包括一个 “创建快照” 的命令，该命令能够基于当前工作目录的当前状态创建一个全新的快照。有些版本控制系统确实是这样工作的，但 Git 不是。我们希望简洁的快照，而且每次从当前状态创建快照可能效果并不理想。例如，考虑如下场景，您开发了两个独立的特性，然后您希望创建两个独立的提交，其中第一个提交仅包含第一个特性，而第二个提交仅包含第二个特性。或者，假设您在调试代码时添加了很多打印语句，然后您仅仅希望提交和修复 bug 相关的代码而丢弃所有的打印语句。
 
 Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area）”的机制，它在Git工作流中位于工作目录（修改区）和历史记录（提交）之间，允许您指定下次快照中要包括那些改动。
+
+在我们使用Git进行工作时，每次输入的命令，要注意它对我们的**工作目录（修改区）**，**暂存区**和**历史记录（数据模型）**都会造成什么变化，这是记忆和掌握Git的命令行接口的关键。
 
 ## Git 的命令行接口
 
@@ -223,7 +225,9 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
 
 - `git diff <filename>`: 显示HEAD快照与暂存区文件的差异
 
-- `git diff <revision> <revision> <filename>`: 显示某个文件两个版本之间的差异(`<revision>` 表示提交对应的哈希字符串或引用名称或*标签名*或*相对引用*，默认则为`HAED`)
+- `git diff <revision> <revision> <filename>`: 显示某个文件两个版本之间的差异
+
+  `<revision>` 表示提交对应的**哈希字符串**或**引用名**称或**标签名**或**相对引用**，一般命令中默认则为`HAED`
 
 - `git checkout <revision>`: 更新 HEAD 和目前的分支（将HEAD指针转移，指向`<reversion>`提交），并让整个工作目录中的文件和`<revision>`提交完全一致
 
@@ -237,13 +241,10 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
   - 如果分支在被删除之前被合并到另一个分支，那么当第一个分支被删除时，所有提交仍然可以从另一个分支访问。它们保持原样；如果分支在没有被合并到另一个分支的情况下被删除，那么该分支中的提交（直到仍然可以访问的提交的分叉点）将不再可见。后者这种情况下使用`git branch -d`将拒绝删除分支，使用 strong的`git branch -D`可强制删除分支.
 - `git checkout -b <name>`: 创建分支并切换到该分支
   - 相当于 `git branch <name>; git checkout <name>`
-
 - `git switch <name>`：v2.23版本后专门用于**切换分支**的命令。取代 `git checkout <分支名>`。
   - `git switch -c <新分支名>`：创建并切换分支，取代 `git checkout -b`。
-
 - `git merge <revision>`: 合并到当前分支
 - `git mergetool`: 使用工具来处理合并冲突
-- `git rebase`: 将一系列补丁变基（rebase）为新的基线
 
 ---
 
@@ -482,7 +483,7 @@ $ git commit -m "& simple"
 
 现在，`master`分支和`feature1`分支各自都分别有新的提交，变成了这样：
 
-![](./images/merge_conflict.png)
+![](../images/merge_conflict.png)
 
 这种情况下，Git无法执行“快速合并”，只能试图把各自的修改合并起来，但这种合并就可能会有冲突，我们试试看：
 
@@ -547,7 +548,7 @@ $ git commit -m "conflict fixed"
 
 现在，`master`分支和`feature1`分支变成了下图所示：
 
-![](./images/merge_out.png)
+![](../images/merge_out.png)
 
 最后，可以正常删除`feature1`分支：
 
@@ -810,7 +811,7 @@ git config --global alias.graph "log --all --graph --decorate --oneline" # 图�
 
 - `git add -p`: 交互式暂存文件的片段
   - 回答`s`表示分开暂存，例如可以把调试print语句不暂存，只保留更改代码。
-- `git rebase -i`: 交互式变基
+- `git rebase`: 将一系列补丁变基（rebase）为新的基线
 - `git blame`: 查看最后修改某行的人
 - `git stash`: 暂时移除工作目录下的修改内容，即将工作目录恢复到上一次提交的状态
   - `git stash pop`：恢复刚刚所做的更改
@@ -942,13 +943,13 @@ logs/
 
 使用此工作流的优点是，Git 功能分支工作流使你可以在代码上进行协作，而不必担心代码冲突。
 
-![](./images/Git_featuret.png)
+![](../images/Git_featuret.png)
 
 ### 2. Git Flow工作流
 
-[Git之GitFlow工作流 | Gitflow Workflow（万字整理，已是最详）-CSDN博客](https://blog.csdn.net/sunyctf/article/details/130587970)
+参考 ：[Git之GitFlow工作流 | Gitflow Workflow（万字整理，已是最详）-CSDN博客](https://blog.csdn.net/sunyctf/article/details/130587970)
 
-![](./images/Git Flow.png)
+![](../images/Git Flow.png)
 
 ### 3. Github Flow工作流
 
@@ -958,7 +959,7 @@ Github Flow是Git flow的简化版，专门配合"持续发布"。它是 Github.
 
 官方推荐的[流程](https://guides.github.com/introduction/flow/index.html)如下。
 
-![](./images/Github Flow.png)
+![](../images/Github Flow.png)
 
 第一步：根据需求，从`master`拉出新分支，不区分功能分支或补丁分支。
 
@@ -972,4 +973,8 @@ Github flow 的最大优点就是简单，对于"持续发布"的产品，可以
 
 问题在于它的假设：`master`分支的更新与产品的发布是一致的。也就是说，`master`分支的最新代码，默认就是当前的线上代码。可是，有些时候并非如此，代码合并进入`master`分支，并不代表它就能立刻发布。比如，苹果商店的APP提交审核以后，等一段时间才能上架。这时，如果还有新的代码提交，`master`分支就会与刚发布的版本不一致。另一个例子是，有些公司有发布窗口，只有指定时间才能发布，这也会导致线上版本落后于`master`分支。
 
-上面这种情况，只有`master`一个主分支就不够用了。通常，你不得不在`master`分支以外，另外新建一个`production`分支跟踪线上版本；或者简化Git Flow工作流 / 丰富功能分支工作流，提前做好约定；或者利用Github的标签 + release功能定期发布线上版本源代码与程序，而仓库只用来存储和展示代码。
+上面这种情况，只有`master`一个主分支就不够用了。通常，你不得不在`master`分支以外，另外新建一个`production`分支跟踪线上版本；或者结合简化Git Flow工作流 / 丰富功能分支工作流，提前做好约定；或者利用Github的标签 + release功能定期发布线上版本源代码与程序，而仓库只用来存储和展示代码。
+
+可以参考如下视频：
+
+[十分钟学会正确的github工作流，和开源作者们使用同一套流程_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV19e4y1q7JJ/?spm_id_from=333.337.search-card.all.click&vd_source=4cf1248054c659cc46bc5bafc9e804af)

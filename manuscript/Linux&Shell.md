@@ -10,7 +10,7 @@ shell：shell的意思是“壳”，这个翻译十分生动形象。计算机�
 
  Bash（GNU Bourne-Again Shell）是一个为 GNU 计划编写的 Unix shell，Bash 是大多数 Linux 系统的缺省 Shell。
 
-![](E:\Linux-learn\images\shell.png)
+![](../images/shell.png)
 
 
 
@@ -92,7 +92,7 @@ shell：shell的意思是“壳”，这个翻译十分生动形象。计算机�
 >
 >  注：Unix shell 使用job这个抽象概念表示为对一条命令行求值而创建的进程，然后为每个作业创建一个进程组，来管理一条命令中涉及创建多个进程的情况。比如 ls | sort，Shell先创建一个job子进程，然后发现执行此命令需要两个进程：一个运行ls程序，一个运行sort程序；因此，Shell又为该作业创建了两个子进程，它们组成了一个进程组。
 >
->  ![](E:\Linux-learn\images\process group.png)
+>  ![](../images/process group.png)
 >
 >4. 程序执行：操作系统的进程调度到子进程，子进程获得了命令的控制权后，执行_start处指令。程序开始执行，并根据命令的功能进行相关操作。程序利用虚拟内存机制访存，在第一次执行指令或访问数据时，会产生缺页中断，实现虚拟内存到物理内存的映射（拷贝），然后重新执行指令。执行过程中，程序可能会读取文件、修改系统状态、向终端输出信息等；同时，shell进程还会根据命令是否为后台作业（命令末尾有无`&`），决定是 waitpid() 等待子进程结束，还是立即返回提示符。
 >
@@ -170,6 +170,36 @@ man command
 - `history`命令查看历史输入过的命令
 
   有时我们想修改`shell history`的行为，例如，如果在命令的开头加上一个空格，它就不会被加进 shell 记录中。当你输入包含密码或是其他敏感信息的命令时会用到这一特性。为此需要在 `.bashrc` 中添加 `HISTCONTROL=ignorespace` 或者向 `.zshrc` 添加 `setopt HIST_IGNORE_SPACE`。 如果不小心忘了在前面加空格，可以通过编辑 `.bash_history` 或 `.zhistory` 来手动地从历史记录中移除那一项
+
+**分多行输入命令**:
+
+正常来说，命令是以“行”为单位的，因此Shell每次处理一行命令，但如果命令过长，我们希望人为地分多行书写一个命令，通常有几种方式：
+
+1. 使用反斜杠 `\`
+
+   在行尾加一个 `\`，告诉 shell 当前命令还没结束，下一行继续：
+
+   ```bash
+   echo this is a very long \
+   command that I split \
+   into multiple lines
+   ```
+
+2. 如果命令中有未闭合的引号或括号，或Shell知晓的未写完的命令，shell 会自动等待下一行补全：
+
+   ```bash
+   echo "this is a
+   multi-line string"
+   
+   for i in 1 2 3; do
+     echo $i
+   done
+   ```
+
+Shell 在决定“是否执行命令”时，有个判断逻辑：
+
+- 如果命令完整（语法闭合，行尾没有 `\`），按 **Enter** 就会执行。
+- 如果命令不完整（比如引号未闭合、行尾有 `\`、`do...done` 未结束），shell 会换一行，提示符也会变化（通常变成 `>`），等待继续输入。
 
 **光标移动快捷键**：
 
@@ -631,7 +661,6 @@ command1 || command2
 command1;command2
 # ; 表示每个命令从左往右依次执行，每个命令彼此之间没有关联
 ```
-
 
 
 
