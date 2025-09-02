@@ -256,6 +256,7 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
 | Recursive       | 默认两路合并                     | 自动合并多个分支的内容，工作原理（Three-way Merge）：Git 会找到两个分支的第一个共同祖先提交（common ancestor），然后对三方（共同祖先、当前分支、要合并的分支）的内容进行合并，并创建一个新的提交来记录这个合并结果，由当前分支指向它。 |
 | Octopus         | `git merge branch1 branch2 ...`  | 多分支同时合并                                               |
 | No-fast-forward | `git merge --no-ff feature/auth` | 显式强制创建合并提交，保留历史结构（**即使可以进行快进合并，也会强制创建一个合并提交**） |
+| Squash压缩合并  | `git merge--squash branch`       | 把 `branch` 的所有提交合并到当前分支，但只产生一个新的合并提交，当前分支的提交历史中不会保留 `branch` 的多次提交记录，即不会记录它和当前分支的合并关系 |
 
 
 ✅ 推荐使用 --no-ff 来保持历史可读性，对于跟踪功能分支的生命周期非常有用，尤其是在主分支合并 feature 分支时。
@@ -581,6 +582,7 @@ Deleted branch feature1 (was 14096d0).
   - Git可以用一些方法维护自己本地仓库的分支和远程仓库某分支的关联，这样`git push`就可以简化输入，它会知道当前分支对应的远端分支并自动扩展所有的参数。
     - `git branch --set-upstream-to=<remote/remote branch>` (`<remote/remote branch>`,例如`origin/master`，)：设置当前分支跟踪来自origin的master分支。
     - 最初使用`git push`完整命令时，顺便添加选项`-u`或`--set-upstream`，这会将本地分支与远程分支关联。
+    - `git branch --unset-upstream <branch name>`: 解除关联
     - `git branch -vv`: 查看本地分支与远程分支的关联关系
 
 - `git fetch <remote>`: 与远程仓库通信，从远端获取对象/索引但不改变当前本地的对象与引用（若只有一个远程仓库，则`<remote>`默认直接使用它）
@@ -950,13 +952,22 @@ logs/
 
 ![](./images/Git Flow.png)
 
+这个模式是基于”版本发布”的，目标是一段时间以后产出一个新版本。但是，很多网站项目是”持续发布”，代码一有变动，就部署一次。Github Flow工作流则可以更好地应对这种情况。
+
 ### 3. Github Flow工作流
 
-Github Flow是Git flow的简化版，专门配合"持续发布"。它是 Github.com 使用的工作流程。
+Github Flow是Git flow的简化版，专门配合"持续发布"。它是 Github.com 推荐使用的工作流程。
 
-它只有一个长期分支，就是`master`，因此用起来非常简单。
+它只有一个长期分支，就是`master`，因此用起来非常简单。官方给出的基本原则如下：
 
-官方推荐的[流程](https://guides.github.com/introduction/flow/index.html)如下。
+1. 任何时刻的master分支代码都是可以用来部署的；
+2. 任何新变更都需要从master派生出一个分支，并且为其起一个描述新变更内容的名字：比如 new-oauth2-scopes；
+3. 在本地提交该新分支变更，并且应经常性的向服务器端该同名分支推送变更；
+4. 当你需要帮助、反馈，或认为新分支可以合并的时候，新建一个pull request；
+5. 只有在其他人review通过之后，新分支才允许合并到 `master` 分支；
+6. 一旦新分支被合并推送至`master`分支，master分支应当立即进行部署。
+
+对应的，官方推荐的[流程](https://guides.github.com/introduction/flow/index.html)如下。
 
 ![](./images/Github Flow.png)
 
@@ -968,11 +979,11 @@ Github Flow是Git flow的简化版，专门配合"持续发布"。它是 Github.
 
 第四步：你的Pull Request被接受，合并进`master`，重新部署后，原来你拉出来的那个分支就被删除。（先部署再合并也可。）
 
-Github flow 的最大优点就是简单，对于"持续发布"的产品，可以说是最合适的流程。
+Github flow 的最大优点就是简单，对于"持续发布"，“改动即部署” 的产品或网页，可以说是最合适的流程。
 
 问题在于它的假设：`master`分支的更新与产品的发布是一致的。也就是说，`master`分支的最新代码，默认就是当前的线上代码。可是，有些时候并非如此，代码合并进入`master`分支，并不代表它就能立刻发布。比如，苹果商店的APP提交审核以后，等一段时间才能上架。这时，如果还有新的代码提交，`master`分支就会与刚发布的版本不一致。另一个例子是，有些公司有发布窗口，只有指定时间才能发布，这也会导致线上版本落后于`master`分支。
 
-上面这种情况，只有`master`一个主分支就不够用了。通常，你不得不在`master`分支以外，另外新建一个`production`分支跟踪线上版本；或者结合简化Git Flow工作流 / 丰富功能分支工作流，提前做好约定；或者利用Github的标签 + release功能定期发布线上版本源代码与程序，而仓库只用来存储和展示代码。
+上面这种情况，只有`master`一个主分支就不够用了。通常，你不得不在`master`分支以外，另外新建一个`production`分支跟踪线上版本；或者结合简化Git Flow工作流 / 丰富功能分支工作流，提前做好约定；或者利用Github的标签 + release功能定期发布线上版本源代码与程序，而`master`只是用来存储和展示最新代码的。
 
 可以参考如下视频：
 
