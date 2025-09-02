@@ -4,7 +4,7 @@
 
 Linux只有一个根目录`/`，
 
-![struct](../images/struct.png)
+![struct](./images/struct.png)
 
 Linux下一切皆文件，即使是windows系统下的文件夹，我们也看作是文件，只不过它叫目录文件，抽象的看，在逻辑上它是树的一个节点，记录了该节点下的文件的位置，信息等。“一切皆是文件”是 Unix/Linux 的基本哲学之一
 
