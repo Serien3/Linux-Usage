@@ -44,10 +44,10 @@
 ## Repository Structure
 
 ```
-Linux-Usage/
-├── image/           # 存放manuscripts中用到的图片                      
+Linux-Usage/                    
 ├── manuscripts/     # Linux-Usage的markdown手稿
-├── docs/            # Linux-Usage的PDF文档
+│   ├─ images/          # 存放manuscripts中用到的图片 
+├── release/         # Linux-Usage的pdf稿件
 ├── README.md
 ├── LICENSE
 ```
