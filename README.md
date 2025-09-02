@@ -1,4 +1,4 @@
-# Linux-Usage: 一个记录了Linux下常用工具的笔记
+# Linux-Usage: 一个记录Linux下常用工具的笔记
 
 ## Introduction
 
@@ -59,5 +59,6 @@ Linux-Usage/
 ## Contact
 
 如需建议、报告错误或寻求帮助，请在 [Github Issue](https://github.com/Serien3/Linux-Usage/issues) 上发帖或联系 whhit1825@outlook.com.
+
 
 
