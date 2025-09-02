@@ -172,8 +172,6 @@ def load_reference(name_or_id):
 
 ---
 
-xxxxxxxxxx4 1# On Linux2sudo strace -e lstat ls -l > /dev/null3# On macOS4sudo dtruss -t lstat64_extended ls -l > /dev/nullbash
-
 抽象：利用组合形成的层次关系如下
 
 文件，文件夹 -> Blob对象，树 -> 快照（顶层树）-不同历史记录下-> commit 
@@ -234,7 +232,7 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
 ## 分支和合并
 
 - `git branch`: 显示本地仓库的所有分支（本质上就是引用）
-  - `git branch -vv`：显示所有分支的详细信息
+  - `git branch -vv`：显示所有分支的详细信息，包括跟踪的远程分支信息
 - `git branch <name>`: 创建分支（本质上就是一个引新的用）
 - `git branch -d <name>`:删除分支（本质上是删除一个引用）
   - 在 Git 中，分支只是提交的有向无环图 (DAG) 中提交的指针（引用）。这意味着删除分支只会删除对提交的引用，这可能会使 DAG 中的某些提交无法访问，从而不可见。但是，在已删除分支上的所有提交仍将在存储库中，至少在无法访问的提交被修剪之前（例如使用`git gc`）
@@ -583,6 +581,7 @@ Deleted branch feature1 (was 14096d0).
   - Git可以用一些方法维护自己本地仓库的分支和远程仓库某分支的关联，这样`git push`就可以简化输入，它会知道当前分支对应的远端分支并自动扩展所有的参数。
     - `git branch --set-upstream-to=<remote/remote branch>` (`<remote/remote branch>`,例如`origin/master`，)：设置当前分支跟踪来自origin的master分支。
     - 最初使用`git push`完整命令时，顺便添加选项`-u`或`--set-upstream`，这会将本地分支与远程分支关联。
+    - `git branch -vv`: 查看本地分支与远程分支的关联关系
 
 - `git fetch <remote>`: 与远程仓库通信，从远端获取对象/索引但不改变当前本地的对象与引用（若只有一个远程仓库，则`<remote>`默认直接使用它）
 
