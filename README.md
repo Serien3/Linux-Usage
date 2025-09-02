@@ -1,6 +1,4 @@
-# Linux-Usage
-
-**一个记录了Linux下常用工具的笔记**
+# Linux-Usage: 一个记录Linux下常用工具的笔记
 
 ## Introduction
 
@@ -55,10 +53,12 @@ Linux-Usage/
 ## Acknowledgements
 
 - 感谢MIT 提供[计算机教育中缺失的一课 · the missing semester of your cs education](https://missing-semester-cn.github.io/) 的开源课程资料
--  感谢bilibili [刘黑黑a 的课程中文字幕视频](https://www.bilibili.com/video/BV1uc411N7eK/?spm_id_from=333.337.search-card.all.click)
+-  感谢bilibili [刘黑黑a](https://www.bilibili.com/video/BV1uc411N7eK/?spm_id_from=333.337.search-card.all.click) 的课程中文字幕视频
 - 部分图片和补充内容来自中文互联网的一些知识分享博客
 
 ## Contact
 
 如需建议、报告错误或寻求帮助，请在 [Github Issue](https://github.com/Serien3/Linux-Usage/issues) 上发帖或联系 whhit1825@outlook.com.
+
+
 
