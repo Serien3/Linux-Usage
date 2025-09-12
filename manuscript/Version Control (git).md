@@ -579,6 +579,9 @@ Deleted branch feature1 (was 14096d0).
 
   - 该命令会在远程仓库创建一个新分支或更新上面的一个分支
     - 省略`<remote branch>`：本地分支名和远程分支名一样的情况下，可以省略；如果远程主机中不存在该分支，那么会被创建。
+  - `git push --all <remote_name>`：不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机`<remote_name>`，这时需要使用–all选项。
+  - `git push origin :master` 等价于 `git push origin --delete master`：如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支。
+
   - Git可以用一些方法维护自己本地仓库的分支和远程仓库某分支的关联，这样`git push`就可以简化输入，它会知道当前分支对应的远端分支并自动扩展所有的参数。
     - `git branch --set-upstream-to=<remote/remote branch>` (`<remote/remote branch>`,例如`origin/master`，)：设置当前分支跟踪来自origin的master分支。
     - 最初使用`git push`完整命令时，顺便添加选项`-u`或`--set-upstream`，这会将本地分支与远程分支关联。
@@ -950,7 +953,7 @@ logs/
 
 参考 ：[Git之GitFlow工作流 | Gitflow Workflow（万字整理，已是最详）-CSDN博客](https://blog.csdn.net/sunyctf/article/details/130587970)
 
-![](./images/Git Flow.png)
+![](./images/Git_Flow.png)
 
 这个模式是基于”版本发布”的，目标是一段时间以后产出一个新版本。但是，很多网站项目是”持续发布”，代码一有变动，就部署一次。Github Flow工作流则可以更好地应对这种情况。
 
@@ -969,7 +972,7 @@ Github Flow是Git flow的简化版，专门配合"持续发布"。它是 Github.
 
 对应的，官方推荐的[流程](https://guides.github.com/introduction/flow/index.html)如下。
 
-![](./images/Github Flow.png)
+![](./images/Github_Flow.png)
 
 第一步：根据需求，从`master`拉出新分支，不区分功能分支或补丁分支。
 
