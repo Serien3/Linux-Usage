@@ -1,0 +1,1619 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="一个记录Linux下常用工具的笔记">
+      
+      
+      
+      
+        <link rel="prev" href="../Metaprogramming/">
+      
+      
+        <link rel="next" href="../Makefile/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>LinuxManage - Linux-Usage</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linux" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Linux-Usage" class="md-header__button md-logo" aria-label="Linux-Usage" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Linux-Usage
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LinuxManage
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Linux-Usage" class="md-nav__button md-logo" aria-label="Linux-Usage" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Linux-Usage
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    主干内容
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            主干内容
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../The%20Shell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01. The Shell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shell_Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02. Shell_Script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Editors%28Vim%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03. Editors(Vim)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Command-line%20Environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04. Command-line Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Version%20Control%20%28git%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05. Version Control (git)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Debugging%20and%20Profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06. Debugging and Profiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metaprogramming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07. Metaprogramming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    分支补充内容
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            分支补充内容
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    LinuxManage
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    LinuxManage
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      一. Linux文件与目录结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一. Linux文件与目录结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 一切皆文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Linux目录结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Linux目录结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. 根目录 (/) 的意义与内容
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-usr" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. /usr 的意义与内容
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.Linux文件类型与后缀名
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      二. 用户管理与权限
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二. 用户管理与权限">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      在Ubuntu中切换用户的方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      为普通用户配置sudo认证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 用户组管理：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 用户管理：
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 用户管理：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      （1）先编辑一个文本用户文件。
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2root-usrsbinnewusersusertxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      （2）以root身份执行命令 /usr/sbin/newusers，从刚创建的用户文件user.txt中导入数据，创建用户：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3usrsbinpwunconv" class="md-nav__link">
+    <span class="md-ellipsis">
+      （3）执行命令/usr/sbin/pwunconv。
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      （4）编辑每个用户的密码对照文件。
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-root-usrsbinchpasswd" class="md-nav__link">
+    <span class="md-ellipsis">
+      （5）以 root 身份执行命令 /usr/sbin/chpasswd。
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6etcpasswd" class="md-nav__link">
+    <span class="md-ellipsis">
+      （6）确定密码经编码写入/etc/passwd的密码栏后。
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 查看和管理用户权限控制：
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 查看和管理用户权限控制：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 更改文件属性：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Makefile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Makefile
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      一. Linux文件与目录结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一. Linux文件与目录结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 一切皆文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Linux目录结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Linux目录结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. 根目录 (/) 的意义与内容
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-usr" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. /usr 的意义与内容
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.Linux文件类型与后缀名
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      二. 用户管理与权限
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二. 用户管理与权限">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      在Ubuntu中切换用户的方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      为普通用户配置sudo认证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 用户组管理：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 用户管理：
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 用户管理：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      （1）先编辑一个文本用户文件。
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2root-usrsbinnewusersusertxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      （2）以root身份执行命令 /usr/sbin/newusers，从刚创建的用户文件user.txt中导入数据，创建用户：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3usrsbinpwunconv" class="md-nav__link">
+    <span class="md-ellipsis">
+      （3）执行命令/usr/sbin/pwunconv。
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      （4）编辑每个用户的密码对照文件。
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-root-usrsbinchpasswd" class="md-nav__link">
+    <span class="md-ellipsis">
+      （5）以 root 身份执行命令 /usr/sbin/chpasswd。
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6etcpasswd" class="md-nav__link">
+    <span class="md-ellipsis">
+      （6）确定密码经编码写入/etc/passwd的密码栏后。
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 查看和管理用户权限控制：
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 查看和管理用户权限控制：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 更改文件属性：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>LinuxManage</h1>
+
+<h2 id="linux">一. Linux文件与目录结构<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 一切皆文件<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>Linux只有一个根目录<code>/</code>，</p>
+<p><img alt="struct" src="../images/struct.png" /></p>
+<p>Linux下一切皆文件，即使是windows系统下的文件夹，我们也看作是文件，只不过它叫目录文件，抽象的看，在逻辑上它是树的一个节点，记录了该节点下的文件的位置，信息等。“一切皆是文件”是 Unix/Linux 的基本哲学之一</p>
+<p><img alt="" src="https://pic4.zhimg.com/v2-8eba94f3bd50ae393a62756f2a597b93_1440w.jpg" /></p>
+<p>首先，在windows中是文件的东西,它们在linux中也是文件，其次一些在windows中不是文件的东西, 比如进程, 磁盘, 也被抽象成了文件.。你可以使用访问文件的方法访问它们获得信息。甚至一些很离谱的东西，比如管道，也是文件。甚至类似于socket（套接字）这样的东西, 使用的接口跟文件接口也是一致的。</p>
+<p>这样做最明显的好处是，开发者仅需要使用一套 API 和开发工具即可调取 Linux 系统中绝大部分的资源。举个简单的例子，Linux 中几乎所有读（读文件，读系统状态，读 socket，读PIPE）的操作都可以用read函数来进行；几乎所有更改（更改文件，更改系统参数，写 socket，写 PIPE）的操作都可以用write函数来进行。</p>
+<p>不利之处在于，使用任何硬件设备都必须与根目录下某一目录执行挂载操作，否则无法使用。我们知道，本身Linux具有一个以根目录为树根的文件目录结构，每个设备也同样如此，它们是相互独立的。如果我们想通过Linux上的根目录找到设备文件的目录结构，就必须将这两个文件系统目录合二为一，这就是挂载的真正含义。</p>
+<hr />
+<h3 id="2-linux">2. Linux目录结构<a class="headerlink" href="#2-linux" title="Permanent link">&para;</a></h3>
+<p>由于linux是开放源代码，各大公司和团体根据linux的核心代码做各自的操作，编程。这样就造成在根下的目录的不同。这样就造成个人不能使用他人的linux系统的PC。因为你根本不知道一些基本的配置，文件在哪里。。。这就造成了混乱。这就是FHS（Filesystem Hierarchy Standard ）机构诞生的原因。该机构是linux爱好者自发的组成的一个团体，主要是是对linux做一些基本的要求，不至于是操作者换一台主机就成了linux的‘文盲’。</p>
+<p>根据FHS(http://www.pathname.com/fhs/)的官方文件指出， 他们的主要目的是希望让使用者可以了解到已安装软件通常放置于那个目录下， 所以他们希望独立的软件开发商、操作系统制作者、以及想要维护系统的用户，都能够遵循FHS的标准。 也就是说，FHS的重点在于规范每个特定的目录下应该要放置什么样子的数据而已。 这样做好处非常多，因为Linux操作系统就能够在既有的面貌下(目录架构不变)发展出开发者想要的独特风格。</p>
+<h4 id="21">2.1. 根目录 (/) 的意义与内容<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<p>根目录是整个系统最重要的一个目录，因为不但所有的目录都是由根目录衍生出来的， 同时根目录也与开机/还原/系统修复等动作有关。 由于系统开机时需要特定的开机软件、核心文件、开机所需程序、 函式库等等文件数据，若系统出现错误时，根目录也必须要包含有能够修复文件系统的程序才行。 因为根目录是这么的重要，所以在FHS的要求方面，他希望根目录不要放在非常大的分区， 因为越大的分区内你会放入越多的数据，如此一来根目录所在分区就可能会有较多发生错误的机会。</p>
+<p>因此FHS标准建议：根目录(/)所在分区应该越小越好， 且应用程序所安装的软件最好不要与根目录放在同一个分区内，保持根目录越小越好。 如此不但效能较佳，根目录所在的文件系统也较不容易发生问题。说白了，就是根目录和Windows的C盘一个样。</p>
+<p>根据以上原因，FHS认为根目录(/)下应该包含如下子目录：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>应放置档案内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/bin</td>
+<td>系统有很多放置执行档的目录，但/bin比较特殊。因为/bin放置的是在单人维护模式下还能够被操作的指令。在/bin底下的指令可以被root与一般帐号所使用，主要有：cat,chmod(修改权限), chown, date, mv, mkdir, cp, bash等等常用的指令。</td>
+</tr>
+<tr>
+<td>/boot</td>
+<td>主要放置开机会使用到的档案，包括Linux核心档案以及开机选单与开机所需设定档等等。Linux kernel常用的档名为：vmlinuz ，如果使用的是grub这个开机管理程式，则还会存在/boot/grub/这个目录。</td>
+</tr>
+<tr>
+<td>/dev</td>
+<td>在Linux系统上，任何装置与周边设备都是以档案的型态存在于这个目录当中。 只要通过存取这个目录下的某个档案，就等于存取某个装置。比要重要的档案有/dev/null, /dev/zero, /dev/tty , /dev/lp<em>, / dev/hd</em>, /dev/sd*等等</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>系统主要的设定档几乎都放置在这个目录内，例如人员的帐号密码档、各种服务的启始档等等。 一般来说，这个目录下的各档案属性是可以让一般使用者查阅的，但是只有root有权力修改。 FHS建议不要放置可执行档(binary)在这个目录中。 比较重要的档案有：/etc/inittab, /etc/init.d/, /etc/modprobe.conf, /etc/X11/, /etc/fstab, /etc/sysconfig/等等。 另外，其下重要的目录有：/etc/init.d/ ：所有服务的预设启动script都是放在这里的，例如要启动或者关闭iptables的话： /etc/init.d/iptables start、/etc/init.d/ iptables stop/etc/xinetd.d/ ：这就是所谓的super daemon管理的各项服务的设定档目录。/etc/X11/ ：与X Window有关的各种设定档都在这里，尤其是xorg.conf或XF86Config这两个X Server的设定档。</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>这是系统预设的使用者家目录(home directory)。 在你新增一个一般使用者帐号时，预设的使用者家目录都会规范到这里来。比较重要的是，家目录有两种代号：  ~ ：代表当前使用者的家目录，而 ~guest：则代表用户名为guest的家目录。</td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>系统的函式库非常的多，而/lib放置的则是在开机时会用到的函式库，以及在/bin或/sbin底下的指令会呼叫的函式库而已 。 什么是函式库呢？妳可以将他想成是外挂，某些指令必须要有这些外挂才能够顺利完成程式的执行之意。 尤其重要的是/lib/modules/这个目录，因为该目录会放置核心相关的模组(驱动程式)。</td>
+</tr>
+<tr>
+<td>/media</td>
+<td>media是媒体的英文，顾名思义，这个/media底下放置的就是可移除的装置。 包括软碟、光碟、DVD等等装置都暂时挂载于此。 常见的档名有：/media/floppy, /media/cdrom等等。</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>如果妳想要暂时挂载某些额外的装置，一般建议妳可以放置到这个目录中。在古早时候，这个目录的用途与/media相同啦。 只是有了/media之后，这个目录就用来暂时挂载用了。</td>
+</tr>
+<tr>
+<td>/opt</td>
+<td>这个是给第三方协力软体放置的目录 。 什么是第三方协力软体啊？举例来说，KDE这个桌面管理系统是一个独立的计画，不过他可以安装到Linux系统中，因此KDE的软体就建议放置到此目录下了。 另外，如果你想要自行安装额外的软体(非原本的distribution提供的)，那么也能够将你的软体安装到这里来。 不过，以前的Linux系统中，我们还是习惯放置在/usr/local目录下。</td>
+</tr>
+<tr>
+<td>/root</td>
+<td>系统管理员(root)的家目录。 之所以放在这里，是因为如果进入单人维护模式而仅挂载根目录时，该目录就能够拥有root的家目录，所以我们会希望root的家目录与根目录放置在同一个分区中。</td>
+</tr>
+<tr>
+<td>/sbin</td>
+<td>Linux有非常多指令是用来设定系统环境的，这些指令只有root才能够利用来设定系统，其他使用者最多只能用来查询而已。放在/sbin底下的为开机过程中所需要的，里面包括了开机、修复、还原系统所需要的指令。至于某些伺服器软体程式，一般则放置到/usr/sbin/当中。至于本机自行安装的软体所产生的系统执行档(system binary)，则放置到/usr/local/sbin/当中了。常见的指令包括：fdisk, fsck, ifconfig, init, mkfs等等。</td>
+</tr>
+<tr>
+<td>/srv</td>
+<td>srv可以视为service的缩写，是一些网路服务启动之后，这些服务所需要取用的资料目录。 常见的服务例如WWW, FTP等等。 举例来说，WWW伺服器需要的网页资料就可以放置在/srv/www/里面。呵呵，看来平时我们编写的代码应该放到这里了。</td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>这是让一般使用者或者是正在执行的程序暂时放置档案的地方。这个目录是任何人都能够存取的，所以你需要定期的清理一下。当然，重要资料不可放置在此目录啊。 因为FHS甚至建议在开机时，应该要将/tmp下的资料都删除。</td>
+</tr>
+</tbody>
+</table>
+<p>事实上FHS针对根目录所定义的标准就仅限于上表，不过仍旧有些目录也需要我们了解一下，具体如下：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>应放置文件内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/lost+found</td>
+<td>这个目录是使用标准的ext2/ext3档案系统格式才会产生的一个目录，目的在于当档案系统发生错误时，将一些遗失的片段放置到这个目录下。 这个目录通常会在分割槽的最顶层存在，例如你加装一个硬盘于/disk中，那在这个系统下就会自动产生一个这样的目录/disk/lost+found</td>
+</tr>
+<tr>
+<td>/proc</td>
+<td>这个目录本身是一个虚拟文件系统(virtual filesystem)喔。 他放置的资料都是在内存当中，例如系统核心、行程资讯(process)（是进程吗?）、周边装置的状态及网络状态等等。因为这个目录下的资料都是在记忆体（内存）当中，所以本身不占任何硬盘空间。比较重要的档案（目录）例如： /proc/cpuinfo, /proc/dma, /proc/interrupts, /proc/ioports, /proc/net/*等等。呵呵，是虚拟内存吗[guest]？</td>
+</tr>
+<tr>
+<td>/sys</td>
+<td>这个目录其实跟/proc非常类似，也是一个虚拟的档案系统，主要也是记录与核心相关的资讯。 包括目前已载入的核心模组与核心侦测到的硬体装置资讯等等。 这个目录同样不占硬盘容量。</td>
+</tr>
+</tbody>
+</table>
+<p>除了这些目录的内容之外，另外要注意的是，因为根目录与开机有关，开机过程中仅有根目录会被挂载， 其他分区则是在开机完成之后才会持续的进行挂载的行为。就是因为如此，因此根目录下与开机过程有关的目录， 就不能够与根目录放到不同的分区去。那哪些目录不可与根目录分开呢？有底下这些：</p>
+<p>/etc：配置文件</p>
+<p>/bin：重要执行档</p>
+<p>/dev：所需要的装置文件</p>
+<p>/lib：执行档所需的函式库与核心所需的模块</p>
+<p>/sbin：重要的系统执行文件</p>
+<p>这五个目录千万不可与根目录分开在不同的分区。</p>
+<h4 id="22-usr">2.2. /usr 的意义与内容<a class="headerlink" href="#22-usr" title="Permanent link">&para;</a></h4>
+<p>依据FHS的基本定义，/usr里面放置的数据属于可分享的与不可变动的(shareable, static)， 如果你知道如何透过网络进行分区的挂载(例如在服务器篇会谈到的NFS服务器)，那么/usr确实可以分享给局域网络内的其他主机来使用喔。</p>
+<p>/usr不是user的缩写，其实usr是Unix Software Resource的缩写， 也就是Unix操作系统软件资源所放置的目录，而不是用户的数据啦。这点要注意。 FHS建议所有软件开发者，应该将他们的数据合理的分别放置到这个目录下的次目录，而不要自行建立该软件自己独立的目录。</p>
+<p>因为是所有系统默认的软件(distribution发布者提供的软件)都会放置到/usr底下，因此这个目录有点类似Windows 系统的C:\Windows\ + C:\Program files\这两个目录的综合体，系统刚安装完毕时，这个目录会占用最多的硬盘容量。 一般来说，/usr的次目录建议有底下这些：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>应放置文件内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/usr/X11R6/</td>
+<td>为X Window System重要数据所放置的目录，之所以取名为X11R6是因为最后的X版本为第11版，且该版的第6次释出之意。</td>
+</tr>
+<tr>
+<td>/usr/bin/</td>
+<td>绝大部分的用户可使用指令都放在这里。请注意到他与/bin的不同之处。(是否与开机过程有关)</td>
+</tr>
+<tr>
+<td>/usr/include/</td>
+<td>c/c++等程序语言的档头(header)与包含档(include)放置处，当我们以tarball方式 (*.tar.gz 的方式安装软件)安装某些数据时，会使用到里头的许多包含档。</td>
+</tr>
+<tr>
+<td>/usr/lib/</td>
+<td>(类似C:\Windows\System32)包含各应用软件的函式库、目标文件(object file)，以及不被一般使用者惯用的执行档或脚本(script)。 某些软件会提供一些特殊的指令来进行服务器的设定，这些指令也不会经常被系统管理员操作， 那就会被摆放到这个目录下啦。要注意的是，如果你使用的是X86_64的Linux系统， 那可能会有/usr/lib64/目录产生</td>
+</tr>
+<tr>
+<td>/usr/local/</td>
+<td>(用户级程序目录，类似C:\Program Files)系统管理员在本机自行安装自己下载的软件(非distribution默认提供者)，建议安装到此目录， 这样会比较便于管理。举例来说，你的distribution提供的软件较旧，你想安装较新的软件但又不想移除旧版， 此时你可以将新版软件安装于/usr/local/目录下，可与原先的旧版软件有分别啦。 你可以自行到/usr/local去看看，该目录下也是具有bin, etc, include, lib...的次目录</td>
+</tr>
+<tr>
+<td>/usr/sbin/</td>
+<td>非系统正常运作所需要的系统指令。最常见的就是某些网络服务器软件的服务指令(daemon)</td>
+</tr>
+<tr>
+<td>/usr/share/</td>
+<td>放置共享文件的地方，在这个目录下放置的数据几乎是不分硬件架构均可读取的数据， 因为几乎都是文本文件嘛。在此目录下常见的还有这些次目录：/usr/share/man：联机帮助文件/usr/share/doc：软件杂项的文件说明/usr/share/zoneinfo：与时区有关的时区文件</td>
+</tr>
+<tr>
+<td>/usr/src/</td>
+<td>一般原始码建议放置到这里，src有source的意思。至于核心原始码则建议放置到/usr/src/linux/目录下。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3linux">3.Linux文件类型与后缀名<a class="headerlink" href="#3linux" title="Permanent link">&para;</a></h3>
+<p>文件在底层都是相同的，都是放置在磁盘上的一长串二进制串，而不同的编码解码，或者说数据的排布格式，决定了文件的“表现形式”，如可执行文件（即程序，二进制或文本脚本），文本文件，图片文件等。</p>
+<p>一谈到文件类型，不同于Windows的文件类型，比如file.txt、file.doc、file.sys、file.mp3、file.exe等，根据文件的后缀就能判断文件的类型，即Windows是以文件的表现形式进行分类。但在Linux一个文件是否能被执行，表现为哪种形式，和后缀名没有太大的关系，主要看文件的属性有关。但我们了解一下Linux文件的后缀名还是有必要的，特别是我们自己创建一些文件，最好还是加后缀名，这样做的目的是仅仅是为了我们的在应用时方便。</p>
+<p>现在的Linux桌面环境和Windows一样智能化，文件的类型是和相应的程序关联的。在我们打开某个文件时，系统会自动判断用哪个应用程序打开。如果从这方面来说，Linux桌面环境和Windows桌面没有太大的区别。</p>
+<p>在Linux中，带有扩展名的文件，只能代表程序的关联，并不能说明文件是可以执行或如何表现，从这方面来说，Linux的扩展名没有太大的意义。</p>
+<p>Linux文件类型和Linux文件的文件名所代表的意义是两个不同的概念。我们通过一般应用程序而创建的比如file.txt、file.tar.gz ，这些文件虽然要用不同的程序来打开，但放在Linux文件类型中衡量的话，大多是常规文件（也被称为普通文件）。</p>
+<p>Linux文件类型常见的有：普通文件（包括文本文件，二进制可执行文件）、目录、字符设备文件、块设备文件、符号链接文件等，这样分类更像是在反映一种操作系统对硬件进行抽象时产生的不同结果。</p>
+<h2 id="_1">二. 用户管理与权限<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>操作系统采用多用户的管理模式进行权限管理</p>
+<ul>
+<li>
+<p>在Linux系统中，拥有最大权限的账户为<code>root</code>（超级管理员）</p>
+</li>
+<li>
+<p>一般使用电脑者使用自创账户，即普通用户权限</p>
+</li>
+<li>
+<p>普通用户一般在<code>home</code>目录内不受限</p>
+</li>
+<li>
+<p>离开<code>home</code>目录，大多数地方普通用户仅有只读和执行的权限，无修改权限</p>
+</li>
+<li>
+<p>这种模式这是由于早年计算机还未充分个人化，多人使用同一台计算机设备而产生的解决方案</p>
+</li>
+</ul>
+<p><strong>切换账户 : <code>su</code> 命令</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># su : Switch User</span>
+su<span class="w"> </span><span class="o">[</span>-<span class="o">]</span><span class="w"> </span><span class="o">[</span>用户名<span class="o">]</span>
+<span class="c1"># -符号: 可选，表示是否在切换用户后加载环境变量，建议带上</span>
+<span class="c1"># 用户名: 可选，表示要切换的用户，若省略表示切换到root（已知root账户密码的情况下）</span>
+<span class="c1"># 切换用户后，可以使用exit命令退回上一个用户，也可以使用快捷键：&quot;ctrl + d&quot;</span>
+<span class="c1"># 使用普通用户切换到其他用户需要使用密码；使用root用户切换到其他用户，无需密码，直接切换</span>
+</code></pre></div>
+<blockquote>
+<h4 id="ubuntu">在Ubuntu中切换用户的方法<a class="headerlink" href="#ubuntu" title="Permanent link">&para;</a></h4>
+<p>在Ubuntu操作系统中，用户可以通过多种方式在不同用户之间切换。这对于需要执行特定权限操作的情况非常有用，例如访问受限文件或执行系统级命令。</p>
+<p><strong>使用命令行切换用户</strong></p>
+<p>在命令行环境中，可以使用<em>su</em>（switch user）命令来切换用户。如果你想从当前用户切换到root用户，可以使用以下命令：</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>su
+</code></pre></div>
+<p>这个命令会将你的用户切换到root用户，这通常需要root权限。<strong>由于Ubuntu默认情况下root用户没有固定密码，因此直接使用<em>su</em>命令可能不会成功，因为你不知道root的密码。</strong></p>
+<p>在切换到root用户后，如果想要切回到普通用户，可以使用以下命令：</p>
+<div class="highlight"><pre><span></span><code>su<span class="w"> </span>-l<span class="w"> </span>用户名
+</code></pre></div>
+<p>或者简单地使用<em>exit</em>命令或<em>Ctrl+D</em>快捷键退出当前root会话。</p>
+<p><strong>设置root用户密码</strong></p>
+<p>如果你需要为root用户设置一个固定密码，可以执行以下命令：</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>passwd<span class="w"> </span>root
+</code></pre></div>
+<p>按照提示操作，设置一个新的root密码。设置密码后，你可以直接使用<em>su root</em>命令并输入密码来切换到root用户。</p>
+<p><strong>禁用和启用root登录</strong></p>
+<p>如果你想禁用root用户的登录，可以使用以下命令：</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>passwd<span class="w"> </span>-l<span class="w"> </span>root
+</code></pre></div>
+<p>这个命令只是禁用root用户，但密码仍然会被保存。如果你想重新启用root用户的登录，可以执行：</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>passwd<span class="w"> </span>-u<span class="w"> </span>root
+</code></pre></div>
+</blockquote>
+<p><strong>授权（相当于windows下以管理员身份运行）: <code>sudo</code>命令</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 长期使用root用户，可能会在不经意时造成系统损坏，使用sudo命令，为普通的命令授权，临时以root身份运行</span>
+sudo<span class="w"> </span>其他命令
+<span class="c1"># 不是所有用户都有权使用sudo命令获取特权，我们需要为普通用户配置sudo认证</span>
+</code></pre></div>
+<blockquote>
+<h4 id="sudo">为普通用户配置sudo认证<a class="headerlink" href="#sudo" title="Permanent link">&para;</a></h4>
+<p>切换到<code>root</code>用户，执行<code>vim sudo</code> ，打开vim编辑器在文件的最后添加：</p>
+<div class="highlight"><pre><span></span><code>用户名<span class="w"> </span><span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span><span class="w">  </span>NOPASSWD:ALL
+<span class="c1"># 其中NOPASSWD:ALL 表示使用sudo命令时，无需输入密码</span>
+</code></pre></div>
+<p><code>wq</code>保存并退出</p>
+<p>然后切换会普通用户即可执行sudo</p>
+</blockquote>
+<hr />
+<p><strong>e.g.</strong> 对于大多数的类 Unix 系统，有一类用户是非常特殊的，那就是：根用户（root user）。 您应该已经注意到了，在上面的输出结果中，根用户几乎不受任何限制，他可以创建、读取、更新和删除系统中的任何文件。 通常在我们并不会以根用户的身份直接登录系统，因为这样可能会因为某些错误的操作而破坏系统。 取而代之的是我们会在需要的时候使用 <code>sudo</code> 命令。顾名思义，它的作用是让您可以以 su（super user 或 root 的简写）的身份执行一些操作。 当您遇到拒绝访问（permission denied）的错误时，通常是因为此时您必须是根用户才能操作。然而，请再次确认您是真的要执行此操作。</p>
+<p>有一件事情是您必须作为根用户才能做的，那就是向 <code>sysfs</code> 文件写入内容。系统被挂载在 <code>/sys</code> 下，<code>sysfs</code> 文件则暴露了一些内核（kernel）参数。 因此，您不需要借助任何专用的工具，就可以轻松地在运行期间配置系统内核。<strong>注意 Windows 和 macOS 没有这个文件</strong>.</p>
+<p>例如，您笔记本电脑的屏幕亮度写在 <code>brightness</code> 文件中，它位于</p>
+<div class="highlight"><pre><span></span><code>/sys/class/backlight
+</code></pre></div>
+<p>通过将数值写入该文件，我们可以改变屏幕的亮度。现在，蹦到您脑袋里的第一个想法可能是：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>find<span class="w"> </span>-L<span class="w"> </span>/sys/class/backlight<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">2</span><span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;*brightness*&#39;</span>
+/sys/class/backlight/thinkpad_screen/brightness
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/sys/class/backlight/thinkpad_screen
+$<span class="w"> </span>sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>&gt;<span class="w"> </span>brightness
+An<span class="w"> </span>error<span class="w"> </span>occurred<span class="w"> </span><span class="k">while</span><span class="w"> </span>redirecting<span class="w"> </span>file<span class="w"> </span><span class="s1">&#39;brightness&#39;</span>
+open:<span class="w"> </span>Permission<span class="w"> </span>denied
+</code></pre></div>
+<p>出乎意料的是，我们还是得到了一个错误信息。毕竟，我们已经使用了 <code>sudo</code> 命令！关于 shell，有件事我们必须要知道。<code>|</code>、<code>&gt;</code>、和 <code>&lt;</code> 是通过 shell 执行的，而不是被各个程序单独执行。 <code>echo</code> 等程序并不知道 <code>|</code> 的存在，它们只知道从自己的输入输出流中进行读写。 回到上面更改屏幕亮度命令执行的报错，为了能让 <code>sudo echo</code> 命令输出的亮度值写入 brightness 文件， <em>shell</em> (权限为当前用户) 会先尝试打开 brightness 文件，但此时操作 shell 的不是根（root）用户，所以系统拒绝了这个打开操作，提示无权限。</p>
+<p>明白这一点后，我们可以这样操作：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>brightness
+</code></pre></div>
+<p>此时打开 <code>/sys</code> 文件的是 <code>tee</code> 这个程序，并且该程序以 <code>root</code> 权限在运行，因此操作可以进行。 这样您就可以在 <code>/sys</code> 中愉快地玩耍了，例如修改系统中各种 LED 的状态（路径可能会有所不同）：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/class/leds/input6::scrolllock/brightness
+</code></pre></div>
+<hr />
+<p><strong>用户和用户组：</strong></p>
+<p>Linux系统中可以</p>
+<ul>
+<li>配置多个用户</li>
+<li>配置多个用户组</li>
+<li>一个用户可以加入多个用户组</li>
+</ul>
+<p>相应的，LInux中关于权限的管控有两个级别</p>
+<ul>
+<li>针对用户的权限控制</li>
+<li>针对用户组的权限控制</li>
+</ul>
+<p>比如，针对某文件，可以控制用户对其的权限，也可以控制用户组对其的权限</p>
+<p>==以下命令中的创建/删除命令需root用户执行，因此要么切换到root用户，要么使用sudo授权==</p>
+<h3 id="1_1">1. <strong>用户组管理：</strong><a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>创建用户组</li>
+</ul>
+<div class="highlight"><pre><span></span><code>groupadd<span class="w"> </span>用户组名
+</code></pre></div>
+<ul>
+<li>删除用户组</li>
+</ul>
+<div class="highlight"><pre><span></span><code>groupdel<span class="w"> </span>用户组名
+</code></pre></div>
+<ul>
+<li>查看组信息</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 组信息保存在/etc/group 文件中，/etc目录是专门用来保存系统配置信息的目录</span>
+cat<span class="w"> </span>/etc/group
+</code></pre></div>
+<blockquote>
+<p>将用户分组是Linux 系统中对用户进行管理及控制访问权限的一种手段。</p>
+<p>每个用户都属于某个用户组；一个组中可以有多个用户，一个用户也可以属于不同的组。</p>
+<p>当一个用户同时是多个组中的成员时，在/etc/passwd文件中记录的是用户所属的主组，也就是登录时所属的默认组，而其他组称为附加组。</p>
+<p>用户组的所有信息都存放在/etc/group文件中，由冒号(:)隔开若干个字段，这些字段有：</p>
+<div class="highlight"><pre><span></span><code>组名:口令:组标识号:组内用户列表
+</code></pre></div>
+<ol>
+<li>"组名" 是用户组的名称，由字母或数字构成。组名不应重复。</li>
+<li>"密码" 字段存放的是用户组加密后的密码。一般Linux 系统的用户组都没有密码，即这个字段一般为空，或者是*。</li>
+<li>"组标识号（GID）" 与用户标识号类似，也是一个整数，被系统内部用来标识组。</li>
+<li>"组内用户列表" 是属于这个组的所有用户的列表，不同用户之间用逗号(,)分隔。这个用户组可能是用户的主组，也可能是附加组。</li>
+</ol>
+</blockquote>
+<ul>
+<li>修改用户组的属性</li>
+</ul>
+<div class="highlight"><pre><span></span><code>groupmod<span class="w"> </span>选项<span class="w"> </span>用户组
+<span class="c1"># 常用的选项有：</span>
+<span class="c1"># -g GID :为用户组指定新的组标识号。</span>
+<span class="c1"># n新用户组 :将用户组的名字改为新名字</span>
+</code></pre></div>
+<h3 id="2">2. <strong>用户管理：</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>创建用户 &amp; 设置/修改密码</li>
+</ul>
+<div class="highlight"><pre><span></span><code>useradd<span class="w"> </span><span class="o">[</span>-g<span class="w"> </span>-d<span class="o">]</span><span class="w"> </span>用户名
+<span class="c1"># -g: 指定用户所属的组，指定-g需要组已经存在，如果已存在与用户名同名的组，则必须使用-g; 不指定-g则会创建与用户名同名的组并自动加入</span>
+<span class="c1"># -d: 指定用户的home路径，不指定，home目录默认在：/home/用户名</span>
+passwd<span class="w"> </span>用户名
+<span class="c1"># 普通用户可直接用passwd修改自己的账户密码</span>
+</code></pre></div>
+<ul>
+<li>删除用户</li>
+</ul>
+<div class="highlight"><pre><span></span><code>userdel<span class="w"> </span><span class="o">[</span>-r<span class="o">]</span><span class="w"> </span>用户名
+<span class="c1"># -r: 删除用户的home目录; 不使用-r，删除用户时会将home目录保留</span>
+</code></pre></div>
+<ul>
+<li>查看用户信息</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 用户信息保存在/etc/passwd 文件中</span>
+cat<span class="w"> </span>/etc/passwd<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>用户名
+或
+getent<span class="w"> </span>passwd<span class="w">   </span><span class="c1">#等价于 cat /etc/passwd</span>
+
+<span class="c1"># 只想查看用户所属组</span>
+id<span class="w"> </span><span class="o">[</span>用户名<span class="o">]</span>
+<span class="c1"># 用户名: 若不提供，则查看自身</span>
+
+who
+<span class="c1"># 查看当前所有登录操作系统的用户列表</span>
+whoami
+<span class="c1"># 查看当前登录用户的用户名</span>
+</code></pre></div>
+<blockquote>
+<p>passwd文件由6个冒号组成7个字段，</p>
+<div class="highlight"><pre><span></span><code>用户名:口令:用户标识号:主组标识号:注释性描述:主目录:登录Shell
+</code></pre></div>
+<p>具体含义如下：</p>
+<ol>
+<li>“用户名”</li>
+<li>“密码”一般为x，表示加密的密码</li>
+<li>“用户标识号（UID）” 一个整数，系统内部用它来标识用户</li>
+<li>“主组标识号（GID）”</li>
+<li>“注释性描述” 字段记录着用户的一些个人情况</li>
+<li>“主目录” home目录位置</li>
+<li>“登录shell” 用户登录后，要启动一个进程，负责将用户的操作传给内核，这个进程是用户登录到系统后运行的命令解释器或某个特定的程序，即Shell。注意：用户的登录Shell也可以指定为某个特定的程序（此程序不是一个命令解释器），利用这一特点，我们可以限制用户只能运行指定的应用程序，在该应用程序运行结束后，用户就自动退出了系统。有些Linux 系统要求只有那些在系统中登记了的程序才能出现在这个字段中。</li>
+</ol>
+<blockquote>
+<p><strong>系统中有一类用户称为伪用户（pseudo users）</strong></p>
+<p>这些用户在/etc/passwd文件中也占有一条记录，但是不能登录，因为它们的登录Shell为空。它们的存在主要是方便系统管理，满足相应的系统进程对文件属主的要求。</p>
+<p>常见的伪用户如下所示：</p>
+<div class="highlight"><pre><span></span><code>伪<span class="w"> </span>用<span class="w"> </span>户<span class="w"> </span>含<span class="w"> </span>义<span class="w"> </span>
+bin<span class="w"> </span>拥有可执行的用户命令文件<span class="w"> </span>
+sys<span class="w"> </span>拥有系统文件<span class="w"> </span>
+adm<span class="w"> </span>拥有帐户文件<span class="w"> </span>
+uucp<span class="w"> </span>UUCP使用<span class="w"> </span>
+lp<span class="w"> </span>lp或lpd子系统使用<span class="w"> </span>
+nobody<span class="w"> </span>NFS使用
+</code></pre></div>
+</blockquote>
+</blockquote>
+<ul>
+<li>修改用户账号的属性</li>
+</ul>
+<p><code>usermod</code> 命令可以用来设置用户的 主组/附加组 和 登录shell，</p>
+<ul>
+<li>主组：通常在新建用户时指定，在<code>/etc/passwd</code>中GID对应的组即为主组</li>
+<li>附加组：在<code>/etc/group</code>中最后一列表示该组是这一列中用户的附加组，或<code>id</code>命令后得到的<code>组=</code>中的非GID组即为该用户的附加组，用于指定用户的附加权限</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 修改用户的主组</span>
+usermod<span class="w"> </span>-g<span class="w"> </span>用户组名<span class="w"> </span>用户名
+<span class="c1"># 修改用户的附加组</span>
+usermod<span class="w"> </span>-G<span class="w"> </span>用户组名<span class="w"> </span>用户名
+<span class="c1"># 修改用户的登录shell</span>
+usermod<span class="w"> </span>-s<span class="w"> </span>/bin/bash
+<span class="c1"># 修改用户账号名称</span>
+usermod<span class="w"> </span>-l<span class="w"> </span>新用户名<span class="w"> </span>原用户名
+<span class="c1"># 修改用户uid</span>
+usermod<span class="w"> </span>-u<span class="w"> </span>&lt;uid&gt;<span class="w"> </span>原用户名
+<span class="c1"># 解除密码绑定</span>
+usermod<span class="w"> </span>-U<span class="w"> </span>用户名
+</code></pre></div>
+<blockquote>
+<p>默认使用<code>useradd</code>添加的用户没有权限使用sudo获取特权，这里我们除了在root用户下修改文件，还可以用另一种方法，即将用户添加到sudo附加组中</p>
+<div class="highlight"><pre><span></span><code>usermod<span class="w"> </span>-G<span class="w"> </span>sudo<span class="w"> </span>用户名
+</code></pre></div>
+</blockquote>
+<ul>
+<li>技巧：添加批量用户</li>
+</ul>
+<p>添加和删除用户对每位Linux系统管理员都是轻而易举的事，比较棘手的是如果要添加几十个、上百个甚至上千个用户时，我们不太可能还使用useradd一个一个地添加，必然要找一种简便的创建大量用户的方法。Linux系统提供了创建大量用户的工具，可以让您立即创建大量用户，方法如下：</p>
+<h4 id="1_2">（1）先编辑一个文本用户文件。<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<p>每一列按照<code>/etc/passwd</code>密码文件的格式书写，要注意每个用户的用户名、UID、宿主目录都不可以相同，其中密码栏可以留做空白或输入x号。一个范例文件user.txt内容如下：</p>
+<div class="highlight"><pre><span></span><code>user001::600:100:user:/home/user001:/bin/bash
+user002::601:100:user:/home/user002:/bin/bash
+user003::602:100:user:/home/user003:/bin/bash
+user004::603:100:user:/home/user004:/bin/bash
+user005::604:100:user:/home/user005:/bin/bash
+user006::605:100:user:/home/user006:/bin/bash
+</code></pre></div>
+<h4 id="2root-usrsbinnewusersusertxt">（2）以root身份执行命令 <code>/usr/sbin/newusers</code>，从刚创建的用户文件<code>user.txt</code>中导入数据，创建用户：<a class="headerlink" href="#2root-usrsbinnewusersusertxt" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code># newusers &lt; user.txt
+</code></pre></div>
+<p>然后可以执行命令 <code>vipw</code> 或 <code>vi /etc/passwd</code> 检查 <code>/etc/passwd</code> 文件是否已经出现这些用户的数据，并且用户的宿主目录是否已经创建。</p>
+<h4 id="3usrsbinpwunconv">（3）执行命令/usr/sbin/pwunconv。<a class="headerlink" href="#3usrsbinpwunconv" title="Permanent link">&para;</a></h4>
+<p>将 <code>/etc/shadow</code> 产生的 <code>shadow</code> 密码解码，然后回写到 <code>/etc/passwd</code> 中，并将<code>/etc/shadow</code>的<code>shadow</code>密码栏删掉。这是为了方便下一步的密码转换工作，即先取消 <code>shadow password</code> 功能。</p>
+<div class="highlight"><pre><span></span><code># pwunconv
+</code></pre></div>
+<h4 id="4">（4）编辑每个用户的密码对照文件。<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p>格式为：</p>
+<div class="highlight"><pre><span></span><code>用户名:密码
+</code></pre></div>
+<p>实例文件 <code>passwd.txt</code> 内容如下：</p>
+<div class="highlight"><pre><span></span><code>user001:123456
+user002:123456
+user003:123456
+user004:123456
+user005:123456
+user006:123456
+</code></pre></div>
+<h4 id="5-root-usrsbinchpasswd">（5）以 root 身份执行命令 <code>/usr/sbin/chpasswd</code>。<a class="headerlink" href="#5-root-usrsbinchpasswd" title="Permanent link">&para;</a></h4>
+<p>创建用户密码，<code>chpasswd</code> 会将经过 <code>/usr/bin/passwd</code> 命令编码过的密码写入 <code>/etc/passwd</code> 的密码栏。</p>
+<div class="highlight"><pre><span></span><code># chpasswd &lt; passwd.txt
+</code></pre></div>
+<h4 id="6etcpasswd">（6）确定密码经编码写入/etc/passwd的密码栏后。<a class="headerlink" href="#6etcpasswd" title="Permanent link">&para;</a></h4>
+<p>执行命令 <code>/usr/sbin/pwconv</code> 将密码编码为 <code>shadow password</code>，并将结果写入 <code>/etc/shadow</code>。</p>
+<div class="highlight"><pre><span></span><code># pwconv
+</code></pre></div>
+<p>这样就完成了大量用户的创建了，之后您可以到/home下检查这些用户宿主目录的权限设置是否都正确，并登录验证用户密码是否正确。</p>
+<h3 id="3">3. <strong>查看和管理用户权限控制：</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在 Linux 中我们可以使用 <strong>ll</strong> 或者 <strong>ls –l</strong> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@www<span class="w"> </span>/<span class="o">]</span><span class="c1"># ls -l</span>
+total<span class="w"> </span><span class="m">64</span>
+dr-xr-xr-x<span class="w">   </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Dec<span class="w"> </span><span class="m">14</span><span class="w">  </span><span class="m">2012</span><span class="w"> </span>bin
+dr-xr-xr-x<span class="w">   </span><span class="m">4</span><span class="w"> </span>mysql<span class="w"> </span>mysql<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">19</span><span class="w">  </span><span class="m">2012</span><span class="w"> </span>boot
+……
+</code></pre></div>
+<p>实例中，<strong>bin</strong> 文件的第一个属性用 <strong>d</strong> 表示。<strong>d</strong> 在 Linux 中代表该文件是一个目录文件。</p>
+<p>在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
+<ul>
+<li>当为 <strong>d</strong> 则是目录</li>
+<li>当为 <strong>-</strong> 则是文件；</li>
+<li>若是 <strong>l</strong> 则表示为链接文档(link file)；</li>
+<li>若是 <strong>b</strong> 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
+<li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
+</ul>
+<hr />
+<p>接下来的字符中，以三个为一组，且均为 <strong>rwx</strong> 的三个参数的组合。其中， <strong>r</strong> 代表可读(read)、 <strong>w</strong> 代表可写(write)、 <strong>x</strong> 代表可作为程序执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>-</strong> 而已。</p>
+<p><img alt="" src="https://www.runoob.com/wp-content/uploads/2014/06/363003_1227493859FdXT.png" /></p>
+<p>从左至右用 <strong>0-9</strong> 这些数字来表示。</p>
+<p>第 <strong>0</strong> 位确定文件类型，第 <strong>1-3</strong> 位确定属主（该文件的所有者）拥有该文件的权限。</p>
+<p>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
+<p>其中，第 <strong>1、4、7</strong> 位表示读权限，如果用 <strong>r</strong> 字符表示，则有读权限，如果用 <strong>-</strong> 字符表示，则没有读权限；</p>
+<p>第 <strong>2、5、8</strong> 位表示写权限，如果用 <strong>w</strong> 字符表示，则有写权限，如果用 <strong>-</strong> 字符表示没有写权限；第 <strong>3、6、9</strong> 位表示可执行权限，如果用 <strong>x</strong> 字符表示，则有执行权限，如果用 <strong>-</strong> 字符表示，则没有执行权限。</p>
+<blockquote>
+<p>针对目录文件（文件夹）</p>
+<ul>
+<li>
+<p>r：可以查看文件夹内容，如ls命令</p>
+</li>
+<li>
+<p>w：可以在文件夹内创建、删除、改名等</p>
+</li>
+<li>
+<p>x：可以更改工作目录到此文件夹，如cd命令</p>
+</li>
+</ul>
+</blockquote>
+<hr />
+<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所属主组的同组用户和其他用户。</p>
+<p>因此，Linux系统按文件所有者（属主）、文件所有者同组用户（属组）和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
+<p>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
+<hr />
+<h4 id="4_1">4. <strong>更改文件属性：</strong><a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h4>
+<p><strong>chgrp命令：更改文件属组</strong></p>
+<div class="highlight"><pre><span></span><code>chgrp<span class="w"> </span><span class="o">[</span>-R<span class="o">]</span><span class="w"> </span>属组名<span class="w"> </span>文件名
+<span class="c1"># -R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上 -R 的参数，那么该目录下的所有文件的属组都会更改。</span>
+</code></pre></div>
+<p><strong>chown命令：更改文件所有者（owner），也可以同时更改文件所属组</strong></p>
+<div class="highlight"><pre><span></span><code>chown<span class="w"> </span><span class="o">[</span>–R<span class="o">]</span><span class="w"> </span>所有者<span class="w"> </span>文件名
+chown<span class="w"> </span><span class="o">[</span>-R<span class="o">]</span><span class="w"> </span>所有者:属组名<span class="w"> </span>文件名
+<span class="c1"># -R: 递归更改文件所有者，就是在更改某个目录文件的所有者时，如果加上 -R 的参数，那么该目录下的所有文件的所有者都会更改。</span>
+</code></pre></div>
+<p><strong>chmod：更改文件9个属性</strong></p>
+<p>Linux 文件的基本权限就有九个，分别是 <strong>owner/group/others(拥有者/组/其他)</strong> 三种身份各有自己的 <strong>read/write/execute</strong> 权限。</p>
+<p>先复习一下刚刚上面提到的数据：文件的权限字符为： <strong>-rwxrwxrwx</strong> ， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<ul>
+<li>r:4</li>
+<li>w:2</li>
+<li>x:1</li>
+</ul>
+<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如要设置权限为： <strong>-rwxrwx---</strong> 分数则是：</p>
+<ul>
+<li>owner = rwx = 4+2+1 = 7</li>
+<li>group = rwx = 4+2+1 = 7</li>
+<li>others= --- = 0+0+0 = 0</li>
+</ul>
+<p>所以等一下我们设定权限的变更时，该文件的权限数字就是 <strong>770</strong>。变更权限的指令 chmod 的语法是这样的：</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>chmod<span class="w"> </span><span class="o">[</span>-R<span class="o">]</span><span class="w"> </span>xyz<span class="w"> </span>文件或目录
+<span class="w"> </span><span class="c1"># xyz : 就是刚刚提到的数字类型的权限属性，为 rwx 属性数值的相加。</span>
+<span class="w"> </span><span class="c1"># -R : 进行递归(recursive)的持续变更，以及连同次目录下的所有文件都会变更</span>
+</code></pre></div>
+<p><strong>符号类型改变文件权限</strong></p>
+<p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
+<ul>
+<li>user：用户</li>
+<li>group：组</li>
+<li>others：其他</li>
+</ul>
+<p>那么我们就可以使用 <strong>u, g, o</strong> 来代表三种身份的权限。</p>
+<p>此外， <strong>a</strong> 则代表 <strong>all</strong>，即全部的身份（默认，不加时默认是<strong>a</strong>）。读写的权限可以写成 <strong>r, w, x</strong>，也就是可以使用下表的方式来看：</p>
+<table>
+<thead>
+<tr>
+<th>chmod</th>
+<th>u g o a</th>
+<th>+(加入) -(除去) =(设定)</th>
+<th>r w x</th>
+<th>文件或目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>如果我们需要将文件权限设置为 <strong>-rwxr-xr--</strong> ，可以使用 <strong>chmod u=rwx,g=rx,o=r 文件名</strong> 来设定:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#  touch test1    // 创建 test1 文件</span>
+<span class="c1"># ls -al test1    // 查看 test1 默认权限</span>
+-rw-r--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">10</span>:32<span class="w"> </span>test1
+<span class="c1"># chmod u=rwx,g=rx,o=r  test1    // 修改 test1 权限</span>
+<span class="c1"># ls -al test1</span>
+-rwxr-xr--<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">10</span>:32<span class="w"> </span>test1
+</code></pre></div>
+<p>而如果是要将权限去掉而不改变其他已存在的权限呢？例如要拿掉全部人的可执行权限，则：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#  chmod  a-x test1</span>
+<span class="c1"># ls -al test1</span>
+-rw-r--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">0</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">10</span>:32<span class="w"> </span>test1
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

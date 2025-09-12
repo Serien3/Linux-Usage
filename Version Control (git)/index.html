@@ -1,0 +1,2085 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="一个记录Linux下常用工具的笔记">
+      
+      
+      
+      
+        <link rel="prev" href="../Command-line%20Environment/">
+      
+      
+        <link rel="next" href="../Debugging%20and%20Profiling/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>05. Version Control (git) - Linux-Usage</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#git" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Linux-Usage" class="md-header__button md-logo" aria-label="Linux-Usage" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Linux-Usage
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              05. Version Control (git)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Linux-Usage" class="md-nav__button md-logo" aria-label="Linux-Usage" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Linux-Usage
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    主干内容
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            主干内容
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../The%20Shell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01. The Shell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shell_Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02. Shell_Script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Editors%28Vim%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03. Editors(Vim)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Command-line%20Environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04. Command-line Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    05. Version Control (git)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    05. Version Control (git)
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#git_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git的数据模型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git的数据模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blob" class="md-nav__link">
+    <span class="md-ellipsis">
+      对文件系统建模：快照Blob
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      对历史记录建模：关联快照
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据模型及其伪代码表示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      对象和内存寻址
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      引用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      仓库
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      暂存区
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git 的命令行接口
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础代码管理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      分支和合并
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="分支和合并">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      git并行开发的分支管理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      远端操作
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      撤销与改变工作目录
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git高级操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git高级操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 查看配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 设置配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 编辑配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 删除配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 常用配置项
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 创建 .gitignore 文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 编写忽略规则
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 生效
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 常用配置项
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git工作流
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git工作流">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Git功能分支工作流
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-git-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Git Flow工作流
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-github-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Github Flow工作流
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Debugging%20and%20Profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06. Debugging and Profiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metaprogramming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07. Metaprogramming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    分支补充内容
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            分支补充内容
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LinuxManage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LinuxManage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Makefile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Makefile
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#git_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git的数据模型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git的数据模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blob" class="md-nav__link">
+    <span class="md-ellipsis">
+      对文件系统建模：快照Blob
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      对历史记录建模：关联快照
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据模型及其伪代码表示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      对象和内存寻址
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      引用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      仓库
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      暂存区
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git 的命令行接口
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础代码管理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      分支和合并
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="分支和合并">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      git并行开发的分支管理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      远端操作
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      撤销与改变工作目录
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git高级操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git高级操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 查看配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 设置配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 编辑配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 删除配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 常用配置项
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 创建 .gitignore 文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 编写忽略规则
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 生效
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 常用配置项
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git工作流
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git工作流">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Git功能分支工作流
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-git-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Git Flow工作流
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-github-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Github Flow工作流
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="git">版本控制（Git）<a class="headerlink" href="#git" title="Permanent link">&para;</a></h1>
+<hr />
+<p><strong>Resources：</strong></p>
+<p><a href="https://missing-semester-cn.github.io/2020/version-control/">版本控制(Git) · the missing semester of your cs education</a></p>
+<p>[<a href="https://www.bilibili.com/video/BV1Wh4y1s7Lj/?spm_id_from=333.337.search-card.all.click&amp;vd_source=4cf1248054c659cc46bc5bafc9e804af">自制双语字幕] 计算机教育缺失的一课(2020) - 第6讲 - 版本控制(Git)_哔哩哔哩_bilibili</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Fw4m1C7Tq/?spm_id_from=333.337.search-card.all.click&amp;vd_source=4cf1248054c659cc46bc5bafc9e804af">【研1基本功 别人不教的，那就我来】SSH+Git+Gitee+Vscode 学会了就是代码管理大师_哔哩哔哩_bilibili</a></p>
+<p>https://github.com/git/git/blob/master/Documentation/giteveryday.adoc</p>
+<p><a href="https://git-scm.com/book/zh/v2">Git</a></p>
+<hr />
+<p>版本控制系统 (VCSs) 是一类用于追踪源代码（或其他文件、文件夹）改动的工具。顾名思义，这些工具可以帮助我们管理代码的修改历史；不仅如此，它还可以让协作编码变得更方便。VCS 通过一系列的快照将某个文件夹及其内容保存了起来，每个快照都包含了顶级目录中所有的文件或文件夹的完整状态。同时它还维护了快照创建者的信息以及每个快照的相关信息等等。</p>
+<p>为什么说版本控制系统非常有用？即使您只是一个人进行编程工作，它也可以帮您创建项目的快照，记录每个改动的目的、基于多分支并行开发等等。和别人协作开发时，它更是一个无价之宝，您可以看到别人对代码进行的修改，同时解决由于并行开发引起的冲突。</p>
+<p>尽管版本控制系统有很多， 其事实上的标准则是 <strong>Git</strong> 。因为 Git 接口的抽象泄漏（leaky abstraction）问题，通过自顶向下的方式（从命令行接口开始）学习 Git 可能会让人感到非常困惑。</p>
+<p>尽管 Git 的接口有些丑陋，但是它的底层设计和思想却是非常优雅的。丑陋的接口只能靠死记硬背，而优雅的底层设计则非常容易被人理解。因此，通过一种自底向上的方式学习 Git是很好的。先从数据模型开始，最后再学习它的抽象接口，一旦搞懂了 Git 的数据模型，再学习其接口并理解这些接口是如何操作数据模型的就非常容易了。</p>
+<h2 id="git_1">Git的数据模型<a class="headerlink" href="#git_1" title="Permanent link">&para;</a></h2>
+<p>Git 拥有一个经过精心设计的模型，这使其能够支持版本控制所需的所有特性，例如维护历史记录、支持分支和促进协作。</p>
+<p>空间（文件，文件夹） &amp; 时间（维护历史记录）</p>
+<h3 id="blob">对文件系统建模：快照Blob<a class="headerlink" href="#blob" title="Permanent link">&para;</a></h3>
+<p>Git 将顶级目录中的文件和文件夹作为集合，并通过一系列快照来管理其历史记录。在 Git 的术语里，文件被称作 Blob 对象（数据对象），也就是一组数据。目录则被称之为“树”，它将名字与 Blob 对象或树对象进行映射（使得目录中可以包含其他目录）。快照则是被追踪的最顶层的树，它可以被看作是带时间戳的文件夹副本。例如，一个树看起来可能是这样的：</p>
+<div class="highlight"><pre><span></span><code>&lt;root&gt;<span class="w"> </span><span class="o">(</span>tree<span class="o">)</span>
+<span class="p">|</span>
++-<span class="w"> </span>foo<span class="w"> </span><span class="o">(</span>tree<span class="o">)</span>
+<span class="p">|</span><span class="w">  </span><span class="p">|</span>
+<span class="p">|</span><span class="w">  </span>+<span class="w"> </span>bar.txt<span class="w"> </span><span class="o">(</span>blob,<span class="w"> </span><span class="nv">contents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hello world&quot;</span><span class="o">)</span>
+<span class="p">|</span>
++-<span class="w"> </span>baz.txt<span class="w"> </span><span class="o">(</span>blob,<span class="w"> </span><span class="nv">contents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git is wonderful&quot;</span><span class="o">)</span>
+</code></pre></div>
+<p>这个顶层的树包含了两个元素，一个名为 “foo” 的树（它本身包含了一个 blob 对象 “bar.txt”），以及一个 blob 对象 “baz.txt”。</p>
+<h3 id="_1">对历史记录建模：关联快照<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>版本控制系统和快照有什么关系呢？历史记录就是一系列快照，线性历史记录是一种最简单的模型，它包含了一组按照时间顺序线性排列的快照。不过出于种种原因，Git 并没有采用这样的模型。</p>
+<p>在 Git 中，历史记录是一个由快照组成的有向无环图，这代表 Git 中的每个快照都有一系列的“父辈”，也就是其之前的一系列快照。注意，快照具有多个“父辈”而非一个，因为某个快照可能由多个父辈而来（因此这是一个图结构而非线性结构）。例如，经过合并后的两条分支。</p>
+<p>在 Git 中，这些快照被称为“提交”。通过可视化的方式来表示这些历史提交记录时，看起来差不多是这样的：</p>
+<div class="highlight"><pre><span></span><code>o &lt;-- o &lt;-- o &lt;-- o
+            ^
+             \
+              --- o &lt;-- o
+</code></pre></div>
+<p>上面是一个 ASCII 码构成的简图，其中的 <code>o</code> 表示一次提交（快照）。（继承关系来表现层次）</p>
+<p>箭头指向了当前提交的父辈（这是一种“在…之前”，而不是“在…之后”的关系）。在第三次提交之后，历史记录分岔成了两条独立的分支。这可能因为此时需要同时开发两个不同的特性，它们之间是相互独立的。开发完成后，这些分支可能会被合并并创建一个新的提交，这个新的提交会同时包含这些特性。新的提交会创建一个新的历史记录，看上去像这样：</p>
+<div class="highlight"><pre><span></span><code>o &lt;-- o &lt;-- o &lt;-- o &lt;----  o 
+            ^            /
+             \          v
+              --- o &lt;-- o
+</code></pre></div>
+<p>Git 中的提交是不可改变的。但这并不代表错误不能被修改，只不过这种“修改”实际上是创建了一个全新的提交记录。而引用（参见下文）则被更新为指向这些新的提交。</p>
+<h3 id="_2">数据模型及其伪代码表示<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>以伪代码的形式来学习 Git 的数据模型，可能更加清晰：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 文件就是一组数据</span>
+<span class="n">type</span><span class="w"> </span><span class="n">blob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span>
+
+<span class="c1">// 一个包含文件和目录的目录</span>
+<span class="n">type</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">blob</span><span class="o">&gt;</span>
+
+<span class="c1">// 每个提交都包含一个父辈，元数据和顶层树（组合）</span>
+<span class="n">type</span><span class="w"> </span><span class="n">commit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nl">parents</span><span class="p">:</span><span class="w"> </span><span class="n">array</span><span class="o">&lt;</span><span class="n">commit</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="nl">author</span><span class="p">:</span><span class="w"> </span><span class="n">string</span>
+<span class="w">    </span><span class="nl">message</span><span class="p">:</span><span class="w"> </span><span class="n">string</span>
+<span class="w">    </span><span class="nl">snapshot</span><span class="p">:</span><span class="w"> </span><span class="n">tree</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>这是一种简洁的历史模型。</p>
+<h3 id="_3">对象和内存寻址<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Git 中的对象可以是 blob、树或提交：</p>
+<div class="highlight"><pre><span></span><code><span class="n">type</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blob</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">commit</span>
+</code></pre></div>
+<p>Git 在储存数据时，所有的对象都会基于它们的 <a href="https://en.wikipedia.org/wiki/SHA-1">SHA-1 哈希</a> 进行寻址。</p>
+<div class="highlight"><pre><span></span><code><span class="n">objects</span> <span class="o">=</span> <span class="nb">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="nb">object</span><span class="o">&gt;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">store</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">sha1</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+    <span class="n">objects</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">object</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">objects</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+</code></pre></div>
+<p>Blobs、树和提交都一样，它们都是对象。当它们引用其他对象时，它们并没有真正的在硬盘上保存这些对象，而是仅仅保存了它们的哈希值作为引用。</p>
+<p>例如，上面例子中的树（可以通过 <code>git cat-file -p 698281bc680d1995c5f4caaf3359721a5a58d48d</code> 来进行可视化），看上去是这样的：</p>
+<div class="highlight"><pre><span></span><code><span class="m">100644</span><span class="w"> </span>blob<span class="w"> </span>4448adbf7ecd394f42ae135bbeed9676e894af85<span class="w">    </span>baz.txt
+<span class="m">040000</span><span class="w"> </span>tree<span class="w"> </span>c68d233a33c5c06e0340e4c224f0afca87c8ce87<span class="w">    </span>foo
+</code></pre></div>
+<p>树本身会包含一些指向其他内容的指针，例如 <code>baz.txt</code> (blob) 和 <code>foo</code> (树)。如果我们用 <code>git cat-file -p 4448adbf7ecd394f42ae135bbeed9676e894af85</code>，即通过哈希值查看 baz.txt 的内容，会得到以下信息：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>is<span class="w"> </span>wonderful
+</code></pre></div>
+<h3 id="_4">引用<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>现在，所有的快照都可以通过它们的 SHA-1 哈希值来标记了。但这也太不方便了，谁也记不住一串 40 位的十六进制字符。</p>
+<p>针对这一问题，Git 的解决方法是给这些哈希值赋予人类可读的名字，也就是引用（references）。引用是指向提交的指针。与对象不同的是，它是可变的（引用可以被更新，指向新的提交）。例如，<code>master</code> 引用通常会指向主分支的最新一次提交。</p>
+<div class="highlight"><pre><span></span><code><span class="n">references</span> <span class="o">=</span> <span class="nb">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">update_reference</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+    <span class="n">references</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">id</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">read_reference</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">references</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_reference</span><span class="p">(</span><span class="n">name_or_id</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name_or_id</span> <span class="ow">in</span> <span class="n">references</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">load</span><span class="p">(</span><span class="n">references</span><span class="p">[</span><span class="n">name_or_id</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">load</span><span class="p">(</span><span class="n">name_or_id</span><span class="p">)</span>
+</code></pre></div>
+<p>这样，Git 就可以使用诸如 “master” 这样人类可读的名称来表示历史记录中某个特定的提交，而不需要在使用一长串十六进制字符了。同时，我们将“master”这样的引用视为“分支”的标识。</p>
+<p>有一个细节需要我们注意， 通常情况下，我们会想要知道“我们当前所在位置”，并将其标记下来。这样当我们创建新的快照的时候，我们就可以知道它的相对位置（如何设置它的“父辈”）。在 Git 中，我们当前的位置有一个特殊的索引，它就是 “HEAD”。</p>
+<h3 id="_5">仓库<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>最后，我们可以粗略地给出 Git 仓库的定义了：<code>对象</code> 和 <code>引用</code>。</p>
+<p>在硬盘上，Git 仅存储对象和引用：因为其数据模型仅包含这些东西。所有的 <code>git</code> 命令都对应着对提交树的操作，例如增加对象，增加或删除引用。</p>
+<p>当您输入某个指令时，请思考一下这条命令是如何对底层的图数据结构进行操作的。另一方面，如果您希望修改提交树，例如“丢弃未提交的修改和将 ‘master’ 引用指向提交 <code>5d83f9e</code> 时，有什么命令可以完成该操作（针对这个具体问题，您可以使用 <code>git checkout master; git reset --hard 5d83f9e</code>）</p>
+<hr />
+<p>抽象：利用组合形成的层次关系如下</p>
+<p>文件，文件夹 -&gt; Blob对象，树 -&gt; 快照（顶层树）-不同历史记录下-&gt; commit </p>
+<p>Blob，树（空间），commit（时间）均是对象，对象需要名字索引（哈希）</p>
+<p>以上均是<strong>不可变</strong>的；还要提供可变的能力表现状态的迁移（提供引用/指针，破坏引用透明性，但提供了状态迁移的表现）</p>
+<p>对象加上它的名字引用就是Git仓库</p>
+<hr />
+<h2 id="_6">暂存区<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>Git 中还包括一个和数据模型完全不相关的概念，但它确是创建提交的接口的一部分。</p>
+<p>就上面介绍的快照系统来说，您也许会期望它的实现里包括一个 “创建快照” 的命令，该命令能够基于当前工作目录的当前状态创建一个全新的快照。有些版本控制系统确实是这样工作的，但 Git 不是。我们希望简洁的快照，而且每次从当前状态创建快照可能效果并不理想。例如，考虑如下场景，您开发了两个独立的特性，然后您希望创建两个独立的提交，其中第一个提交仅包含第一个特性，而第二个提交仅包含第二个特性。或者，假设您在调试代码时添加了很多打印语句，然后您仅仅希望提交和修复 bug 相关的代码而丢弃所有的打印语句。</p>
+<p>Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area）”的机制，它在Git工作流中位于工作目录（修改区）和历史记录（提交）之间，允许您指定下次快照中要包括那些改动。</p>
+<p>在我们使用Git进行工作时，每次输入的命令，要注意它对我们的<strong>工作目录（修改区）</strong>，<strong>暂存区</strong>和<strong>历史记录（数据模型）</strong>都会造成什么变化，这是记忆和掌握Git的命令行接口的关键。</p>
+<h2 id="git_2">Git 的命令行接口<a class="headerlink" href="#git_2" title="Permanent link">&para;</a></h2>
+<h2 id="_7">基础代码管理<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><code>git help &lt;command&gt;</code>: 获取 git 命令的帮助信息</p>
+</li>
+<li>
+<p><code>git init</code>: 创建一个新的 git 仓库，其数据会存放在一个名为 <code>.git</code> 的目录下</p>
+</li>
+<li>
+<p><code>git status</code>: 显示当前的仓库状态</p>
+</li>
+<li>
+<p><code>git add &lt;filename&gt;</code>: 添加文件到暂存区</p>
+</li>
+<li>
+<p><code>git add .</code>:添加仓库中所有文件到暂存区</p>
+</li>
+<li>
+<p><code>git commit</code>: 创建一个新的提交</p>
+</li>
+<li>
+<p><code>git commit -m "&lt;message&gt;"</code></p>
+</li>
+<li>
+<p>如何编写 <a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">良好的提交信息</a>!</p>
+</li>
+<li>
+<p>为何要 <a href="https://chris.beams.io/posts/git-commit/">编写良好的提交信息</a></p>
+</li>
+<li>
+<p><code>git log</code>: 显示历史日志</p>
+</li>
+<li>
+<p><code>git log --all --graph --decorate</code>: 可视化历史记录（有向无环图）</p>
+</li>
+<li>
+<p><code>git show &lt;object&gt;</code>：指定要显示的 Git 对象。可以是提交哈希、标签、分支名等。</p>
+</li>
+<li>
+<p><code>git diff &lt;filename&gt;</code>: 显示HEAD快照与暂存区文件的差异</p>
+</li>
+<li>
+<p><code>git diff &lt;revision&gt; &lt;revision&gt; &lt;filename&gt;</code>: 显示某个文件两个版本之间的差异</p>
+</li>
+</ul>
+<p><code>&lt;revision&gt;</code> 表示提交对应的<strong>哈希字符串</strong>或<strong>引用名</strong>称或<strong>标签名</strong>或<strong>相对引用</strong>，一般命令中默认则为<code>HAED</code></p>
+<ul>
+<li><code>git checkout &lt;revision&gt;</code>: 更新 HEAD 和目前的分支（将HEAD指针转移，指向<code>&lt;reversion&gt;</code>提交），并让整个工作目录中的文件和<code>&lt;revision&gt;</code>提交完全一致</li>
+</ul>
+<h2 id="_8">分支和合并<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>git branch</code>: 显示本地仓库的所有分支（本质上就是引用）</li>
+<li><code>git branch -vv</code>：显示所有分支的详细信息，包括跟踪的远程分支信息</li>
+<li><code>git branch &lt;name&gt;</code>: 创建分支（本质上就是一个引新的用）</li>
+<li><code>git branch -d &lt;name&gt;</code>:删除分支（本质上是删除一个引用）</li>
+<li>在 Git 中，分支只是提交的有向无环图 (DAG) 中提交的指针（引用）。这意味着删除分支只会删除对提交的引用，这可能会使 DAG 中的某些提交无法访问，从而不可见。但是，在已删除分支上的所有提交仍将在存储库中，至少在无法访问的提交被修剪之前（例如使用<code>git gc</code>）</li>
+<li>如果分支在被删除之前被合并到另一个分支，那么当第一个分支被删除时，所有提交仍然可以从另一个分支访问。它们保持原样；如果分支在没有被合并到另一个分支的情况下被删除，那么该分支中的提交（直到仍然可以访问的提交的分叉点）将不再可见。后者这种情况下使用<code>git branch -d</code>将拒绝删除分支，使用 strong的<code>git branch -D</code>可强制删除分支.</li>
+<li><code>git checkout -b &lt;name&gt;</code>: 创建分支并切换到该分支</li>
+<li>相当于 <code>git branch &lt;name&gt;; git checkout &lt;name&gt;</code></li>
+<li><code>git switch &lt;name&gt;</code>：v2.23版本后专门用于<strong>切换分支</strong>的命令。取代 <code>git checkout &lt;分支名&gt;</code>。</li>
+<li><code>git switch -c &lt;新分支名&gt;</code>：创建并切换分支，取代 <code>git checkout -b</code>。</li>
+<li><code>git merge &lt;revision&gt;</code>: 合并到当前分支</li>
+<li><code>git mergetool</code>: 使用工具来处理合并冲突</li>
+</ul>
+<hr />
+<h3 id="git_3">git并行开发的分支管理<a class="headerlink" href="#git_3" title="Permanent link">&para;</a></h3>
+<p>分支合并的类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>命令</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fast-forward</td>
+<td>默认模式</td>
+<td>如果当前分支是目标分支的祖先，则直接移动 HEAD 指针</td>
+</tr>
+<tr>
+<td>Recursive</td>
+<td>默认两路合并</td>
+<td>自动合并多个分支的内容，工作原理（Three-way Merge）：Git 会找到两个分支的第一个共同祖先提交（common ancestor），然后对三方（共同祖先、当前分支、要合并的分支）的内容进行合并，并创建一个新的提交来记录这个合并结果，由当前分支指向它。</td>
+</tr>
+<tr>
+<td>Octopus</td>
+<td><code>git merge branch1 branch2 ...</code></td>
+<td>多分支同时合并</td>
+</tr>
+<tr>
+<td>No-fast-forward</td>
+<td><code>git merge --no-ff feature/auth</code></td>
+<td>显式强制创建合并提交，保留历史结构（<strong>即使可以进行快进合并，也会强制创建一个合并提交</strong>）</td>
+</tr>
+<tr>
+<td>Squash压缩合并</td>
+<td><code>git merge--squash branch</code></td>
+<td>把 <code>branch</code> 的所有提交合并到当前分支，但只产生一个新的合并提交，当前分支的提交历史中不会保留 <code>branch</code> 的多次提交记录，即不会记录它和当前分支的合并关系</td>
+</tr>
+</tbody>
+</table>
+<p>✅ 推荐使用 --no-ff 来保持历史可读性，对于跟踪功能分支的生命周期非常有用，尤其是在主分支合并 feature 分支时。</p>
+<p><strong>（使用 git mergetool） 解决合并两个分支时出现的冲突</strong></p>
+<p>Git 使用三路合并算法（Three-way Merge），基于以下三个版本进行合并：</p>
+<ol>
+<li>当前分支（HEAD）</li>
+<li>要合并的分支（feature/auth）</li>
+<li>公共祖先（Common Ancestor）</li>
+</ol>
+<p>因此如果两个分支都修改了同一文件的相同区域，Git 就无法确定保留哪一部分内容，于是标记为冲突。</p>
+<p>总结下来，当执行以下操作时可能触发合并冲突：</p>
+<ul>
+<li><code>git merge</code>（合并分支）</li>
+<li><code>git pull</code>（拉取远程代码）</li>
+<li><code>git rebase</code>（变基操作）</li>
+<li><code>git cherry-pick</code>（选择性提交）</li>
+</ul>
+<p>此时 Git 会提示 <code>CONFLICT</code> 并终止操作，需手动解决冲突。</p>
+<p><strong>一般工作流程：</strong></p>
+<ol>
+<li>配置合并工具（以 KDiff3 为例）</li>
+</ol>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>merge.tool<span class="w"> </span>kdiff3<span class="w">         </span><span class="c1"># 设置默认工具</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>mergetool.kdiff3.path<span class="w"> </span><span class="s2">&quot;/usr/bin/kdiff3&quot;</span><span class="w">  </span><span class="c1"># 指定工具路径</span>
+</code></pre></div>
+<ol>
+<li>查看冲突文件</li>
+</ol>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>status
+<span class="c1"># 冲突文件会被标记为 Unmerged paths。</span>
+</code></pre></div>
+<ol>
+<li>启动合并工具</li>
+</ol>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>mergetool
+<span class="c1"># 此命令会依次打开所有冲突文件对应的合并工具界面。</span>
+<span class="c1"># 或者手动打开冲突文件检查</span>
+</code></pre></div>
+<ol>
+<li>标记冲突已解决</li>
+</ol>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>&lt;file&gt;<span class="w">  </span><span class="c1"># 将解决后的文件标记为已解决</span>
+
+git<span class="w"> </span>commit<span class="w">      </span>
+--or--
+git<span class="w"> </span>merge<span class="w"> </span>--continue<span class="w">  </span><span class="c1"># 提交合并结果，Git 会自动生成一个合并提交信息，如需修改可手动编辑。</span>
+</code></pre></div>
+<p><strong>主流mergetool（合并工具）及配置：</strong></p>
+<ol>
+<li>
+<p><strong>Git 内置工具：diff3</strong></p>
+</li>
+<li>
+<p>特点：命令行工具，直接展示冲突标记。</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt;<span class="w"> </span>HEAD
+这是当前分支的代码（例如，在<span class="w"> </span>master<span class="w"> </span>分支上合并<span class="w"> </span>feature<span class="w"> </span>分支，那么这里就是<span class="w"> </span>master<span class="w"> </span>分支的代码）
+<span class="o">=======</span>
+这是要合并进来的分支的代码（例如，feature<span class="w"> </span>分支的代码）
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="w"> </span>branch-name
+</code></pre></div>
+<ul>
+<li>
+<p><strong>使用场景</strong>：适合简单冲突的快速修复。</p>
+</li>
+<li>
+<p><strong>KDiff3（跨平台）</strong></p>
+</li>
+<li>
+<p><strong>安装</strong>：</p>
+<ul>
+<li>Linux: <code>sudo apt install kdiff3</code></li>
+<li>macOS: <code>brew install kdiff3</code></li>
+<li>Windows: 官网下载安装包</li>
+</ul>
+</li>
+<li>
+<p><strong>配置：</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>merge.tool<span class="w"> </span>kdiff3
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>mergetool.kdiff3.trustExitCode<span class="w"> </span><span class="nb">true</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>优点</strong>：三窗格对比（本地/远程/基准），可视化操作。</p>
+</li>
+<li>
+<p><strong>Beyond Compare（商业软件）</strong></p>
+</li>
+<li>
+<p>配置</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>merge.tool<span class="w"> </span>bc3
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>mergetool.bc3.path<span class="w"> </span><span class="s2">&quot;/Applications/Beyond Compare.app/Contents/MacOS/bcomp&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>优点</strong>：强大的文件对比与合并功能，支持文件夹同步。</p>
+</li>
+<li>
+<p><strong>Visual Studio Code（内置合并工具）</strong></p>
+</li>
+<li>
+<p>使用方法：</p>
+<ol>
+<li><strong>打开冲突文件</strong>：VSCode会高亮显示冲突的文件，在VSCode中打开存在冲突的文件，可以看到冲突的代码段，会显示 <code>Current Changes</code> 和 <code>Incoming Changes</code>。</li>
+<li><strong>解决冲突</strong>：VSCode提供了多个选项帮助解决冲突，例如“Accept Current Change”（接受当前更改）、“Accept Incoming Change”（接受传入更改）、“Accept Both Changes”（接受两者），或者手动编辑冲突部分。</li>
+<li><strong>标记冲突已解决</strong>：解决冲突后，保存文件，并在终端或VSCode的源代码控制面板中提交快照。</li>
+</ol>
+</li>
+<li><strong>优点</strong>：无需额外配置，适合日常开发环境。</li>
+</ul>
+<p><strong>现在，我们从示例开始演示分支管理操作：</strong></p>
+<p>首先，我们创建<code>dev</code>分支，然后切换到<code>dev</code>分支：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>dev
+Switched<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;dev&#39;</span>
+</code></pre></div>
+<p>用<code>git branch</code>命令查看当前分支：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>branch
+*<span class="w"> </span>dev
+<span class="w">  </span>master
+</code></pre></div>
+<p>然后，我们就可以在<code>dev</code>分支上正常提交，比如对<code>readme.txt</code>做个修改，加上一行：</p>
+<div class="highlight"><pre><span></span><code>Creating<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span>is<span class="w"> </span>quick.
+</code></pre></div>
+<p>然后提交：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>readme.txt<span class="w"> </span>
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;branch test&quot;</span>
+<span class="o">[</span>dev<span class="w"> </span>b17d20e<span class="o">]</span><span class="w"> </span>branch<span class="w"> </span><span class="nb">test</span>
+<span class="w"> </span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>changed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>insertion<span class="o">(</span>+<span class="o">)</span>
+</code></pre></div>
+<p>现在，<code>dev</code>分支的工作完成，我们就可以切换回<code>master</code>分支：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>master
+Switched<span class="w"> </span>to<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;master&#39;</span>
+</code></pre></div>
+<p>换回<code>master</code>分支后，再查看一个<code>readme.txt</code>文件，刚才添加的内容不见了！因为那个提交是在<code>dev</code>分支上，而<code>master</code>分支此刻的提交点并没有变。</p>
+<p>在，我们把<code>dev</code>分支的工作成果合并到<code>master</code>分支上：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>merge<span class="w"> </span>dev
+Updating<span class="w"> </span>d46f35e..b17d20e
+Fast-forward
+<span class="w"> </span>readme.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>+
+<span class="w"> </span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>changed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>insertion<span class="o">(</span>+<span class="o">)</span>
+</code></pre></div>
+<p>注意到上面的<code>Fast-forward</code>信息，Git告诉我们，这次合并是“快进模式”，也就是直接把<code>master</code>指向<code>dev</code>的当前提交，所以合并速度非常快。</p>
+<p>合并完成后，就可以放心地删除<code>dev</code>分支了：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>dev
+Deleted<span class="w"> </span>branch<span class="w"> </span>dev<span class="w"> </span><span class="o">(</span>was<span class="w"> </span>b17d20e<span class="o">)</span>.
+</code></pre></div>
+<p>准备新的<code>feature1</code>分支，继续我们的新分支开发：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>feature1
+Switched<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;feature1&#39;</span>
+</code></pre></div>
+<p>修改<code>readme.txt</code>最后一行，改为：</p>
+<div class="highlight"><pre><span></span><code>Creating<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span>is<span class="w"> </span>quick<span class="w"> </span>AND<span class="w"> </span>simple.
+</code></pre></div>
+<p>在<code>feature1</code>分支上提交：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>readme.txt
+
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;AND simple&quot;</span>
+<span class="o">[</span>feature1<span class="w"> </span>14096d0<span class="o">]</span><span class="w"> </span>AND<span class="w"> </span>simple
+<span class="w"> </span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>changed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>insertion<span class="o">(</span>+<span class="o">)</span>,<span class="w"> </span><span class="m">1</span><span class="w"> </span>deletion<span class="o">(</span>-<span class="o">)</span>
+</code></pre></div>
+<p>切换到<code>master</code>分支：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>switch<span class="w"> </span>master
+Switched<span class="w"> </span>to<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;master&#39;</span>
+Your<span class="w"> </span>branch<span class="w"> </span>is<span class="w"> </span>ahead<span class="w"> </span>of<span class="w"> </span><span class="s1">&#39;origin/master&#39;</span><span class="w"> </span>by<span class="w"> </span><span class="m">1</span><span class="w"> </span>commit.
+<span class="w">  </span><span class="o">(</span>use<span class="w"> </span><span class="s2">&quot;git push&quot;</span><span class="w"> </span>to<span class="w"> </span>publish<span class="w"> </span>your<span class="w"> </span><span class="nb">local</span><span class="w"> </span>commits<span class="o">)</span>
+</code></pre></div>
+<p>Git还会自动提示我们当前<code>master</code>分支比远程的<code>master</code>分支要超前1个提交。</p>
+<p>在<code>master</code>分支上把<code>readme.txt</code>文件的最后一行改为：</p>
+<div class="highlight"><pre><span></span><code>Creating<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span>is<span class="w"> </span>quick<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>simple.
+</code></pre></div>
+<p>提交：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>readme.txt<span class="w"> </span>
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;&amp; simple&quot;</span>
+<span class="o">[</span>master<span class="w"> </span>5dc6824<span class="o">]</span><span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>simple
+<span class="w"> </span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>changed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>insertion<span class="o">(</span>+<span class="o">)</span>,<span class="w"> </span><span class="m">1</span><span class="w"> </span>deletion<span class="o">(</span>-<span class="o">)</span>
+</code></pre></div>
+<p>现在，<code>master</code>分支和<code>feature1</code>分支各自都分别有新的提交，变成了这样：</p>
+<p><img alt="" src="../images/merge_conflict.png" /></p>
+<p>这种情况下，Git无法执行“快速合并”，只能试图把各自的修改合并起来，但这种合并就可能会有冲突，我们试试看：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>merge<span class="w"> </span>feature1
+Auto-merging<span class="w"> </span>readme.txt
+CONFLICT<span class="w"> </span><span class="o">(</span>content<span class="o">)</span>:<span class="w"> </span>Merge<span class="w"> </span>conflict<span class="w"> </span><span class="k">in</span><span class="w"> </span>readme.txt
+Automatic<span class="w"> </span>merge<span class="w"> </span>failed<span class="p">;</span><span class="w"> </span>fix<span class="w"> </span>conflicts<span class="w"> </span>and<span class="w"> </span><span class="k">then</span><span class="w"> </span>commit<span class="w"> </span>the<span class="w"> </span>result.
+</code></pre></div>
+<p>果然冲突了！Git告诉我们，<code>readme.txt</code>文件存在冲突，必须手动解决冲突后再提交。<code>git status</code>也可以告诉我们冲突的文件：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>status
+On<span class="w"> </span>branch<span class="w"> </span>master
+Your<span class="w"> </span>branch<span class="w"> </span>is<span class="w"> </span>ahead<span class="w"> </span>of<span class="w"> </span><span class="s1">&#39;origin/master&#39;</span><span class="w"> </span>by<span class="w"> </span><span class="m">2</span><span class="w"> </span>commits.
+<span class="w">  </span><span class="o">(</span>use<span class="w"> </span><span class="s2">&quot;git push&quot;</span><span class="w"> </span>to<span class="w"> </span>publish<span class="w"> </span>your<span class="w"> </span><span class="nb">local</span><span class="w"> </span>commits<span class="o">)</span>
+
+You<span class="w"> </span>have<span class="w"> </span>unmerged<span class="w"> </span>paths.
+<span class="w">  </span><span class="o">(</span>fix<span class="w"> </span>conflicts<span class="w"> </span>and<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;git commit&quot;</span><span class="o">)</span>
+<span class="w">  </span><span class="o">(</span>use<span class="w"> </span><span class="s2">&quot;git merge --abort&quot;</span><span class="w"> </span>to<span class="w"> </span>abort<span class="w"> </span>the<span class="w"> </span>merge<span class="o">)</span>
+
+Unmerged<span class="w"> </span>paths:
+<span class="w">  </span><span class="o">(</span>use<span class="w"> </span><span class="s2">&quot;git add &lt;file&gt;...&quot;</span><span class="w"> </span>to<span class="w"> </span>mark<span class="w"> </span>resolution<span class="o">)</span>
+
+<span class="w">    </span>both<span class="w"> </span>modified:<span class="w">   </span>readme.txt
+
+no<span class="w"> </span>changes<span class="w"> </span>added<span class="w"> </span>to<span class="w"> </span>commit<span class="w"> </span><span class="o">(</span>use<span class="w"> </span><span class="s2">&quot;git add&quot;</span><span class="w"> </span>and/or<span class="w"> </span><span class="s2">&quot;git commit -a&quot;</span><span class="o">)</span>
+</code></pre></div>
+<p>我们可以直接查看readme.txt的内容：</p>
+<div class="highlight"><pre><span></span><code>Git<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>distributed<span class="w"> </span>version<span class="w"> </span>control<span class="w"> </span>system.
+Git<span class="w"> </span>is<span class="w"> </span>free<span class="w"> </span>software<span class="w"> </span>distributed<span class="w"> </span>under<span class="w"> </span>the<span class="w"> </span>GPL.
+Git<span class="w"> </span>has<span class="w"> </span>a<span class="w"> </span>mutable<span class="w"> </span>index<span class="w"> </span>called<span class="w"> </span>stage.
+Git<span class="w"> </span>tracks<span class="w"> </span>changes<span class="w"> </span>of<span class="w"> </span>files.
+<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt;<span class="w"> </span>HEAD
+Creating<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span>is<span class="w"> </span>quick<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>simple.
+<span class="o">=======</span>
+Creating<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span>is<span class="w"> </span>quick<span class="w"> </span>AND<span class="w"> </span>simple.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="w"> </span>feature1
+</code></pre></div>
+<p>Git用<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记出不同分支的内容，我们修改如下后保存：</p>
+<div class="highlight"><pre><span></span><code>Git<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>distributed<span class="w"> </span>version<span class="w"> </span>control<span class="w"> </span>system.
+Git<span class="w"> </span>is<span class="w"> </span>free<span class="w"> </span>software<span class="w"> </span>distributed<span class="w"> </span>under<span class="w"> </span>the<span class="w"> </span>GPL.
+Git<span class="w"> </span>has<span class="w"> </span>a<span class="w"> </span>mutable<span class="w"> </span>index<span class="w"> </span>called<span class="w"> </span>stage.
+Git<span class="w"> </span>tracks<span class="w"> </span>changes<span class="w"> </span>of<span class="w"> </span>files.
+Creating<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span>is<span class="w"> </span>quick<span class="w"> </span>and<span class="w"> </span>simple.
+</code></pre></div>
+<p>再提交：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>readme.txt<span class="w"> </span>
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;conflict fixed&quot;</span>
+<span class="o">[</span>master<span class="w"> </span>cf810e4<span class="o">]</span><span class="w"> </span>conflict<span class="w"> </span>fixed
+</code></pre></div>
+<p>现在，<code>master</code>分支和<code>feature1</code>分支变成了下图所示：</p>
+<p><img alt="" src="../images/merge_out.png" /></p>
+<p>最后，可以正常删除<code>feature1</code>分支：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>feature1
+Deleted<span class="w"> </span>branch<span class="w"> </span>feature1<span class="w"> </span><span class="o">(</span>was<span class="w"> </span>14096d0<span class="o">)</span>.
+</code></pre></div>
+<hr />
+<h2 id="_9">远端操作<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><code>git remote</code>: 列出当前仓库的远端</p>
+</li>
+<li>
+<p><code>git remote -v</code>：列出当前仓库中已配置的远程仓库，并显示它们的 URL。</p>
+</li>
+<li><code>git remote show &lt;remote_name&gt;</code>：显示指定远程仓库的详细信息，包括 URL 和跟踪分支。</li>
+<li><code>git remote add &lt;remote_name&gt; &lt;remote_url&gt;</code>：添加一个新的远程仓库。指定一个远程仓库的名称和 URL，将其添加到当前仓库中。</li>
+<li><code>git remote rename &lt;old_name&gt; &lt;new_name&gt;</code>：将已配置的远程仓库重命名。</li>
+<li><code>git remote remove &lt;remote_name&gt;</code>：从当前仓库中删除指定的远程仓库。</li>
+<li>
+<p><code>git remote set-url &lt;remote_name&gt; &lt;new_url&gt;</code>：修改指定远程仓库的 URL。</p>
+</li>
+<li>
+<p><code>git remote add &lt;name&gt; &lt;url&gt;</code>: 添加一个远端（<code>&lt;name&gt;</code>是为远程仓库起的名称，一般叫做<code>origin</code>）</p>
+</li>
+<li>
+<p><code>git push &lt;remote&gt; &lt;local branch&gt;:&lt;remote branch&gt;</code>: 将对象传送至远端并更新远端引用</p>
+</li>
+<li>
+<p>该命令会在远程仓库创建一个新分支或更新上面的一个分支</p>
+<ul>
+<li>省略<code>&lt;remote branch&gt;</code>：本地分支名和远程分支名一样的情况下，可以省略；如果远程主机中不存在该分支，那么会被创建。</li>
+</ul>
+</li>
+<li><code>git push --all &lt;remote_name&gt;</code>：不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机<code>&lt;remote_name&gt;</code>，这时需要使用–all选项。</li>
+<li>
+<p><code>git push origin :master</code> 等价于 <code>git push origin --delete master</code>：如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支。</p>
+</li>
+<li>
+<p>Git可以用一些方法维护自己本地仓库的分支和远程仓库某分支的关联，这样<code>git push</code>就可以简化输入，它会知道当前分支对应的远端分支并自动扩展所有的参数。</p>
+<ul>
+<li><code>git branch --set-upstream-to=&lt;remote/remote branch&gt;</code> (<code>&lt;remote/remote branch&gt;</code>,例如<code>origin/master</code>，)：设置当前分支跟踪来自origin的master分支。</li>
+<li>最初使用<code>git push</code>完整命令时，顺便添加选项<code>-u</code>或<code>--set-upstream</code>，这会将本地分支与远程分支关联。</li>
+<li><code>git branch --unset-upstream &lt;branch name&gt;</code>: 解除关联</li>
+<li><code>git branch -vv</code>: 查看本地分支与远程分支的关联关系</li>
+</ul>
+</li>
+<li>
+<p><code>git fetch &lt;remote&gt;</code>: 与远程仓库通信，从远端获取对象/索引但不改变当前本地的对象与引用（若只有一个远程仓库，则<code>&lt;remote&gt;</code>默认直接使用它）</p>
+</li>
+<li>
+<p><code>git pull</code>: （参数同<code>git push</code>）相当于 <code>git fetch; git merge</code></p>
+</li>
+<li>
+<p><code>git clone &lt;url&gt; &lt;folder name&gt;</code>: 从远端下载仓库并创建自己的本地副本(<code>&lt;folder name&gt;</code>默认为当前文件夹)</p>
+</li>
+<li>
+<p>这是一个复合命令，当执行 <code>git clone</code> 时，Git 在后台自动执行了三个关键步骤：</p>
+<ol>
+<li>
+<p><strong>初始化（<code>git init</code>）</strong>：在指定的目录（或默认使用远程仓库名作为目录名）中，创建一个新的<strong>本地仓库</strong>。这会生成一个 <code>.git</code> 文件夹，里面包含了所有 Git 管理项目所需的骨架结构（如 objects, refs 等目录）。</p>
+</li>
+<li>
+<p><strong>抓取（<code>git fetch</code>）</strong>：与远程仓库（如 GitHub、GitLab 或另一个服务器上的仓库）建立连接，并<strong>下载其所有数据</strong>。这包括：</p>
+</li>
+<li>
+<p><strong>所有提交历史（Commit Objects）</strong>：整个项目的所有版本快照。</p>
+</li>
+<li><strong>所有分支（Branches）</strong>：远程仓库上的 <code>main</code>, <code>master</code>, <code>develop</code>, <code>feature</code> 等所有分支。这些分支在本地被存储为 <strong>远程跟踪分支（Remote-Tracking Branches）</strong>，格式为 <code>&lt;remote&gt;/&lt;branch&gt;</code>（例如 <code>origin/main</code>）。</li>
+<li><strong>所有标签（Tags）</strong>：项目的所有标记版本。</li>
+</ol>
+<p>此时，你的本地仓库已经有了远程仓库的<strong>完整副本</strong>，但<strong>工作目录里还是空的</strong>。</p>
+<ol>
+<li><strong>检出（<code>git checkout</code>）</strong>：<strong>“检出”（Checkout）是什么意思？</strong></li>
+</ol>
+<p>它的本质是：<strong>让工作目录中的文件内容匹配某个特定提交（或分支）的状态。</strong></p>
+<p>在 <code>clone</code> 的最后，Git 会自动执行一次 <code>git checkout</code>，它做两件事：
+   a. <strong>确定目标</strong>：默认情况下，它会找到远程仓库的<strong>默认分支</strong>（通常是 <code>origin/main</code> 或 <code>origin/master</code>）。
+   b. <strong>创建并切换分支</strong>：它会在本地创建一个<strong>同名的分支</strong>（<code>main</code> 或 <code>master</code>），并将这个本地分支<strong>指向</strong>刚刚下载的 <code>origin/main</code> 所指向的那个最新提交。
+   c. <strong>更新工作目录</strong>：最后，Git 将那个最新提交所对应的所有文件（代码、文档等）<strong>提取出来</strong>，并放置到你的工作目录中。这样，你就能看到一个完整的、可编译、可运行的项目代码了。</p>
+</li>
+<li>
+<p><code>-b &lt;分支名&gt;</code> 或 <code>--branch &lt;分支名&gt;</code>：指定要克隆后<strong>立即检出</strong>的特定分支，而不是远程的默认分支。</p>
+</li>
+<li><code>--depth &lt;数字&gt;</code>：进行<strong>浅克隆</strong>。只下载最近的 n 次提交历史，而不是整个历史。这可以极大加快克隆速度，特别适用于历史非常悠久的大型项目。</li>
+<li><code>--single-branch</code>：只克隆<strong>一个分支</strong>的完整历史（默认是远程的默认分支，也可与 <code>-b</code> 联用指定其他分支）。这比 <code>--depth</code> 更能减少下载数据量。</li>
+<li><code>-o &lt;名称&gt;</code> 或 <code>--origin &lt;名称&gt;</code>：自定义远程仓库的<strong>简称</strong>。默认的简称是 <code>origin</code>，我们可以用它改成别的。</li>
+</ul>
+<h2 id="_10">撤销与改变工作目录<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>git commit --amend</code>: 修改最近的一次提交（实际工作方式是<strong>创建一个新的提交来替换掉最新的提交</strong>，而不是在原提交上打补丁，因此，它会改变提交的哈希值）</li>
+</ul>
+<p>e.g.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">功能</th>
+<th style="text-align: left;">命令示例</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>修改提交信息</strong></td>
+<td style="text-align: left;"><code>git commit --amend</code> 或 <code>git commit --amend -m "新信息"</code></td>
+<td style="text-align: left;">提交信息有拼写错误或描述不清。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>添加漏掉的文件</strong></td>
+<td style="text-align: left;"><code>git add &lt;漏掉的文件&gt;</code> -&gt; <code>git commit --amend</code></td>
+<td style="text-align: left;">提交后发现少加了文件或还有小修改。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>修改作者信息</strong></td>
+<td style="text-align: left;"><code>git commit --amend --author="新作者信息"</code></td>
+<td style="text-align: left;">配置错误，用了错误的用户名/邮箱提交。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p><code>git reset</code>: <strong>撤销更改</strong>和<strong>移动当前分支的指向（HEAD）</strong>，它有三种模式（从三个区<em>{工作目录修改区，暂存区，历史记录}</em>变动的表现来划分）：</p>
+</li>
+<li>
+<p><code>git reset --soft &lt;revision&gt;</code>：最温和的重置（<strong>只动历史</strong>）。它移动分支指针（HEAD 和 分支 移动到目标提交）；暂存区现在会包含<code>&lt;revision&gt;</code>那次提交之后的所有更改，就像已经用 <code>git add</code> 把它们暂存了一样；工作目录保持不变，<code>&lt;revision&gt;</code>后对所有文件的修改都还在。</p>
+<p>技巧：把之前几次提交合并成一次更整洁的提交</p>
+<p>相对引用：<code>git reset HEAD~1</code>：沿主干线回溯，重置到上一个提交（<code>HEAD</code> 的父提交），<code>~1</code> 表示向上回溯一代</p>
+<p>​                   <code>git reset HEAD^1</code>：将分支重置到当前提交的第一个父提交；在线性历史中，这两者是相同的，因为线性历史上的每个提交都只有一个父提交，<code>HEAD^</code> 和 <code>HEAD~1</code> 指向的是同一个提交。只有在存在合并提交且你需要选择非第一个父提交时，它们才有区别。例如<code>git reset HEAD^2</code>表示重置到第二个父提交，即被合并过来的那个分支的最新提交，而不是该提交的“爷爷提交”。</p>
+</li>
+<li>
+<p><code>git reset --mixed &lt;revision&gt;</code> (<strong>不加选项时的默认模式，动历史和暂存区</strong>)：它移动分支指针（HEAD 和 分支 移动到目标提交）；暂存区被重置到<code>&lt;revision&gt;</code>那次提交的状态（那之后 <code>git add</code> 的东西没了）；工作目录保持不变，<code>&lt;revision&gt;</code>后对所有文件的修改都还在，只是变成了“未暂存”的状态。</p>
+<p>技巧：用 <code>git add</code> 暂存了多余的文件，或者想撤销一次提交但保留所有修改以便重新检查和暂存。</p>
+</li>
+<li>
+<p><code>git reset --hard &lt;revision&gt;</code>：最危险的重置（<strong>全动</strong>）。它移动分支指针（HEAD 和 分支 移动到目标提交）；暂存区被重置到<code>&lt;revision&gt;</code>那次提交的状态（那之后 <code>git add</code> 的东西没了）；工作目录被强制覆盖，所有未提交的更改（包括未暂存和已暂存的）都将永久丢失。</p>
+</li>
+<li>
+<p><code>git checkout &lt;revision&gt; -- &lt;file&gt;</code>: 丢弃<code>&lt;file&gt;</code>中做的修改，将它恢复到某个历史状态，这不会改变 <code>HEAD</code> 指针的位置。</p>
+</li>
+<li>
+<p>由于<code>git checkout</code>身兼两职（切换分支和恢复文件）容易让人混淆，Git 在 2.23 版本引入了两个更科学、更安全的新命令来拆分它的功能：<code>git switch</code>和<code>git restore</code>。</p>
+</li>
+<li>
+<p>如果省略 <code>&lt;revision&gt;</code>（通常是提交哈希、分支名或标签），则默认从 暂存区（Stage） 恢复。如果暂存区没有，就从 <code>HEAD</code> 恢复。</p>
+</li>
+<li>
+<p><code>git restore</code>: git2.32 版本后取代 <code>git reset</code>和<code>git checkout</code>进行许多撤销操作；将工作目录或暂存区中的文件恢复到某个指定的历史状态。</p>
+</li>
+<li>
+<p><code>git restore --source=&lt;revision&gt; -- &lt;file&gt;</code>：从指定提交恢复文件。</p>
+</li>
+<li><code>git restore --staged -- &lt;file&gt;</code>：只取消暂存（unstage），不覆盖工作目录。</li>
+</ul>
+<h2 id="git_4">Git高级操作<a class="headerlink" href="#git_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>git config</code>: Git 是一个 <a href="https://git-scm.com/docs/git-config">高度可定制的</a> 工具</li>
+</ul>
+<hr />
+<p>Git 的配置分为三个层级，优先级从高到低如下：</p>
+<ol>
+<li><strong>本地（Local）</strong>：<strong>优先级最高</strong>，只对当前所在的特定 Git 仓库生效。配置信息保存在当前仓库的 <code>.git/config</code> 文件中。</li>
+<li><strong>全局（Global）</strong>：对当前操作系统用户拥有的<strong>所有 Git 仓库</strong>生效。配置信息保存在用户家目录下的 <code>~/.gitconfig</code>（Linux/macOS）或 <code>C:\Users\&lt;用户名&gt;\.gitconfig</code>（Windows）文件中。</li>
+<li><strong>系统（System）</strong>：<strong>优先级最低</strong>，对当前系统上的<strong>所有用户的所有 Git 仓库</strong>都生效。配置信息保存在 Git 的安装目录下的 <code>/etc/gitconfig</code>（Linux/macOS）或 Git 安装目录的 <code>etc\gitconfig</code>（Windows）文件中。</li>
+</ol>
+<p>当同一个配置项在不同级别被设置时，高优先级的配置会覆盖低优先级的配置。</p>
+<p>基本语法是：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span><span class="o">[</span>&lt;级别&gt;<span class="o">]</span><span class="w"> </span>&lt;配置项&gt;<span class="w"> </span>&lt;值&gt;
+</code></pre></div>
+<p>其中 <code>[&lt;级别&gt;]</code> 是可选参数，用于指定配置级别，分别是 <code>--local</code>, <code>--global</code>, <code>--system</code>。如果省略，默认使用 <code>--local</code>。</p>
+<h4 id="1">1. 查看配置<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>列出所有当前生效的配置</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--list
+</code></pre></div>
+<p>这会列出所有三级配置合并后的最终结果，优先级高的在后面，会覆盖前面的。</p>
+<ul>
+<li><strong>查看指定级别的所有配置</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--list<span class="w">  </span><span class="c1"># 查看全局配置</span>
+git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>--list<span class="w">   </span><span class="c1"># 查看当前仓库配置</span>
+</code></pre></div>
+<ul>
+<li><strong>查看某个特定配置项的值</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w">        </span><span class="c1"># 查看当前仓库配置的用户名</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="c1"># 查看全局配置的邮箱</span>
+</code></pre></div>
+<h4 id="2">2. 设置配置<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<p>这是最常用的功能。</p>
+<ul>
+<li><strong>设置全局用户名和邮箱（第一次安装 Git 必须做的）</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;your.email@example.com&quot;</span>
+</code></pre></div>
+<blockquote>
+<p><strong>非常重要</strong>：这里的用户名和邮箱是你每次提交的“作者签名”。<code>--global</code> 级别意味着你电脑上绝大多数仓库都会使用这个信息。</p>
+<p>这两个属性最好与要连接的github账户相匹配</p>
+</blockquote>
+<ul>
+<li><strong>为某个特定仓库设置不同的邮箱（比如公司项目）</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/path/to/my-project<span class="w">      </span><span class="c1"># 先进入该仓库目录</span>
+git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;your.company-email@example.com&quot;</span>
+</code></pre></div>
+<p>这样，在这个仓库里提交就会使用公司邮箱，而其他个人项目仍使用全局设置的邮箱。</p>
+<ul>
+<li><strong>设置默认的文本编辑器（比如改用 VSCode）</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span><span class="s2">&quot;code --wait&quot;</span>
+</code></pre></div>
+<ul>
+<li><code>code</code> 是 VSCode 的命令行命令。</li>
+<li><code>--wait</code> 会让 Git 等待你关闭文件后再继续操作。</li>
+<li>
+<p>其他编辑器：</p>
+<ul>
+<li>VS Code: <code>code --wait</code></li>
+<li>Sublime Text: <code>subl -n -w</code></li>
+<li>Notepad++: <code>'C:\Program Files\Notepad++\notepad++.exe' -multiInst -notabbar -nosession -noPlugin</code> (请根据实际安装路径修改)</li>
+</ul>
+</li>
+<li>
+<p><strong>设置差异化对比工具（Diff Tool）</strong>：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>diff.tool<span class="w"> </span>vimdiff<span class="w">  </span><span class="c1"># 例如设置为 vimdiff</span>
+</code></pre></div>
+<h4 id="3">3. 编辑配置<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p>你也可以直接用编辑器修改配置文件，这样更容易管理多个设置。</p>
+<ul>
+<li><strong>编辑全局配置</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--edit
+<span class="c1"># 用系统默认的文本编辑器直接打开 Git 的全局配置文件，可以手动查看、添加、修改或删除其中的所有配置项。</span>
+</code></pre></div>
+<ul>
+<li><strong>编辑当前仓库配置</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>--edit
+</code></pre></div>
+<h4 id="4">4. 删除配置<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p>如果想移除某个设置，可以使用 <code>--unset</code> 选项。</p>
+<ul>
+<li><strong>删除全局配置中的某个项</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--unset<span class="w"> </span>user.name
+</code></pre></div>
+<h4 id="5">5. 常用配置项<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. 用户身份 (必设)</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;你的姓名&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;你的邮箱&quot;</span>
+
+<span class="c1"># 2. 设置默认编辑器为 VSCode</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span><span class="s2">&quot;code --wait&quot;</span>
+
+<span class="c1"># 3. 让命令行输出更易读（带颜色）</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>color.ui<span class="w"> </span>auto
+
+<span class="c1"># 4. 设置默认分支名为 main（可选，现代仓库的默认趋势）</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>init.defaultBranch<span class="w"> </span>main
+
+<span class="c1"># 5. 处理换行符 (跨平台协作非常重要！)</span>
+<span class="c1"># 在 Windows 上：提交时转换为 LF，检出时转换为 CRLF</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.autocrlf<span class="w"> </span><span class="nb">true</span>
+<span class="c1"># 在 Linux/macOS 上：提交时转换为 LF，检出时不转换</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.autocrlf<span class="w"> </span>input
+
+<span class="c1"># 6. 创建常用命令的别名（Alias），极大提升效率</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.co<span class="w"> </span>checkout<span class="w">    </span><span class="c1"># 以后用 git co 代替 git checkout</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.br<span class="w"> </span>branch<span class="w">      </span><span class="c1"># git br</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.ci<span class="w"> </span>commit<span class="w">      </span><span class="c1"># git ci</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.st<span class="w"> </span>status<span class="w">      </span><span class="c1"># git st</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.last<span class="w"> </span><span class="s1">&#39;log -1 HEAD&#39;</span><span class="w"> </span><span class="c1"># 优雅地查看最后一次提交</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.graph<span class="w"> </span><span class="s2">&quot;log --all --graph --decorate --oneline&quot;</span><span class="w"> </span><span class="c1"># 图形化查看历史</span>
+</code></pre></div>
+<hr />
+<ul>
+<li><code>git add -p</code>: 交互式暂存文件的片段</li>
+<li>回答<code>s</code>表示分开暂存，例如可以把调试print语句不暂存，只保留更改代码。</li>
+<li><code>git rebase</code>: 将一系列补丁变基（rebase）为新的基线</li>
+<li><code>git blame</code>: 查看最后修改某行的人</li>
+<li><code>git stash</code>: 暂时移除工作目录下的修改内容，即将工作目录恢复到上一次提交的状态</li>
+<li><code>git stash pop</code>：恢复刚刚所做的更改</li>
+<li><code>git bisect</code>: 通过二分查找搜索历史记录</li>
+<li><code>.gitignore</code>: <a href="https://git-scm.com/docs/gitignore">指定</a> 故意不追踪的文件，避免将无关文件（如编译产物、日志、本地配置）或敏感文件（密钥、密码配置文件等）提交到仓库</li>
+</ul>
+<hr />
+<h4 id="1-gitignore">1. 创建 <code>.gitignore</code> 文件<a class="headerlink" href="#1-gitignore" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>位置</strong>：通常放在 Git 仓库的<strong>根目录</strong>下。但也可以在子目录中创建，其规则仅对该子目录及其子目录生效。</p>
+</li>
+<li>
+<p><strong>命名</strong>：文件名就是 <code>.gitignore</code>（注意开头有一个点），这是固定写法。</p>
+</li>
+<li>
+<p><strong>方法</strong>：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 在项目根目录下</span>
+touch<span class="w"> </span>.gitignore<span class="w">  </span><span class="c1"># Linux/macOS</span>
+<span class="c1"># 或者</span>
+<span class="nb">type</span><span class="w"> </span>nul<span class="w"> </span>&gt;<span class="w"> </span>.gitignore<span class="w"> </span><span class="c1"># Windows</span>
+</code></pre></div>
+<p>也可以直接用代码编辑器（如 VSCode）新建该文件。</p>
+<h4 id="2_1">2. 编写忽略规则<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<p>打开 <code>.gitignore</code> 文件，每一行写一个忽略模式（pattern）。语法非常简单但也非常强大。</p>
+<p><strong>基本规则：</strong></p>
+<ul>
+<li><strong>空行</strong>：被忽略，可用于分隔。</li>
+<li><strong><code>#</code> 开头的行</strong>：是注释。</li>
+<li><strong>标准模式</strong>：直接写文件名、目录名或通配符模式。</li>
+<li><strong><code>/</code> 开头</strong>：防止递归。只忽略当前目录下的文件/目录，而不是所有同名文件/目录。</li>
+<li><code>/log.txt</code>：只忽略根目录的 <code>log.txt</code>，不忽略 <code>subdir/log.txt</code>。</li>
+<li><strong><code>/</code> 结尾</strong>：表示要忽略的是一个目录。</li>
+<li><code>tmp/</code>：忽略所有名为 <code>tmp</code> 的目录。</li>
+<li><strong><code>!</code> 开头</strong>：表示否定，即<strong>不忽略</strong>这个文件，即使它匹配了之前的忽略模式。这是一个“例外”规则。</li>
+<li>注意：如果父目录被忽略了，<code>!</code> 无法重新包含其中的文件。必须先忽略父目录，再用 <code>!</code> 取消忽略子文件。</li>
+</ul>
+<p><strong>通配符：</strong></p>
+<ul>
+<li><code>*</code>：匹配任意数量的任意字符（除了路径分隔符 <code>/</code>）。</li>
+<li><code>*.log</code>：忽略所有 <code>.log</code> 文件。</li>
+<li><code>**</code>：匹配任意层级的目录。</li>
+<li><code>**/tmp</code>：忽略任何目录下的 <code>tmp</code> 文件夹。</li>
+<li><code>logs/**/*.log</code>：忽略 <code>logs</code> 目录的所有子目录下的 <code>.log</code> 文件。</li>
+<li><code>?</code>：匹配单个任意字符。</li>
+<li><code>?.txt</code>：忽略 <code>a.txt</code>，<code>1.txt</code>，但不忽略 <code>file.txt</code>。</li>
+<li><code>[abc]</code>：匹配方括号中的任何一个字符。</li>
+<li><code>[abc].txt</code>：忽略 <code>a.txt</code>，<code>b.txt</code>，<code>c.txt</code>。</li>
+</ul>
+<h4 id="3_1">3. 生效<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
+<p><code>.gitignore</code> 文件本身需要被提交到版本库中，这样所有克隆这个仓库的人都会共享同样的忽略规则。</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>.gitignore
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add .gitignore file&quot;</span>
+git<span class="w"> </span>status<span class="w"> </span>--ignored<span class="w">  </span><span class="c1"># 命令显示被忽略的文件。</span>
+</code></pre></div>
+<p><strong>重要提示</strong>：如果某个文件已经被 Git 跟踪（已经 <code>commit</code> 过），之后再把它加入 <code>.gitignore</code> 是<strong>无效的</strong>。Git 会继续跟踪它。你必须先手动从 Git 索引中删除它（但保留在工作目录中）：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>rm<span class="w"> </span>--cached<span class="w"> </span>&lt;file&gt;<span class="w">  </span><span class="c1"># 从暂存区删除，停止跟踪，但保留本地文件</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Stop tracking &lt;file&gt;&quot;</span>
+</code></pre></div>
+<h4 id="4_1">4. 常用配置项<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h4>
+<p>下面是一个非常典型的 <code>.gitignore</code> 文件内容，适用于多种语言的项目：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 忽略操作系统自动生成的文件</span>
+.DS_Store<span class="w">          </span><span class="c1"># macOS 桌面服务存储文件</span>
+Thumbs.db<span class="w">          </span><span class="c1"># Windows 缩略图缓存文件</span>
+desktop.ini
+
+<span class="c1"># 忽略IDE/编辑器生成的配置文件</span>
+.vscode/<span class="w">           </span><span class="c1"># Visual Studio Code</span>
+.idea/<span class="w">             </span><span class="c1"># JetBrains IDE (IntelliJ, PyCharm, WebStorm)</span>
+*.swp<span class="w">              </span><span class="c1"># Vim 交换文件</span>
+*.swo
+*~
+
+<span class="c1"># 忽略依赖安装目录（Node.js, Python等）</span>
+node_modules/<span class="w">      </span><span class="c1"># Node.js 包目录</span>
+venv/<span class="w">              </span><span class="c1"># Python 虚拟环境</span>
+.pipenv/
+__pycache__/<span class="w">       </span><span class="c1"># Python 字节码缓存</span>
+*.pyc
+*.pyo
+
+<span class="c1"># 忽略项目构建输出目录</span>
+/dist<span class="w">              </span><span class="c1"># 常见的打包输出目录</span>
+/build
+/out
+/target
+
+<span class="c1"># 忽略日志文件</span>
+*.log
+logs/
+
+<span class="c1"># 忽略环境变量或敏感配置文件</span>
+.env<span class="w">               </span><span class="c1"># 通常包含数据库密码、API密钥等</span>
+.env.local
+.env.*.local
+
+<span class="c1"># 忽略压缩包</span>
+*.zip
+*.tar.gz
+</code></pre></div>
+<hr />
+<h2 id="git_5">Git工作流<a class="headerlink" href="#git_5" title="Permanent link">&para;</a></h2>
+<h3 id="1-git">1. Git功能分支工作流<a class="headerlink" href="#1-git" title="Permanent link">&para;</a></h3>
+<p>当你有多个开发人员在同一个代码库上工作时，Git 功能分支工作流将成为必选项。</p>
+<p>假设你有一个正在开发一项新功能的开发人员。另一个开发人员正在开发第二个功能或修复某个bug。现在，如果两个开发人员都向同一个分支提交代码，这将使代码库陷入混乱，并产生大量冲突。为避免这种情况，两个开发人员可以分别从 master 分支创建两个单独的分支，并分别开发其负责的功能。完成功能后，他们可以将各自的分支合并到 master 分支，然后进行部署，而不必等待对方的功能开发完成。</p>
+<p>使用此工作流的优点是，Git 功能分支工作流使你可以在代码上进行协作，而不必担心代码冲突。</p>
+<p><img alt="" src="../images/Git_featuret.png" /></p>
+<h3 id="2-git-flow">2. Git Flow工作流<a class="headerlink" href="#2-git-flow" title="Permanent link">&para;</a></h3>
+<p>参考 ：<a href="https://blog.csdn.net/sunyctf/article/details/130587970">Git之GitFlow工作流 | Gitflow Workflow（万字整理，已是最详）-CSDN博客</a></p>
+<p><img alt="" src="../images/Git_Flow.png" /></p>
+<p>这个模式是基于”版本发布”的，目标是一段时间以后产出一个新版本。但是，很多网站项目是”持续发布”，代码一有变动，就部署一次。Github Flow工作流则可以更好地应对这种情况。</p>
+<h3 id="3-github-flow">3. Github Flow工作流<a class="headerlink" href="#3-github-flow" title="Permanent link">&para;</a></h3>
+<p>Github Flow是Git flow的简化版，专门配合"持续发布"。它是 Github.com 推荐使用的工作流程。</p>
+<p>它只有一个长期分支，就是<code>master</code>，因此用起来非常简单。官方给出的基本原则如下：</p>
+<ol>
+<li>任何时刻的master分支代码都是可以用来部署的；</li>
+<li>任何新变更都需要从master派生出一个分支，并且为其起一个描述新变更内容的名字：比如 new-oauth2-scopes；</li>
+<li>在本地提交该新分支变更，并且应经常性的向服务器端该同名分支推送变更；</li>
+<li>当你需要帮助、反馈，或认为新分支可以合并的时候，新建一个pull request；</li>
+<li>只有在其他人review通过之后，新分支才允许合并到 <code>master</code> 分支；</li>
+<li>一旦新分支被合并推送至<code>master</code>分支，master分支应当立即进行部署。</li>
+</ol>
+<p>对应的，官方推荐的<a href="https://guides.github.com/introduction/flow/index.html">流程</a>如下。</p>
+<p><img alt="" src="../images/Github_Flow.png" /></p>
+<p>第一步：根据需求，从<code>master</code>拉出新分支，不区分功能分支或补丁分支。</p>
+<p>第二步：新分支开发完成后，或者需要讨论的时候，就向<code>master</code>发起一个<a href="https://help.github.com/articles/using-pull-requests/">pull request</a>（简称PR）。</p>
+<p>第三步：Pull Request既是一个通知，让别人注意到你的请求，又是一种对话机制，大家一起评审和讨论你的代码。对话过程中，你还可以不断提交代码。</p>
+<p>第四步：你的Pull Request被接受，合并进<code>master</code>，重新部署后，原来你拉出来的那个分支就被删除。（先部署再合并也可。）</p>
+<p>Github flow 的最大优点就是简单，对于"持续发布"，“改动即部署” 的产品或网页，可以说是最合适的流程。</p>
+<p>问题在于它的假设：<code>master</code>分支的更新与产品的发布是一致的。也就是说，<code>master</code>分支的最新代码，默认就是当前的线上代码。可是，有些时候并非如此，代码合并进入<code>master</code>分支，并不代表它就能立刻发布。比如，苹果商店的APP提交审核以后，等一段时间才能上架。这时，如果还有新的代码提交，<code>master</code>分支就会与刚发布的版本不一致。另一个例子是，有些公司有发布窗口，只有指定时间才能发布，这也会导致线上版本落后于<code>master</code>分支。</p>
+<p>上面这种情况，只有<code>master</code>一个主分支就不够用了。通常，你不得不在<code>master</code>分支以外，另外新建一个<code>production</code>分支跟踪线上版本；或者结合简化Git Flow工作流 / 丰富功能分支工作流，提前做好约定；或者利用Github的标签 + release功能定期发布线上版本源代码与程序，而<code>master</code>只是用来存储和展示最新代码的。</p>
+<p>可以参考如下视频：</p>
+<p><a href="https://www.bilibili.com/video/BV19e4y1q7JJ/?spm_id_from=333.337.search-card.all.click&amp;vd_source=4cf1248054c659cc46bc5bafc9e804af">十分钟学会正确的github工作流，和开源作者们使用同一套流程_哔哩哔哩_bilibili</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

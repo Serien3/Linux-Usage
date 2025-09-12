@@ -1,0 +1,1431 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="一个记录Linux下常用工具的笔记">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../Shell_Script/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>01. The Shell - Linux-Usage</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linuxshell" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Linux-Usage" class="md-header__button md-logo" aria-label="Linux-Usage" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Linux-Usage
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              01. The Shell
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Linux-Usage" class="md-nav__button md-logo" aria-label="Linux-Usage" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Linux-Usage
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    主干内容
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            主干内容
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    01. The Shell
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    01. The Shell
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Shell与命令行
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Shell与命令行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-shell_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Shell
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 命令行 (Command Line)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 终端 (Terminal)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 控制台 (Console)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 文件和目录相关命令
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 文件内容读写工具的相关命令
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 输入输出流相关命令
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shell_Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02. Shell_Script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Editors%28Vim%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03. Editors(Vim)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Command-line%20Environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04. Command-line Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Version%20Control%20%28git%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05. Version Control (git)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Debugging%20and%20Profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06. Debugging and Profiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metaprogramming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07. Metaprogramming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    分支补充内容
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            分支补充内容
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LinuxManage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LinuxManage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Makefile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Makefile
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Shell与命令行
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Shell与命令行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-shell_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Shell
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 命令行 (Command Line)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 终端 (Terminal)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 控制台 (Console)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 文件和目录相关命令
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 文件内容读写工具的相关命令
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 输入输出流相关命令
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="linuxshell">Linux命令与Shell工具<a class="headerlink" href="#linuxshell" title="Permanent link">&para;</a></h1>
+<h3 id="1-shell">1. Shell与命令行<a class="headerlink" href="#1-shell" title="Permanent link">&para;</a></h3>
+<p>如今的计算机有着多种多样的交互接口让我们可以进行指令的的输入，从炫酷的图像用户界面（GUI），语音输入甚至是 AR/VR 都已经无处不在。 这些交互接口可以覆盖 80% 的使用场景，但是它们也从根本上限制了您的操作方式——你不能点击一个不存在的按钮或者是用语音输入一个还没有被录入的指令。 为了充分利用计算机的能力，我们不得不回到最根本的方式，使用文字接口：命令行Shell</p>
+<p>命令行：命令提示符页面，只能处理字符串(文本)，以纯“字符串”的形式操作系统，用各种字符化的命令对系统发出操作指令，其本身也是一个程序。</p>
+<p>shell：shell的意思是“壳”，这个翻译十分生动形象。计算机系统中，真正能够控制计算机硬件（CPU、内存、显示器等）的只有操作系统内核（Kernel），图形界面或命令行只是架设在用户和内核之间的一座桥梁。由于安全、复杂、繁琐等原因，用户不能直接接触内核，而用户使用这个命令行解释器程序，<strong>该程序的作用就是接收用户的操作，并进行简单的处理，同时把一些请求传递给内核</strong>。如此一来，用户和内核之间就多了一层“壳”，这层“壳”既简化了用户的操作，也保护了内核。Linux下这个命令行解释器程序就叫做shell，它连接了用户和 Linux 内核，让用户能够更加高效、安全、低成本地使用、访问 Linux 内核。（当然根据这个定义，我们Windwos图形化界面也是一种Shell程序 —— 图形化Shell）</p>
+<p>Bash（GNU Bourne-Again Shell）是一个为 GNU 计划编写的 Unix shell，Bash 是大多数 Linux 系统的缺省 Shell。</p>
+<p><img alt="" src="../images/shell.png" /></p>
+<hr />
+<p><strong>一些名词的区分</strong></p>
+<h4 id="1-shell_1">1. Shell<a class="headerlink" href="#1-shell_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>是什么？</strong> Shell 是一个<strong>程序</strong>，它是命令行<strong>解释器</strong>，接收你输入的命令，解释并执行它们，然后输出结果。它是用户和操作系统内核（Kernel）之间的“外壳”（所以叫 Shell）。当下它可以分为命令行Shell和图形化Shell。</li>
+<li><strong>核心功能：</strong> 命令解释、执行脚本、管理进程、进行输入输出重定向等。</li>
+<li><strong>常见例子：</strong></li>
+<li><code>Bash</code> (Bourne-Again Shell): Linux 和 macOS 上最流行的 Shell。</li>
+<li><code>Zsh</code>: 另一个功能强大的 Shell，现在是 macOS 的默认 Shell。</li>
+<li><code>PowerShell</code>: Windows 上强大的现代 Shell，不仅处理文本，还处理对象。</li>
+<li><code>Command Prompt</code> (cmd.exe): Windows 上的传统命令 Shell。</li>
+</ul>
+<p><strong>简单说：Shell 是一个类似于python的解释器，它是真正干活的那个“大脑”。</strong></p>
+<h4 id="2-command-line">2. 命令行 (Command Line)<a class="headerlink" href="#2-command-line" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>是什么？</strong> 命令行是一个<strong>文本式的交互界面</strong>，你通过在其中输入文本命令来与计算机交互。它是一种<strong>工作方式</strong>或<strong>环境</strong>。</li>
+<li><strong>核心功能：</strong> 提供一种输入命令的机制。</li>
+<li><strong>关键点：</strong> “命令行”这个词强调的是<strong>基于文本输入</strong>的这种模式。你是在“一行”文字中键入命令。</li>
+</ul>
+<p><strong>简单说：命令行是一种与Shell的交互接口，以输入命令的方式表现（相对于GUI图形界面点击的方式）。</strong></p>
+<h4 id="3-terminal">3. 终端 (Terminal)<a class="headerlink" href="#3-terminal" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>是什么？</strong> 终端是一个<strong>程序</strong>，它提供了一个窗口，让你可以在其中与 Shell 进行交互。它<strong>模拟</strong>了过去的硬件终端设备。</li>
+<li><strong>历史背景：</strong> 在早期，终端（Terminal）是一个物理硬件设备（一台显示器和键盘），通过串口线连接到大型机或小型机上。现在，我们用的都是“终端模拟器”（Terminal Emulator），即在图形界面中模拟那个硬件设备功能的软件。</li>
+<li><strong>核心功能：</strong> 接收你的键盘输入，并将其发送给 Shell；接收 Shell 的输出，并将其显示在屏幕上。</li>
+<li><strong>常见例子：</strong></li>
+<li>macOS: <strong>Terminal</strong>（终端）， <strong>iTerm2</strong></li>
+<li>Linux: <strong>GNOME Terminal</strong>, <strong>Konsole</strong></li>
+<li>Windows: <strong>Windows Terminal</strong>, <strong>ConEmu</strong>（Windows 本身的命令提示符和 PowerShell 窗口也可以看作简单的终端）</li>
+</ul>
+<p><strong>简单说：终端是那个你打开的黑窗口或白窗口程序，它是 Shell 的“展示窗口”和“传话员”。</strong></p>
+<h4 id="4-console">4. 控制台 (Console)<a class="headerlink" href="#4-console" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>是什么？</strong> 控制台是一个<strong>特殊的终端</strong>，它直接连接到计算机硬件上。终端是通过串口连接上的，不是计算机本身就有的设备，而控制台是 计算机本身就有的设备，一个计算机只有一个控制台。计算机启动的时候，所有的信息都会显示到控制台上，而不会显示到终端上。也就是说，控制台是计算机的基本设备，而终端是附加设备。 当然，由于控制台也有终端一样的功能，控制台有时候也被模糊的统称为终端。 计算机操作系统中，与终端不相关的信息，比如内核消息，后台服务消息，都可以显示到控制台上，但不会显示到终端上。</li>
+<li><strong>历史背景：</strong> 在过去，控制台（Console）指的是计算机本身的那一套专用物理设备（键盘和显示器），用于直接与操作系统进行底层通信和系统维护。它比通过串口连接的普通终端（Terminal）权限更高、更根本。</li>
+<li><strong>现代用法：</strong></li>
+<li><strong>系统控制台：</strong> 在 Linux 系统中，你按 <code>Ctrl + Alt + F1~F6</code> 会切换到纯文本的“虚拟控制台”，这才是现代意义上的 Console，它不依赖于图形界面。</li>
+<li><strong>混用：</strong> 在日常口语中，Console 经常和 Terminal 混用，指代同一个黑色窗口。但严格来说，终端模拟器模拟的是 Terminal，而不是 Console。</li>
+<li><strong>开发领域：</strong> 在编程中，“控制台输出”通常指代 <code>stdout</code>（标准输出），比如在 C++ 中的 <code>cout</code>，Python 中的 <code>print()</code>，JavaScript 中的 <code>console.log()</code>，它们输出的目的地就是终端/控制台。</li>
+</ul>
+<p><strong>简单说：控制台是那个最原始、最底层的“终端”，现在多用于指系统维护界面或与 Terminal 混用。</strong></p>
+<p><strong>它们是如何协同工作的？</strong></p>
+<ol>
+<li>你打开一个<strong>终端</strong>（Terminal）程序（比如 iTerm2）。</li>
+<li>这个终端程序会启动一个 <strong>Shell</strong>（比如 Zsh），并与之连接。</li>
+<li>现在，你可以在终端的窗口里，使用<strong>命令行</strong>（输入文本命令）的方式与 Shell 交互。</li>
+<li>Shell 解释并执行你的命令，将结果返回给终端程序。</li>
+<li>终端程序将这些结果显示在窗口上给你看。</li>
+<li>如果在系统启动出问题时，你可能会切换到<strong>控制台</strong>（Console）来进行修复。</li>
+</ol>
+<p><strong>简单来说：你在【终端】里，通过【命令行】输入命令，与【Shell】交互。而【控制台】是一个历史悠久且有时会混用的词。</strong></p>
+<hr />
+<p><strong>命令：即执行Linux程序</strong></p>
+<hr />
+<p>Linux命令解释程序的工作流程如下：</p>
+<ol>
+<li>
+<p>用户输入命令：用户在终端窗口中输入需要执行的命令，例如”ls”，shell读取当前的命令行(fgets)</p>
+</li>
+<li>
+<p>Shell解析（eval）命令：用户输入的命令首先被Shell解析。Shell是一种命令行解释器程序，负责解析并执行用户输入的命令。通过词法分析，它会将命令分解成命令名和参数，以及执行命令所需的其他信息，构造命令行参数列表argv[] 和环境变量envp[]。</p>
+</li>
+<li>
+<p>执行命令并加载程序：检查第一个命令行参数，如果命令是一个内置命令（builtin_command），Shell则直接执行该命令；否则Shell根据用户输入的命令名，在系统中找到对应的可执行程序。如果找到了对应的程序，Shell会使用fork函数创建一个子进程，子进程与父进程Shell的地址空间完全相同但独立，之后shell创建新的作业job，并将子进程加入此作业。子进程通过execve系统调用启动加载器，在当前进程的上下文中加载程序，建立文件与进程私有虚拟地址空间的映射，设置PC指向代码区域的入口点_start（创建进程 -&gt; 初始化虚拟内存 -&gt; 跳转到main()例程 ）。</p>
+</li>
+</ol>
+<p>注1：Unix shell 使用job这个抽象概念表示为对一条命令行求值而创建的进程，然后为每个作业创建一个进程组，来管理一条命令中涉及创建多个进程的情况。比如 ls | sort，Shell先创建一个job子进程，然后发现执行此命令需要两个进程：一个运行ls程序，一个运行sort程序；因此，Shell又为该作业创建了两个子进程，它们组成了一个进程组。</p>
+<p><img alt="" src="../images/process_group.png" /></p>
+<p>注2：程序加载</p>
+<ul>
+<li>
+<p>抽象：<strong>加载</strong>在我们用户眼中，是计算机系统将存储在硬盘等介质中的程序读取到内存中并准备执行的过程。</p>
+</li>
+<li>
+<p>了解操作系统（系统调用）：创建<strong>进程</strong>，把静态的程序<strong>加载</strong>到进程上下文中，初始化进程的<strong>虚拟内存</strong>，. . . . . . </p>
+</li>
+<li>
+<p>实际上：背后涉及硬件组成与实现，操作系统进程管理、虚拟内存和内存映射等一系列复杂概念与机制，大致如下图</p>
+</li>
+</ul>
+<p>（FROM CSAPP）：</p>
+<p><img alt="" src="../images/Load.jpg" /></p>
+<ol>
+<li>
+<p>程序执行：操作系统的进程调度到子进程，子进程获得了命令的控制权后，执行_start处指令。程序开始执行，并根据命令的功能进行相关操作。程序利用虚拟内存机制访存，在第一次执行指令或访问数据时，会产生缺页中断，实现虚拟内存到物理内存的映射（拷贝），然后重新执行指令。执行过程中，程序可能会读取文件、修改系统状态、向终端输出信息等；同时，shell进程还会根据命令是否为后台作业（命令末尾有无<code>&amp;</code>），决定是 waitpid() 等待子进程结束，还是立即返回提示符。</p>
+</li>
+<li>
+<p>程序结束：当程序正常执行完毕或遇到错误时，会返回执行结果或错误信息（正常：发送SIGCHLD信号，错误：发送其他错误信号）。Shell会接收到程序的返回值，并将其显示给用户。父进程Shell的SIGCHLD信号处理子程序，通过<code>waitpid</code>完成对僵死子进程的回收,并删除作业job；若发送其他信号，Shell也会执行对应的信号处理程序。</p>
+</li>
+<li>
+<p>Shell等待下一条命令：父进程shell的<code>waitfg</code>检查job状态非前台，则结束对此进程和作业的处理。Shell会等待用户输入下一条命令，循环执行上述步骤。</p>
+</li>
+</ol>
+<p>总结来说，Linux命令解释程序的工作流程包括用户输入命令、Shell解释命令、执行命令并加载程序、程序执行以及Shell等待下一条命令。通过这个流程，用户可以通过命令行界面与系统交互，并完成各种操作。</p>
+<hr />
+<p>==通用格式：==</p>
+<p><code>command [-options] [parameter]</code></p>
+<ul>
+<li>
+<p>command：命令本身</p>
+</li>
+<li>
+<p>-options：[可选]命令的一些选项/标识符，可以通过选项控制命令的行为细节或指定特定的操作</p>
+</li>
+</ul>
+<p><code>-</code> 单横线选项后面跟的参数必须是单字符参数，一个字符表示一个参数，可以多个参数写在同一个横线后面</p>
+<p><code>--</code> 双横线选项后面跟的参数必须是多字符参数（单词），双横线后只能跟一个参数。</p>
+<p>e.g. <code>-f</code>一般表示强制，<code>-r</code>一般表示递归的处理文件夹</p>
+<ul>
+<li>parame：[可选]命令的参数，多数用于命令的指向目标（若跟在选项后面，视为该选项的参数）等。</li>
+</ul>
+<p>在需要加参数且为多个参数的时候，参数可以使用“=”分隔，也可以使用空格分隔。</p>
+<p>==使用终端的常用技巧及快捷键：==</p>
+<p><strong>放大终端窗口字体</strong>：<code>ctrl + shift + =</code><br><strong>缩小终端窗口字体</strong>：<code>ctrl + -</code></p>
+<p><strong>查阅命令帮助信息</strong>：   两个选项</p>
+<div class="highlight"><pre><span></span><code><span class="nb">command</span><span class="w"> </span>--help
+<span class="c1">#显示command命令的帮助信息</span>
+man<span class="w"> </span><span class="nb">command</span>
+<span class="c1">#查阅command命令的使用手册manual</span>
+</code></pre></div>
+<p>使用<code>man</code>（手册形式展示文件内容）时的操作键：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">空格键</th>
+<th style="text-align: left;">显示手册页的下一页</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Enter</td>
+<td style="text-align: left;">一次滚动手册页的一行</td>
+</tr>
+<tr>
+<td style="text-align: left;">空格键</td>
+<td style="text-align: left;">一次滚动手册页的一页</td>
+</tr>
+<tr>
+<td style="text-align: left;">b</td>
+<td style="text-align: left;">回滚一屏</td>
+</tr>
+<tr>
+<td style="text-align: left;">f</td>
+<td style="text-align: left;">前滚一屏</td>
+</tr>
+<tr>
+<td style="text-align: left;">q</td>
+<td style="text-align: left;">退出</td>
+</tr>
+<tr>
+<td style="text-align: left;">/word</td>
+<td style="text-align: left;">向下搜索"word"字符串</td>
+</tr>
+<tr>
+<td style="text-align: left;">?word</td>
+<td style="text-align: left;">向上搜索"word"字符串</td>
+</tr>
+<tr>
+<td style="text-align: left;">n</td>
+<td style="text-align: left;">重复前一个搜索（与 / 或 ? 有关）</td>
+</tr>
+<tr>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">反向重复前一个搜索（与 / 或 ? 有关）</td>
+</tr>
+<tr>
+<td style="text-align: left;">:help</td>
+<td style="text-align: left;">获取帮助</td>
+</tr>
+</tbody>
+</table>
+<p>输入clear或使用快捷键<code>ctrl + L</code> ，可以实现<strong>清屏</strong></p>
+<p>直接输入文件的名字作为命令，若该文件是可执行程序，相当于直接<strong>执行该程序</strong></p>
+<p><strong>强制终止程序运行</strong>：<code>ctrl + C</code></p>
+<p><strong>退出账户当前登录的shell或退出某些特定程序的专属界面</strong>：<code>ctrl + d</code>或使用命令<code>logout</code></p>
+<p><strong>自动补全</strong>：在敲出命令的前几个字母后，按下<code>Tab</code> 键</p>
+<ul>
+<li>如果输入的没有歧义，终端会自动补全</li>
+<li>如果有歧义，再按一下<code>Tab</code> ，终端会打印出可能存在的命令</li>
+</ul>
+<p><strong>追溯曾经使用过的命令</strong>：</p>
+<ul>
+<li>
+<p>按<code>上（ctrl + P） / 下（ctrl + N）</code>光标键可以在曾经使用过的命令之间进行切换</p>
+</li>
+<li>
+<p>若要退出选择并且不想执行当前选中的命令，按<code>ctrl + C</code></p>
+</li>
+<li>
+<p><code>history</code>命令查看历史输入过的命令</p>
+</li>
+</ul>
+<p>有时我们想修改<code>shell history</code>的行为，例如，如果在命令的开头加上一个空格，它就不会被加进 shell 记录中。当你输入包含密码或是其他敏感信息的命令时会用到这一特性。为此需要在 <code>.bashrc</code> 中添加 <code>HISTCONTROL=ignorespace</code> 或者向 <code>.zshrc</code> 添加 <code>setopt HIST_IGNORE_SPACE</code>。 如果不小心忘了在前面加空格，可以通过编辑 <code>.bash_history</code> 或 <code>.zhistory</code> 来手动地从历史记录中移除那一项</p>
+<p><strong>分多行输入命令</strong>:</p>
+<p>正常来说，命令是以“行”为单位的，因此Shell每次处理一行命令，但如果命令过长，我们希望人为地分多行书写一个命令，通常有几种方式：</p>
+<ol>
+<li>使用反斜杠 <code>\</code></li>
+</ol>
+<p>在行尾加一个 <code>\</code>，告诉 shell 当前命令还没结束，下一行继续：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span>this<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>very<span class="w"> </span>long<span class="w"> </span><span class="se">\</span>
+<span class="nb">command</span><span class="w"> </span>that<span class="w"> </span>I<span class="w"> </span>split<span class="w"> </span><span class="se">\</span>
+into<span class="w"> </span>multiple<span class="w"> </span>lines
+</code></pre></div>
+<ol>
+<li>如果命令中有未闭合的引号或括号，或Shell知晓的未写完的命令，shell 会自动等待下一行补全：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;this is a</span>
+<span class="s2">multi-line string&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$i</span>
+<span class="k">done</span>
+</code></pre></div>
+<p>Shell 在决定“是否执行命令”时，有个判断逻辑：</p>
+<ul>
+<li>如果命令完整（语法闭合，行尾没有 <code>\</code>），按 <strong>Enter</strong> 就会执行。</li>
+<li>如果命令不完整（比如引号未闭合、行尾有 <code>\</code>、<code>do...done</code> 未结束），shell 会换一行，提示符也会变化（通常变成 <code>&gt;</code>），等待继续输入。</li>
+</ul>
+<p><strong>光标移动快捷键</strong>：</p>
+<ul>
+<li><code>ctrl + a</code>：跳到命令开头</li>
+<li><code>ctrl + e</code>：跳到命令结尾</li>
+<li><code>ctrl + 键盘左键</code>：向左跳一个单词</li>
+<li><code>ctrl + 键盘右键</code>：向右跳一个单词</li>
+</ul>
+<p><strong>文件路径表示相关</strong>：</p>
+<p>​        绝对路径：以根目录为起点，路径描述以<code>/</code>开头</p>
+<p>​   相对路径：以当前目录为起点，路径描述无需以<code>/</code>开头</p>
+<p>​   特殊路径符：</p>
+<ul>
+<li>.  表示当前目录</li>
+<li>..  表示上一级目录</li>
+<li>~  表示用户的home目录</li>
+</ul>
+<p><strong>可以这样理解，对于操作系统或终端来说，linux每个文件的名字就是其路径，文件名=文件路径；只是对我们人来说，我们起名或说一个文件的名字时，常忽略前面的路径，只说文件自身的名字，也可以知道文件的位置、路径，但终端并不能仅通过名字就知道文件位置</strong></p>
+<p>直接输入文件的路径作为命令，若该文件是可执行程序，相当于直接<strong>执行该程序</strong>；</p>
+<p>But，如果直接输入可执行程序的名字，Shell并不一定能找到这个程序文件的位置！</p>
+<p><strong>Recall：Shell根据用户输入的命令名，在系统中找到对应的可执行程序？ --Shell如何查找程序？</strong></p>
+<p>如果第一个命令行参数只给出程序名，或者说是给出相对路径，而不是明确的路径，则会经历下面的查找过程：</p>
+<ol>
+<li><strong>alias中查找</strong></li>
+</ol>
+<p>alias命令可用来设置命令别名，而单独输入alias可以查看到已设置的别名：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">alias</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">egrep</span><span class="o">=</span><span class="s1">&#39;egrep --color=auto&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">fgrep</span><span class="o">=</span><span class="s1">&#39;fgrep --color=auto&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">grep</span><span class="o">=</span><span class="s1">&#39;grep --color=auto&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">l</span><span class="o">=</span><span class="s1">&#39;ls -CF&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">la</span><span class="o">=</span><span class="s1">&#39;ls -A&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">ll</span><span class="o">=</span><span class="s1">&#39;ls -alF&#39;</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto&#39;</span>
+</code></pre></div>
+<p>如果这里没有找到你执行的命令，那么就会接下去查找。如果找到了，那么就会执行下去。</p>
+<ol>
+<li><strong>内置命令中查找</strong></li>
+</ol>
+<p>不同的shell包含一些不同的内置命令，通常不需要shell到磁盘中去搜索。通过help命令可以看到有哪些内置命令：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">help</span>
+</code></pre></div>
+<p>通过type 命令可以查看命令类型：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="nb">echo</span>
+<span class="nb">echo</span><span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>shell<span class="w"> </span><span class="nb">builtin</span>
+</code></pre></div>
+<p>如果是内置命令，则会直接执行，否则继续查找。</p>
+<ol>
+<li><strong>PATH中查找</strong></li>
+</ol>
+<p>以ls为例，在shell输入ls时，首先它会从PATH环境变量中查找，PATH内容是什么呢，我们看看：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+</code></pre></div>
+<p>所以它会在这些路径下去寻找ls程序，按照路径找到的第一个ls程序就会被执行。使用whereis也能确定ls的位置：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>whereis<span class="w"> </span>ls
+ls:<span class="w"> </span>/bin/ls<span class="w"> </span>/usr/share/man/man1/ls.1.g
+</code></pre></div>
+<p>既然它是在bin目录下，那么我把ls从bin目录下移走是不是就找不到了呢？是的。</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mv<span class="w"> </span>/bin/ls<span class="w"> </span>/temp/ls_bak<span class="w">  </span><span class="c1">#测试完后记得改回来奥</span>
+</code></pre></div>
+<p>现在再来执行ls命令看看：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls<span class="w"> </span>
+The<span class="w"> </span>program<span class="w"> </span><span class="s1">&#39;ls&#39;</span><span class="w"> </span>is<span class="w"> </span>currently<span class="w"> </span>not<span class="w"> </span>installed.<span class="w"> </span>You<span class="w"> </span>can<span class="w"> </span>install<span class="w"> </span>it<span class="w"> </span>by<span class="w"> </span>typing:
+apt<span class="w"> </span>install<span class="w"> </span>coreutils
+</code></pre></div>
+<p>没错，它会提示你没有安装这个程序或者命令没有找到。</p>
+<p>所以你现在明白为什么你第一次安装jdk或者python的时候要设置环境变量了吧？不设置的话行不行？</p>
+<p>行。这个时候你就需要指定路径了。怎么指定路径？无非就是那么几种，相对路径，绝对路径等等。
+   比如：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/temp
+$<span class="w"> </span>./ls_bak
+</code></pre></div>
+<p>或者：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>/temp/ls_bak
+</code></pre></div>
+<p>是不是发现和运行自己的普通程序方式没什么差别呢？</p>
+<p>到这里，如果还没有找到你要执行的命令，那么就会报错。</p>
+<ol>
+<li><strong>确定解释程序</strong></li>
+</ol>
+<p>在找到程序之后呢，需要确定解释程序。什么意思呢？
+   shell通常可以执行两种程序，一种是二进制程序，一种是脚本程序。</p>
+<p>而一旦发现要执行的程序文件是文本文件，且文本未指定解释程序，那么就会默认当成shell脚本来执行。例如，假设有test.txt内容如下：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;hello world&quot;</span>
+</code></pre></div>
+<p>赋予执行权限并执行：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>test.txt
+$<span class="w"> </span>./test.txt
+hello<span class="w"> </span>world
+</code></pre></div>
+<p>当然了，我们通常会在shell脚本程序的来头带上下面这句：</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+</code></pre></div>
+<p>这是告诉shell，你要用bash程序来解释执行test.txt。作为一位调皮的开发者，如果开头改成下面这样呢？</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/python</span>
+</code></pre></div>
+<p>再次执行之后结果如下：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>./test.txt
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;./test.txt&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">2</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;hello world&quot;</span>
+<span class="w">                        </span>^
+SyntaxError:<span class="w"> </span>invalid<span class="w"> </span>syntax
+</code></pre></div>
+<p>是的，它被当成python脚本来执行了，自然就会报错了。</p>
+<p>那么如果是二进制程序呢？就会使用execl族函数去创建一个新的进程来运行新的程序了。</p>
+<p>小结一下前面的内容，就是说，如果是文本程序，且开头没有指定解释程序，则按照shell脚本处理，如果指定了解释程序，则使用解释程序来解释运行；对于二进制程序，则直接创建新的进程即可。</p>
+<h3 id="2">2. 文件和目录相关命令<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>查看目录内容</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># ls:list,列出目录的内容</span>
+ls<span class="w"> </span><span class="o">[</span>-a<span class="w"> </span>-l<span class="w"> </span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>文件路径<span class="o">]</span>
+<span class="c1"># -a:all，列出全部文件</span>
+<span class="c1"># -l:列表（竖向排列）形式展示内容，并展示更多信息</span>
+<span class="c1"># -h:使用 -lh，显示文件的大小单位</span>
+<span class="c1"># 参数默认为当前所在工作目录</span>
+</code></pre></div>
+<ul>
+<li>切换工作目录</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># cd: Change Directory,更改当前所在的工作目录</span>
+<span class="nb">cd</span><span class="w"> </span><span class="o">[</span>文件路径<span class="o">]</span>
+<span class="c1"># 参数默认为回到用户的home目录</span>
+</code></pre></div>
+<ul>
+<li>查看当前工作目录路径</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># pwd: Print Work Directory</span>
+<span class="nb">pwd</span>
+</code></pre></div>
+<ul>
+<li>创建新的目录(文件夹)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># mkdir: Make Directory</span>
+mkdir<span class="w"> </span><span class="o">[</span>-p<span class="o">]</span><span class="w"> </span>文件路径
+<span class="c1"># -p: 表示自动创建不存在的父目录，适用于创建连续多层级的目录</span>
+<span class="c1"># 参数必填，表示要创建的文件夹的路径，相对或绝对表示方法均可</span>
+</code></pre></div>
+<ul>
+<li>创建新的文件</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># touch</span>
+touch<span class="w"> </span>文件路径
+<span class="c1"># 参数必填，表示要创建的文件的路径</span>
+</code></pre></div>
+<ul>
+<li>拷贝文件 / 文件夹（目录文件）</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># cp: copy, 复制文件/文件夹</span>
+cp<span class="w"> </span><span class="o">[</span>-r<span class="o">]</span><span class="w"> </span>参数1<span class="w"> </span>参数2
+<span class="c1"># -r: 可选，用于复制文件夹，表示递归</span>
+<span class="c1"># 参数1: 文件路径，表示被复制的文件或文件夹</span>
+<span class="c1"># 参数2: 文件路径，表示要复制去的地方，若为文件夹，则复制到文件夹内或复制并重命名文件夹；若为文件，则复制并重命名文件</span>
+</code></pre></div>
+<ul>
+<li>移动文件 / 文件夹（目录文件），为文件 / 文件夹（目录文件）改名</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># mv: move, 移动文件/文件夹，为文件 / 文件夹改名</span>
+mv<span class="w"> </span>参数1<span class="w"> </span>参数2
+<span class="c1"># 参数1: 文件路径，表示被移动的文件或文件夹</span>
+<span class="c1"># 参数2: 文件路径，表示要移动去的地方，若为文件夹，则移动到文件夹内或移动并重命名文件夹；若为文件，则移动并重命名文件</span>
+</code></pre></div>
+<p>mv 参数设置与运行结果（cp也可参考此表）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">命令格式</th>
+<th style="text-align: left;">运行结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>mv source_file(文件) dest_file(文件)</code></td>
+<td style="text-align: left;">将源文件名 source_file 改为目标文件名 dest_file</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>mv source_file(文件) dest_directory(目录)</code></td>
+<td style="text-align: left;">将文件 source_file 移动到目标目录 dest_directory 中</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>mv source_directory(目录) dest_directory(目录)</code></td>
+<td style="text-align: left;">目录名 dest_directory 已存在，将 source_directory 移动到目录名 dest_directory 中；目录名 dest_directory 不存在则 source_directory 改名为目录名 dest_directory</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>mv source_directory(目录) dest_file(文件)</code></td>
+<td style="text-align: left;">出错</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>删除文件 / 文件夹（目录文件）</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># rm: remove, 删除文件/文件夹</span>
+rm<span class="w"> </span><span class="o">[</span>-r<span class="w"> </span>-f<span class="o">]</span><span class="w"> </span>参数
+<span class="c1"># -r: 可选，用于删除文件夹，表示递归</span>
+<span class="c1"># -f: 可选，强制删除，不弹出提示（root超级管理员用户）</span>
+<span class="c1"># 参数: 表示要删除的文件或文件夹的路径</span>
+rmdir<span class="w"> </span><span class="o">[</span>-p<span class="o">]</span><span class="w"> </span>dirName
+<span class="c1"># -p: 当子目录被删除后使它也成为空目录的话，则顺便一并删除</span>
+</code></pre></div>
+<p>删除当前目录下的所有文件及目录，命令行为：</p>
+<div class="highlight"><pre><span></span><code>rm<span class="w">  </span>-rf<span class="w">  </span>*<span class="w"> </span>
+</code></pre></div>
+<p>文件一旦通过rm命令删除，则无法恢复，所以必须格外小心地使用该命令。</p>
+<ul>
+<li>查找命令对应的程序文件位置</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Linux命令的本体就是一个个二进制可执行程序，我们可以通过which命令，查找所使用的一系列命令的程序文件存放在哪里</span>
+which<span class="w"> </span>要查找的命令
+</code></pre></div>
+<ul>
+<li>在指定目录下查找匹配的文件和目录</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># find: 在指定目录下查找特定匹配的文件和目录，它可以使用不同的选项来过滤和限制查找的结果</span>
+find<span class="w"> </span><span class="o">[</span>文件路径<span class="o">]</span><span class="w"> </span><span class="o">[</span>匹配条件<span class="o">]</span><span class="w"> </span><span class="o">[</span>动作<span class="o">]</span>
+<span class="c1"># 路径 是要查找的目录路径，可以是一个目录或文件名，也可以是多个路径，多个路径之间用空格分隔，如果未指定路径，则默认为当前目录。</span>
+<span class="c1"># 匹配条件 是可选参数，用于指定查找的条件，可以是文件名、文件类型、文件大小等等。</span>
+<span class="c1"># 动作 可选的，用于对匹配到的文件执行操作，比如删除、复制等。</span>
+</code></pre></div>
+<p>匹配条件 中可使用的选项有二三十个之多，以下列出最常用的部份：</p>
+<ul>
+<li>
+<p><code>-name pattern</code>：按文件名查找，文件名<code>pattern</code>支持使用通配符 <code>*</code> 和 <code>?</code>。</p>
+</li>
+<li>
+<p><code>-type type</code>：按文件类型查找，可以是 <code>f</code>（普通文件）、<code>d</code>（目录）、<code>l</code>（符号链接）等。</p>
+</li>
+<li>
+<p><code>-size [+-]size[cwbkMG]</code>：按文件大小查找，支持使用 <code>+</code> 或 <code>-</code> 表示大于或小于指定大小，单位可以是 <code>c</code>（字节）、<code>w</code>（字数）、<code>b</code>（块数）、<code>k</code>（KB）、<code>M</code>（MB）或 <code>G</code>（GB）。</p>
+</li>
+<li>
+<p><code>-mtime days</code>：按修改时间查找，支持使用 <code>+</code> 或 <code>-</code> 表示在指定天数前或后，days 是一个整数表示天数。</p>
+</li>
+<li>
+<p><code>-user username</code>：按文件所有者查找。</p>
+</li>
+<li>
+<p><code>-group groupname</code>：按文件所属组查找。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>e,g.
+<span class="c1"># 查找一个文件，比如 .bashrc, /etc路径下的hosts文件</span>
+$<span class="w"> </span>find<span class="w"> </span>.bashrc
+$<span class="w"> </span>find<span class="w"> </span>/etc/hosts
+
+<span class="c1"># 查找当前目录及子目录后缀为gz的文件</span>
+$<span class="w"> </span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.gz&quot;</span>
+<span class="c1"># 查找所有的 html 网页文件</span>
+$<span class="w"> </span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-regex<span class="w"> </span><span class="s2">&quot;.*html</span>$<span class="s2">&quot;</span>
+<span class="c1"># 将所有 fasta 文件中序列名字包含node的改成seq</span>
+$<span class="w"> </span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-regex<span class="w"> </span><span class="s2">&quot;.*fasta</span>$<span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/NODE/Seq/g&#39;</span>
+
+<span class="c1"># 查找子目录深度为4层目录的fasta文件</span>
+$<span class="w"> </span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">4</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.fasta&quot;</span>
+
+<span class="c1"># 查找/var/log路径下权限为755的目录</span>
+$<span class="w"> </span>find<span class="w"> </span>/var/log<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-perm<span class="w"> </span><span class="m">755</span>
+
+<span class="c1"># 按照用户查找用户，在tmp路径下查找属于用户 nginx 的文件</span>
+$<span class="w"> </span>find<span class="w"> </span>/tmp<span class="w"> </span>-user<span class="w"> </span>nginx
+<span class="c1"># 用户主home路径下查找属于 root 权限，属性为644的文件</span>
+$<span class="w"> </span>find<span class="w"> </span>.<span class="w"> </span>-user<span class="w"> </span>root<span class="w"> </span>-perm<span class="w"> </span><span class="m">644</span>
+</code></pre></div>
+<h3 id="3">3. 文件内容读写工具的相关命令<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p><strong>Linux系统下任何文件的读写是按文本文件进行处理</strong></p>
+<ul>
+<li>查看文件内容</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># cat: 连接文件并打印到标准输出设备上，它的主要作用是用于查看和连接文件</span>
+cat<span class="w"> </span><span class="o">[</span>-b<span class="w"> </span>-n<span class="o">]</span><span class="w"> </span>文件路径
+-b:<span class="w"> </span>对非空输出行编号
+-n:<span class="w"> </span>对所有输出行编号
+
+<span class="c1"># more: 支持翻页，若文件内容过多可以一页页的展示(手册形式)</span>
+more<span class="w"> </span>文件路径
+
+<span class="c1"># less: less 与 more 类似，less 可以随意浏览文件，支持翻页和搜索，支持向上翻页和向下翻页</span>
+less<span class="w"> </span><span class="o">[</span>-m<span class="w"> </span>-N<span class="o">]</span><span class="w"> </span>文件路径
+-m:<span class="w"> </span>显示已阅读的百分比
+-N:显示每行的行号
+</code></pre></div>
+<hr />
+<p>more与less的区别？</p>
+<p>​   ①less可以按键盘上下方向键显示上下内容，而more不能通过上下方向键控制显示。</p>
+<p>②less不必读整个文件，加载速度会比more更快。</p>
+<p>③less退出后shell不会留下刚显示的内容，而more退出后会在shell上留下刚显示的内容。</p>
+<p>④阅读到文件结束时，less不会退出，而more会。</p>
+<p>⑤less可用行号或百分比作为书签浏览文件，而more不行。</p>
+<p>⑥相比more，less提供更加友好的检索、高亮显示等操作。</p>
+<hr />
+<ul>
+<li>在文件中进行文本搜索，模式查找</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># grep: 通过正则表达式过滤文件行，实现模式查找/文本搜索</span>
+grep<span class="w"> </span><span class="o">[</span>-n<span class="w"> </span>-i<span class="o">]</span><span class="w"> </span><span class="s2">&quot;正则表达式&quot;</span><span class="w"> </span>文件路径
+<span class="c1"># -n: 显示匹配行的行号</span>
+<span class="c1"># -i: 忽略大小写</span>
+<span class="c1"># 正则表达式 : ^a(搜索以a开头的行), ke$(搜索以ke结束的行)</span>
+<span class="c1"># 文件路径: 必填，可使用管道符作为输入</span>
+
+e.g.<span class="w"> </span><span class="nb">history</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>find
+<span class="c1"># 利用管道将history输出结果传递给 grep 进行模式搜索，打印包含 find 子串的命令</span>
+</code></pre></div>
+<ul>
+<li>统计文件的行数、单词数量、字节数</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># wc: 统计文件的行数、单词数量、字节数</span>
+wc<span class="w"> </span><span class="o">[</span>-c<span class="w"> </span>-m<span class="w"> </span>-l<span class="w"> </span>-w<span class="o">]</span><span class="w"> </span>文件路径
+<span class="c1"># -c: 统计bytes的数量</span>
+<span class="c1"># -m: 统计字符的数量</span>
+<span class="c1"># -l: 统计行数</span>
+<span class="c1"># -w: 统计单词数量</span>
+<span class="c1"># 文件路径: 必填，可使用管道符作为输入</span>
+</code></pre></div>
+<ul>
+<li><strong>head命令</strong>: 查看文件的开头部分的内容</li>
+</ul>
+<div class="highlight"><pre><span></span><code>head<span class="w"> </span><span class="o">[</span>-&lt;num&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;数字&gt;<span class="o">]</span><span class="w"> </span>文件路径
+<span class="c1"># -&lt;num&gt;: 具体数字，表示查看开头 num 行，不填则默认10行</span>
+<span class="c1"># -n &lt;数字&gt;: 效果同直接-num</span>
+</code></pre></div>
+<ul>
+<li><strong>tail命令</strong>: 查看文件尾部内容，跟踪文件的最新更改</li>
+</ul>
+<div class="highlight"><pre><span></span><code>tail<span class="w"> </span><span class="o">[</span>-f<span class="w"> </span>-&lt;num&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;数字&gt;<span class="o">]</span><span class="w"> </span>文件路径
+<span class="c1"># -f: 表示持续跟踪，即监听功能</span>
+<span class="c1"># -&lt;num&gt;: 具体数字，表示查看尾部 num 行，不填则默认10行</span>
+<span class="c1"># -n &lt;数字&gt;: 效果同直接-num</span>
+<span class="c1"># 文件路径: 必填</span>
+</code></pre></div>
+<h3 id="4">4. 输入输出流相关命令<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>如何在程序 / 文件间创建“链接” / “渠道”？</p>
+<p>在 shell 中，程序有两个主要的“流”：它们的输入流和输出流。 当程序尝试读取信息时，它们会从输入流中进行读取，当程序打印信息时，它们会将信息输出到输出流中。 通常，一个程序的输入输出流都是您的终端。也就是，您的键盘作为输入，显示器作为输出。 但是，我们也可以重定向这些流！</p>
+<ul>
+<li><strong>管道符 <code>|</code></strong> : 将一个命令的输出通过管道作为另一个命令的输入</li>
+<li><strong>echo命令</strong>：在命令行输出指定字符串内容</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span>输出的内容
+<span class="c1"># 无需选项，只有一个参数，表示要输出的字符串，复杂内容可用&quot; &quot;包围</span>
+<span class="nb">echo</span><span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>
+<span class="c1"># 将命令用反引号包围，被反引号包围的内容不再作为普通字符串直接输出，而是会先被作为命令执行，再将结果输出到命令行</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>重定向符</strong>: 执行命令的结果（如echo命令），若不想默认输出到终端命令行，可使用重定向符号写入文件</p>
+</li>
+<li>
+<p><code>&gt;</code> : 将左侧命令的结果，覆盖写入到符号右侧文件</p>
+</li>
+<li><code>&gt;&gt;</code> : 将左侧命令的结果，追加写入到符号右侧文件</li>
+</ul>
+<p><strong>Note：</strong> 当一行命令启动进程组时，第一步往往是先打开输入输出对应的文件，再进行后续操作。</p>
+<ul>
+<li><strong>tee命令：</strong>Linux tee命令用于读取标准输入的数据，并将其内容输出成文件。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># tee指令会从标准输入设备读取数据，将其内容输出到标准输出设备，同时保存成文件</span>
+tee<span class="w"> </span><span class="o">[</span>-ai<span class="o">][</span>--help<span class="o">][</span>--version<span class="o">][</span>文件...<span class="o">]</span>
+<span class="c1"># -a或--append 　附加到既有文件的后面，而非覆盖它．</span>
+<span class="c1"># -i或--ignore-interrupts 　忽略中断信号。</span>
+<span class="c1"># --help 　在线帮助。</span>
+<span class="c1"># --version 　显示版本信息。</span>
+
+e.g.<span class="w"> </span>使用指令<span class="s2">&quot;tee&quot;</span>将用户输入的数据同时保存到文件<span class="s2">&quot;file1&quot;</span>和<span class="s2">&quot;file2&quot;</span>中，输入如下命令：
+$<span class="w"> </span>tee<span class="w"> </span>file1<span class="w"> </span>file2
+以上命令执行后，将提示用户输入需要保存到文件的数据，如下所示：
+My<span class="w"> </span>Linux<span class="w">                        </span><span class="c1">#提示用户输入数据  </span>
+My<span class="w"> </span>Linux<span class="w">                        </span><span class="c1">#输出数据，进行输出反馈  </span>
+</code></pre></div>
+<ul>
+<li>其他一些符号的作用</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">command</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="c1"># 在后台执行command</span>
+command1<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>command2
+<span class="c1"># &amp;&amp; 表示逻辑“与”，前一条命令执行成功时才执行后一条命令；若前一条命令执行失败，后一条命令不执行（短路求值）</span>
+command1<span class="w"> </span><span class="o">||</span><span class="w"> </span>command2
+<span class="c1"># || 表示逻辑“或”，前一条命令执行成功时，后一条命令不会再执行；若前一条命令执行失败，后一条命令才执行（短路求值）</span>
+command1<span class="p">;</span>command2
+<span class="c1"># ; 表示每个命令从左往右依次执行，每个命令彼此之间没有关联</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

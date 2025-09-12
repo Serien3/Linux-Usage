@@ -1,0 +1,1494 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="一个记录Linux下常用工具的笔记">
+      
+      
+      
+      
+        <link rel="prev" href="../Editors%28Vim%29/">
+      
+      
+        <link rel="next" href="../Version%20Control%20%28git%29/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>04. Command-line Environment - Linux-Usage</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Linux-Usage" class="md-header__button md-logo" aria-label="Linux-Usage" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Linux-Usage
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              04. Command-line Environment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Linux-Usage" class="md-nav__button md-logo" aria-label="Linux-Usage" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Linux-Usage
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    主干内容
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            主干内容
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../The%20Shell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01. The Shell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Shell_Script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02. Shell_Script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Editors%28Vim%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03. Editors(Vim)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    04. Command-line Environment
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    04. Command-line Environment
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      一. 软件下载与管理相关
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一. 软件下载与管理相关">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 软件下载
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Version%20Control%20%28git%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05. Version Control (git)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Debugging%20and%20Profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06. Debugging and Profiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metaprogramming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07. Metaprogramming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    分支补充内容
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            分支补充内容
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LinuxManage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LinuxManage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Makefile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Makefile
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      一. 软件下载与管理相关
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一. 软件下载与管理相关">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 软件下载
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">命令行环境<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<hr />
+<p><strong>Resources：</strong></p>
+<p><a href="https://missing-semester-cn.github.io/2020/command-line/">命令行环境 · the missing semester of your cs education</a></p>
+<p>[<a href="https://www.bilibili.com/video/BV1Jh4y1Z7SV?spm_id_from=333.788.videopod.sections&amp;vd_source=4cf1248054c659cc46bc5bafc9e804af">自制双语字幕] 计算机教育缺失的一课(2020) - 第5讲 - 命令行环境_哔哩哔哩_bilibili</a></p>
+<p>《深入理解计算机系统CSAPP》</p>
+<p><a href="https://www.bilibili.com/video/BV1nk4y1k742/?spm_id_from=333.337.search-card.all.click&amp;vd_source=4cf1248054c659cc46bc5bafc9e804af">【大学计算机不会教的知识】Ep.5 远程服务器SSH 端口转发_哔哩哔哩_bilibili</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/102546608">一文助你打通 tmux - 知乎</a></p>
+<hr />
+<h2 id="_2">一. 软件下载与管理相关<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 软件下载<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>下载安装包自行安装</li>
+</ul>
+<p>​   <strong>下载安装包至LInux中，注意先修改安装包的所有者和可执行权限，再执行安装</strong></p>
+<ul>
+<li>系统的 "应用商店" 安装</li>
+</ul>
+<p><strong>Linux apt 命令：</strong></p>
+<p>apt（Advanced Packaging Tool）是一个在 Debian 和 Ubuntu 中的 Shell 前端软件包管理器。</p>
+<blockquote>
+<ol>
+<li>
+<p>APT概念
+   APT(Advanced Packaging Tool，高级软件包管理工具)是一个用于管理Debian系Linux发行版软件包的工具，可以视其为另一工具dpkg的前端，操作管理更方便，对Linux运维人员具有重要意义。
+   通常来说，由于APT是用于管理软件包的，故大量操作都需要基于sudo（超级用户权限）下操作。</p>
+</li>
+<li>
+<p>APT历史
+   简单来说，就是最初的GNU/Linux系统只有.tar.gz打包源码提供给Linux用户自行编译安装的这种安装软件包的方式，太麻烦，于是Debian就搞了dpkg这样的一个可以安装.deb软件包的工具，但是处理依赖太麻烦，Debian就又搞出来APT这个既可以很方便处理依赖，又可以很方便从服务器下载软件包安装的程序。</p>
+</li>
+<li>
+<p>APT的原理</p>
+</li>
+</ol>
+<p>Ubuntu采用集中式的软件仓库机制，将各式各样的软件包分门别类地存放在软件仓库中，进行有效地组织和管理。然后，将软件仓库置于许许多多的镜像服务器中，并保持基本一致。这样，所有的Ubuntu用 户随时都能获得最新版本的安装软件包。因此，对于用户，这些镜像服务器就是他们的软件源（Reposity）。</p>
+<p>但那些镜像站点具体都拥有什么软件资源并不清楚。若每安装一个软件包，就在服务器上寻找一遍，效率是很低的。因而，就有必要为这些软件资源列个清单（建立索引文件），以便本地主机查询。</p>
+<p>服务器会分析自己所有deb包，根据它们的依赖生成一个索引文件，客户端的APT就负责下载这个索引，然后每次安装东西就会去本地的索引查找依赖，然后一次性去服务器下载下来按照特定顺序安装。本地的索引很容易过期，因此每次使用APT之前最好还是更新一下。</p>
+<ol>
+<li>APT的服务器
+   那世界上这么多服务器，APT怎么知道找哪个呢？由于每位用户所处的网络环境不同，不可能随意地访问各镜像站点，为了能够有选择地访问，在Ubuntu系统中服务器的地址是被储存在/etc/apt/sources.list文件和/etc/apt/sources.list.d文件夹下面的.list文件中，说白了每次APT更新索引时都会去这一堆 .list 文件里面找服务器，再去服务器下载索引。同时，这些提供.deb和索引的服务器就被称为通常意义上的镜像源。</li>
+</ol>
+<p>————————————————</p>
+</blockquote>
+<p>apt 命令提供了查找、安装、升级、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。</p>
+<p>apt 命令执行需要超级管理员权限(root)。</p>
+<p>```shell
+[sudo] apt [options] command package</p>
+<h1 id="options-h-yyes-q">options：可选，选项包括 -h（帮助），-y（当安装过程提示选择全部为"yes"），-q（不显示安装的过程）等等<a class="headerlink" href="#options-h-yyes-q" title="Permanent link">&para;</a></h1>
+<h1 id="command">command：要进行的操作<a class="headerlink" href="#command" title="Permanent link">&para;</a></h1>
+<h1 id="package">package：安装的包名<a class="headerlink" href="#package" title="Permanent link">&para;</a></h1>
+<p>```</p>
+<h4 id="apt">apt 常用命令<a class="headerlink" href="#apt" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>连接软件源，列出所有可更新的软件清单命令(每次使用apt下载前最好都更新一下)：<strong>sudo apt update</strong></p>
+</li>
+<li>
+<p>升级软件包：<strong>sudo apt upgrade</strong></p>
+</li>
+</ul>
+<p>列出可更新的软件包及版本信息：<strong>apt list --upgradable</strong></p>
+<p>升级所有软件包（包括内核），升级前先删除需要更新软件包：<strong>sudo apt full-upgrade</strong></p>
+<ul>
+<li>安装指定的软件命令：<strong>sudo apt install <package_name></strong></li>
+</ul>
+<p>安装多个软件包：<strong>sudo apt install <package_1> <package_2> <package_3></strong></p>
+<ul>
+<li>
+<p>更新指定的软件命令：<strong>sudo apt update <package_name></strong></p>
+</li>
+<li>
+<p>显示软件包具体信息,例如：版本号，安装大小，依赖关系等等：<strong>sudo apt show <package_name></strong></p>
+</li>
+<li>
+<p>删除软件包命令：<strong>sudo apt remove <package_name></strong></p>
+</li>
+<li>
+<p>xxxxxxxxxx4 1# On Linux2sudo strace -e lstat ls -l &gt; /dev/null3# On macOS4sudo dtruss -t lstat64_extended ls -l &gt; /dev/nullbash</p>
+</li>
+<li>
+<p>查找软件包命令： <strong>sudo apt search <keyword></strong></p>
+</li>
+<li>
+<p>列出所有已安装的包：<strong>apt list --installed</strong></p>
+</li>
+<li>
+<p>列出所有已安装的包的版本信息：<strong>apt list --all-versions</strong></p>
+</li>
+</ul>
+<h4 id="apt_1">apt安装软件包的位置<a class="headerlink" href="#apt_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>软件包缓存位置：安装时下载的软件包会被存储在 /var/cache/apt/archives 目录中。这些文件是<em>.deb</em>格式的安装包，用于安装或更新软件。</p>
+</li>
+<li>
+<p>二进制可执行文件：通常安装在 /usr/bin/ 目录下。这是存放系统级命令和应用程序的目录，所有用户都可以访问。</p>
+</li>
+<li>
+<p>库文件：通常安装在 /usr/lib/ 或 /usr/lib/x86_64-linux-gnu/ 目录下（后者针对64位系统）。这些目录存放共享库文件，供系统中的程序使用。</p>
+</li>
+<li>
+<p>源代码文件：如果安装的是开发包（以<code>-dev</code>结尾的软件包），源代码文件通常被安装在<code>/usr/include/</code>目录下。</p>
+</li>
+<li>
+<p>配置文件：通常安装在 /etc/ 目录下。这是存放系统级配置文件的目录，用于配置软件包的运行参数和行为。</p>
+</li>
+<li>
+<p>文档和手册页：通常安装在 /usr/share/man/、/usr/share/doc/ 等目录下。这些目录存放软件包的帮助文档和手册页，供用户查阅。</p>
+</li>
+<li>
+<p>其他文件：根据软件包的不同，可能还会有其他类型的文件安装在 /usr/share/ 目录下。例如，字体文件、图标文件等。</p>
+</li>
+</ol>
+<h3 id="2">2. 打包与压缩<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>不同操作系统常用的打包压缩方式不同：</p>
+<ul>
+<li>Windows常用<code>rar</code>格式</li>
+<li>Mac常用<code>zip</code>格式</li>
+<li>Linux常用<code>tar.gz</code>格式</li>
+</ul>
+<h4 id="21">2.1. 打包 / 解包<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<p>tar是Linux中常用的打包备份工具，此命令可以把一系列文件打包到一个大文件夹中，也可以把一个打包的大文件恢复成一系列文件</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 打包文件</span>
+tar<span class="w"> </span>-cvf<span class="w"> </span>打包文件.tar<span class="w"> </span>被打包的文件路径（若是多个文件用空格分隔）
+<span class="c1"># 解包文件</span>
+tar<span class="w"> </span>-xvf<span class="w"> </span>打包文件.tar
+</code></pre></div>
+<hr />
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span>生成的归档文件.tar<span class="w"> </span>要打包的文件或目录...
+<span class="c1"># -c : Create，创建新的归档文件。（打包时必选）</span>
+<span class="c1"># -x : Extract，从归档文件中提取文件。（解包时必选）</span>
+<span class="c1"># -f : File，指定归档文件的文件名。（必选，后面必须紧跟归档文件名）</span>
+<span class="c1"># -v : Verbose，显示操作的详细过程（输出文件列表）。</span>
+<span class="c1"># -t : List，列出归档文件中的内容（不解包）。</span>
+<span class="c1"># -z : 通过 gzip 过滤归档文件（即使用 gzip 进行压缩或解压），对应 .tar.gz 或 .tgz。</span>
+<span class="c1"># -j : 通过 bzip2 过滤归档文件，对应 .tar.bz2 或 .tbz。</span>
+<span class="c1"># -J : 通过 xz 过滤归档文件，对应 .tar.xz 或 .txz。</span>
+<span class="c1"># -C : 解压到指定目录。</span>
+</code></pre></div>
+<hr />
+<h4 id="22">2.2. 压缩 / 解压缩<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<p>tar与gzip结合使用可以实现文件的打包与压缩</p>
+<ul>
+<li><code>tar</code>只负责打包文件，但不压缩</li>
+<li>用<code>gzip</code>可以压缩<code>tar</code>打包后的文件，其扩展名一般为<code>xxx.tar.gz</code></li>
+<li>在<code>tar</code>命令中有一个选项<code>-z</code>可以调用<code>gzip</code>，从而方便的实现打包压缩功能</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 压缩文件</span>
+tar<span class="w"> </span>-zcvf<span class="w"> </span>打包文件.tar.gz<span class="w"> </span>被打包的文件路径（若是多个文件用空格分隔）
+<span class="c1"># 解压缩文件</span>
+tar<span class="w"> </span>-zxvf<span class="w"> </span>打包文件.tar.gz
+</code></pre></div>
+<hr />
+<p>inux主要有三种压缩方式：</p>
+<ol>
+<li>gzip：是公认的压缩这速度最快，压缩大文件的时候与其他的压缩方式相比更加明显，历史最久，应用最广泛的压缩方式</li>
+<li>bzip：压缩形成的文件小，但是可用性不如gzip</li>
+<li>xz：是最新的压缩方式，可以自动提供最佳的压缩率</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>压缩格式</th>
+<th>扩展名</th>
+<th>压缩比/速度</th>
+<th>调用参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gzip</strong></td>
+<td><code>.tar.gz</code> <code>.tgz</code></td>
+<td>平衡</td>
+<td>-z</td>
+</tr>
+<tr>
+<td><strong>Bzip2</strong></td>
+<td><code>.tar.bz2</code> <code>.tbz</code></td>
+<td>比 Gzip 高，更慢</td>
+<td>-j</td>
+</tr>
+<tr>
+<td><strong>XZ</strong></td>
+<td><code>.tar.xz</code> <code>.txz</code></td>
+<td>最高，最慢</td>
+<td>-J</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="23">2.3. 使用其他压缩工具<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<ol>
+<li><code>zip</code> / <code>unzip</code></li>
+</ol>
+<p><strong>特点</strong>：在 Windows 和 Linux 之间通用的常见格式。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 压缩 (-r 表示递归目录)</span>
+zip<span class="w"> </span>-r<span class="w"> </span>archive.zip<span class="w"> </span>file1.txt<span class="w"> </span>directory/
+
+<span class="c1"># 查看压缩包内容</span>
+unzip<span class="w"> </span>-l<span class="w"> </span>archive.zip
+
+<span class="c1"># 解压</span>
+unzip<span class="w"> </span>archive.zip
+
+<span class="c1"># 解压到指定目录</span>
+unzip<span class="w"> </span>archive.zip<span class="w"> </span>-d<span class="w"> </span>/target/directory
+</code></pre></div>
+<ol>
+<li><code>gzip</code>, <code>bzip2</code>, <code>xz</code> (单独使用)</li>
+</ol>
+<p>这些命令通常只用于压缩<strong>单个文件</strong>，因为它们不能处理目录。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 压缩单个文件 (原文件会被删除，生成 file.txt.gz)</span>
+gzip<span class="w"> </span>file.txt
+bzip2<span class="w"> </span>file.txt<span class="w">   </span><span class="c1"># -&gt; file.txt.bz2</span>
+xz<span class="w"> </span>file.txt<span class="w">      </span><span class="c1"># -&gt; file.txt.xz</span>
+
+<span class="c1"># 解压单个文件</span>
+gunzip<span class="w"> </span>file.txt.gz
+bunzip2<span class="w"> </span>file.txt.bz2
+unxz<span class="w"> </span>file.txt.xz
+
+<span class="c1"># 保留原文件进行压缩</span>
+gzip<span class="w"> </span>-c<span class="w"> </span>file.txt<span class="w"> </span>&gt;<span class="w"> </span>file.txt.gz
+</code></pre></div>
+<h4 id="24">2.4. 高级技巧与常用选项<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<ul>
+<li>排除文件(<code>--exclude</code>)</li>
+</ul>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-czvf<span class="w"> </span>backup.tar.gz<span class="w"> </span>--exclude<span class="o">=</span><span class="s1">&#39;*.tmp&#39;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s1">&#39;cache/&#39;</span><span class="w"> </span>directory/
+</code></pre></div>
+<ul>
+<li>使用通配符</li>
+</ul>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-czvf<span class="w"> </span>photos.tar.gz<span class="w"> </span>*.jpg
+</code></pre></div>
+<ul>
+<li>保留权限 (<code>-p</code>)：在创建和解压时保留文件的原始权限和属性（对于备份系统文件很重要）</li>
+</ul>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-czpvf<span class="w"> </span>backup.tar.gz<span class="w"> </span>/etc
+tar<span class="w"> </span>-xzpf<span class="w"> </span>backup.tar.gz
+</code></pre></div>
+<ul>
+<li>分卷压缩：先将大文件打包压缩，然后用 <code>split</code> 命令分割。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 创建分卷压缩包 (每个部分 100M)</span>
+tar<span class="w"> </span>-czvf<span class="w"> </span>-<span class="w"> </span>big_directory/<span class="w"> </span><span class="p">|</span><span class="w"> </span>split<span class="w"> </span>-b<span class="w"> </span>100M<span class="w"> </span>-<span class="w"> </span>big_backup.tar.gz.part
+
+<span class="c1"># 合并并解压</span>
+cat<span class="w"> </span>big_backup.tar.gz.part*<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-xzvf<span class="w"> </span>-
+</code></pre></div>
+<h3 id="3">3. 环境变量<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>在使用Linux内置命令时（如ls），我们知道实际上是在执行一个程序（/usr/bin/ls），但为何无论当前在哪个工作目录下，都能执行这个程序呢？</p>
+<p>这就是环境变量的作用。</p>
+<p>其实，类似于 Python 或 Ruby，shell 是一个<strong>编程环境</strong>，所以它具备变量、条件、循环和函数。当你在 shell 中执行命令时，您实际上是在执行一段 shell 可以解释执行的简短代码。如果你要求 shell 执行某个指令，但是该指令并不是 shell 所了解的编程关键字，那么它会去咨询 <em>环境变量</em> <code>$PATH</code>，它会列出当 shell 接到某条指令时，进行程序搜索的路径：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看当前系统中记录的环境变量</span>
+env
+<span class="c1"># 查看PATH环境变量    $符号用于取“变量”的值</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+</code></pre></div>
+<p>环境变量中的<code>PATH</code> 变量记录了系统或终端执行任何命令的搜索路径（Linux中以冒号分隔），当执行任何命令，都会按照顺序，从<code>PATH</code>中搜索要执行程序的本体。</p>
+<p>e.g. 当我们执行 <code>echo</code> 命令时，shell 了解到需要执行 <code>echo</code> 这个程序，随后它便会在 <code>$PATH</code> 中搜索由 <code>:</code> 所分割的一系列目录，基于名字搜索该程序。当找到该程序时便执行（假定该文件是 <em>可执行程序</em>）。确定某个程序名代表的是哪个具体的程序，可以使用 <code>which</code> 程序。我们也可以绕过 <code>$PATH</code>，通过直接指定需要执行的程序的路径来执行该程序.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>which<span class="w"> </span><span class="nb">echo</span>
+/bin/echo
+$<span class="w"> </span>/bin/echo<span class="w"> </span><span class="nv">$PATH</span>
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+<span class="c1"># 但实际上有些shell中echo是内建命令，不需要搜索PATH也可执行。</span>
+$<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="nb">echo</span>
+<span class="nb">echo</span><span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>shell<span class="w"> </span><span class="nb">builtin</span>
+</code></pre></div>
+<blockquote>
+<p>终端执行程序的逻辑：</p>
+<p>若用户输入绝对路径或使用了特殊路径符，则直接按路径去执行该程序</p>
+<p>若用户输入相对路径，终端会在<code>PATH</code>中搜索路径以搜索程序位置；因此内置命令直接输入名字就能执行，而我们自己的程序路径若不在<code>PATH</code>中，即使在对应目录下直接输入名字也不会执行</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 想执行/home/me/a.out程序</span>
+<span class="c1"># 目前已进入/hoeme/me目录，在当前工作目录中输入</span>
+a.out<span class="w">    </span><span class="c1"># 不执行，a.out: command not found</span>
+./a.out<span class="w">  </span><span class="c1">#执行</span>
+</code></pre></div>
+</blockquote>
+<p>当然，除了<code>PATH</code>变量以外，一般还有一些其他变量：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">环境变量名</th>
+<th style="text-align: left;">主要作用</th>
+<th style="text-align: left;">典型值示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>PATH</strong></td>
+<td style="text-align: left;">指定系统搜索<strong>可执行命令</strong>的目录路径</td>
+<td style="text-align: left;"><code>/usr/local/bin:/usr/bin:/bin</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HOME</strong></td>
+<td style="text-align: left;">指明当前用户的<strong>家目录</strong></td>
+<td style="text-align: left;"><code>/home/username</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SHELL</strong></td>
+<td style="text-align: left;">指定当前用户使用的<strong>默认 Shell</strong></td>
+<td style="text-align: left;"><code>/bin/bash</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PWD</strong></td>
+<td style="text-align: left;">指示<strong>当前工作目录</strong> (Print Working Directory)</td>
+<td style="text-align: left;"><code>/tmp</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LANG</strong> / <strong>LANGUAGE</strong></td>
+<td style="text-align: left;">设置系统的<strong>默认语言和区域</strong>（如字符编码）</td>
+<td style="text-align: left;"><code>zh_CN.UTF-8</code>, <code>en_US.UTF-8</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>USER</strong> / <strong>LOGNAME</strong></td>
+<td style="text-align: left;">记录当前登录的<strong>用户名</strong></td>
+<td style="text-align: left;"><code>your_username</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PS1</strong></td>
+<td style="text-align: left;">定义 Shell <strong>主提示符的格式</strong></td>
+<td style="text-align: left;"><code>[\u@\h \W]\$</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LD_LIBRARY_PATH</strong></td>
+<td style="text-align: left;">指定<strong>动态链接库</strong>（.so 文件）的搜索路径</td>
+<td style="text-align: left;"><code>/usr/local/lib</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TMP</strong> / <strong>TMPDIR</strong></td>
+<td style="text-align: left;">指定应用程序存放<strong>临时文件</strong>的目录</td>
+<td style="text-align: left;"><code>/tmp</code></td>
+</tr>
+</tbody>
+</table>
+<p>这些环境变量影响着系统和应用的方方面面：</p>
+<ul>
+<li><strong>程序执行</strong>：<code>PATH</code> 决定了系统在哪里寻找命令。</li>
+<li><strong>用户配置</strong>：<code>HOME</code>, <code>SHELL</code> 等保存了用户的工作环境和偏好。</li>
+<li><strong>系统配置</strong>：<code>LANG</code> 等变量定义了系统语言、字符集等。</li>
+</ul>
+<h4 id="_3">自行设置环境变量<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>Linux环境变量可以用户自行设置</p>
+<ul>
+<li>临时设置 在终端中直接执行</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 配置环境变量语法为</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">变量名</span><span class="o">=</span>变量值
+</code></pre></div>
+<ul>
+<li>永久生效 在配置文件中设置</li>
+<li>
+<p>若要针对当前用户生效，配置在<code>~/.bashrc</code>文件中</p>
+<p><code>echo 变量名=变量值 &gt;&gt; ~/.bashrc</code></p>
+</li>
+<li>
+<p>若要针对所有用户生效，配置在<code>/etc/profile</code>文件中</p>
+</li>
+<li>
+<p>配置后通过执行<code>source 配置文件</code>刷新终端，即可生效</p>
+</li>
+</ul>
+<p>追加<code>PATH</code>变量</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:路径
+<span class="c1"># 对PATH变量赋值，等号右侧意思为在PATH原有值的基础上，再加上“ :路径 ”这个值，这样做会追加PATH变量的值，而不会重新赋值覆盖掉PATH原有的值</span>
+</code></pre></div>
+<h4 id="env"><code>env</code>命令<a class="headerlink" href="#env" title="Permanent link">&para;</a></h4>
+<p>env 是 Linux/Unix 系统中一个非常实用的命令行工具，主要用于</p>
+<ol>
+<li>
+<p>打印当前shell会话中的所有环境变量  <code>env</code></p>
+</li>
+<li>
+<p>在一个自定义环境中运行程序</p>
+</li>
+</ol>
+<p>可以在运行一个命令之前，临时设置、修改或删除一些环境变量。<strong>这些修改只对这次运行的命令有效，不会影响当前的 shell 环境</strong>。（类似于创建一个临时的仅用于运行某个命令的虚拟环境，实际上“conda虚拟环境”的本质就是临时更改了shell的环境变量<code>PATH</code>）</p>
+<div class="highlight"><pre><span></span><code>env<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="nv">NAME</span><span class="o">=</span>VALUE<span class="o">]</span><span class="w"> </span><span class="o">[</span>COMMAND<span class="o">]</span>
+<span class="c1"># options:</span>
+<span class="c1"># -i, --ignore-environment: 从一个空环境开始，忽略继承的环境变量（纯净启动）</span>
+<span class="c1"># -u NAME, --unset=NAME: 从环境中删除指定的变量NAME</span>
+<span class="c1"># -C DIR, --chdir=DIR: 在运行命令前切换到指定目录DIR</span>
+<span class="c1"># 不加任何选项与参数默认输出当前shell中所有的环境变量</span>
+</code></pre></div>
+<hr />
+<h2 id="_4">二. 命令行环境管理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1. 任务控制 / 进程管理<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p><code>sleep</code>命令：Linux sleep命令可以用来将目前动作延迟一段时间</p>
+<div class="highlight"><pre><span></span><code>sleep<span class="w"> </span><span class="o">[</span>--help<span class="o">]</span><span class="w"> </span><span class="o">[</span>--version<span class="o">]</span><span class="w"> </span>number<span class="o">[</span>smhd<span class="o">]</span>
+<span class="c1"># --help : 显示辅助讯息</span>
+<span class="c1"># --version : 显示版本编号</span>
+<span class="c1"># number : 时间长度，后面可接 s、m、h 或 d</span>
+<span class="c1"># 其中 s 为秒，m 为 分钟，h 为小时，d 为日数，不加默认为秒</span>
+</code></pre></div>
+<p><strong>查看进程资源：</strong>可以使用ps，pstree，top，htop，pgrep等命令查看进程资源，命令具体详见 “调试及性能分析” 笔记。</p>
+<p><strong>结束进程：</strong></p>
+<p>情景：执行<code>sleep</code>命令后，不想再等待，停止执行该命令，怎么做？</p>
+<p>使用<code>ctrl + c</code>快捷键中止，那么为什么它能中止一个命令 / 程序 运行？</p>
+<p>shell 会使用 UNIX 提供的信号机制执行进程间通信。当一个进程接收到信号且程序中没有特殊处理该信号的操作时，则会执行该信号的默认操作，程序会停止执行、处理该信号并基于信号传递的信息来改变其执行。就这一点而言，信号是一种 <em>软件中断</em> 机制。</p>
+<hr />
+<p><strong>Summary：</strong></p>
+<p><img alt="" src="../images/signal.png" /></p>
+<p>默认行为可以总结为：</p>
+<ul>
+<li>进程终止</li>
+<li>进程终止并转储存储器（dump core）</li>
+<li>进程暂停，直到被SIGCONT信号重启</li>
+<li>进程忽略该信号</li>
+</ul>
+<hr />
+<p>在上面的例子中，当我们输入 <code>Ctrl-C</code> 时，shell 会发送一个 <code>SIGINT</code> （INT：interrupt）信号到进程。</p>
+<p><em>特殊处理该信号的操作</em> ：例如使用python，有一个signal库，里面的函数signal即可处理信号SIGINT等信号。</p>
+<blockquote>
+<p>常用的终止程序相关的请求信号及发出该信号对应的快捷键：</p>
+<p>2) SIGINT</p>
+<p>程序终止(interrupt)信号, 在用户键入INTR字符(通常是<code>ctrl + C</code>)时发出，用于通知前台进程组终止进程。</p>
+<p>3) SIGQUIT</p>
+<p>和SIGINT类似, 但由QUIT字符(通常是<code>ctrl + \</code>快捷键)来控制. 进程在因收到SIGQUIT退出时会产生core文件, 在这个意义上类似于一个程序错误信号。</p>
+<p>15) SIGTERM</p>
+<p>程序结束(terminate)信号, 与SIGKILL不同的是该信号可以被阻塞和处理。通常用来要求程序自己正常退出，shell命令kill缺省产生这个信号。如果进程终止不了，我们才会尝试SIGKILL。</p>
+<p>同时，<code>SIGTERM</code> 则是一个更加通用的、也更加优雅地退出信号。为了发出这个信号我们需要使用 <code>kill</code> 命令, 它的语法是：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">kill</span><span class="w"> </span>-TERM<span class="w"> </span>&lt;PID&gt;
+<span class="nb">kill</span><span class="w"> </span>&lt;PID&gt;
+<span class="c1"># kill命令缺省默认产生SIGTERM信号，但如果使用它进程中止不了，会尝试使用SIGKILL信号</span>
+</code></pre></div>
+<p>19) SIGSTOP</p>
+<p>停止(stopped)进程的执行. 注意它和terminate以及interrupt的区别:该进程还未结束, 只是暂停执行. 本信号不能被阻塞, 处理或忽略.</p>
+<ol>
+<li>SIGKILL</li>
+</ol>
+<p>当前进程收到该信号,注意该信号不是由终端发送的，而是由内核直接发送的，程序无法捕获它,也就是说进程无法执行信号处理程序,会直接发送默认行为,也就是直接退出.这也就是为何<code>kill -9 pid</code>一定能杀死程序的原因. 故这也造成了进程被结束前无法清理或者关闭资源等行为,这样是不好的.</p>
+</blockquote>
+<p><strong>发送信号的方式：</strong></p>
+<p><strong>内核检测到一个系统事件，比如除零错误或者子进程终止，因此内核要更新目的进程上下文中的某个状态（异常控制流），发送一个信号给目的进程。这种发送信号的机制是基于“进程组”而非单个进程的。</strong></p>
+<ol>
+<li>
+<p>使用库函数。如<code>kill</code>, <code>alarm</code>函数等。</p>
+</li>
+<li>
+<p><strong>从键盘发送信号</strong>：例如，从键盘上输入<code>Ctrl+C</code>会导致内核发送一个<code>SIGINT</code>信号到前台进程组中的每个进程。</p>
+</li>
+<li>
+<p><strong>kill命令</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nb">kill</span><span class="w"> </span>命令可以发送不同的信号给目标进程，来实现不同的操作，如果不指定信号，默认会发送<span class="w"> </span>TERM<span class="w"> </span>信号（15），即终止。若仍无法终止该程序，可使用<span class="w"> </span>SIGKILL<span class="o">(</span><span class="m">9</span><span class="o">)</span><span class="w"> </span>信息尝试强制删除程序。
+<span class="nb">kill</span><span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span>&lt;PID&gt;
+<span class="c1"># &lt;PID&gt; 是要终止进程的进程 ID</span>
+<span class="c1"># options：</span>
+<span class="c1"># -l：列出所有可用的信号</span>
+<span class="c1">#以下几种选项或选项+参数均可制定信号：</span>
+<span class="c1"># (1) -&lt;signal&gt;  带 SIG 前缀，例如：kill -SIGKILL 1234</span>
+<span class="c1"># (2) -&lt;signal&gt;  不带SIG前缀，例如：kill -KILL 1234</span>
+<span class="c1"># (3) -&lt;num&gt;  使用信号的编号，例如：kill -9 1234</span>
+<span class="c1"># (4) -s &lt;signal&gt;  -s选项用于指定要发送的信号名称,例如：kill -s SIGKILL 1234 </span>
+</code></pre></div>
+<p>e.g. </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 终止 PID 为 1234 的进程：</span>
+<span class="nb">kill</span><span class="w"> </span><span class="m">1234</span>
+<span class="c1"># 强制终止 PID 为 1234 的进程：</span>
+<span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span><span class="m">1234</span>
+<span class="c1"># 向 PID 为 1234 的进程发送 SIGSTOP：</span>
+<span class="nb">kill</span><span class="w"> </span>-s<span class="w"> </span>SIGSTOP<span class="w"> </span><span class="m">1234</span>
+</code></pre></div>
+<p><strong>kill相关命令</strong>：</p>
+<ul>
+<li><code>killall</code>:使用进程的名称（而不是PID）来发送信号，这对于不知道PID但知道确切进程名的场景非常方便。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>killall<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="o">[</span>signal<span class="o">]</span><span class="w"> </span>&lt;进程名&gt;
+<span class="c1"># options：</span>
+<span class="c1"># -e, --exact：要求进程名必须精确匹配（对于长进程名很有用）。</span>
+<span class="c1"># -i, --interactive：交互模式，在杀死每个进程前询问确认。</span>
+<span class="c1"># -r, --regexp：使用扩展正则表达式来匹配进程名，而不是默认的精确匹配。</span>
+<span class="c1"># -u, --user：只终止属于指定用户的进程。</span>
+<span class="c1"># -I, --ignore-case：忽略进程名的大小写。</span>
+<span class="c1"># -o, --older-than：只终止运行时间比指定时间长的进程。</span>
+<span class="c1"># -y, --younger-than：只终止运行时间比指定时间短的进程。</span>
+<span class="c1"># -&lt;signal&gt;：指定发送的信号</span>
+
+e.g.
+<span class="c1"># 1. 正常终止所有名为 &quot;firefox&quot; 的进程</span>
+killall<span class="w"> </span>firefox
+
+<span class="c1"># 2. 强制终止所有名为 &quot;chrome&quot; 的进程</span>
+killall<span class="w"> </span>-9<span class="w"> </span>chrome
+killall<span class="w"> </span>-SIGKILL<span class="w"> </span>chrome
+
+<span class="c1"># 3. 交互式地终止所有名为 &quot;some_script&quot; 的进程（会问你 Y/N）</span>
+killall<span class="w"> </span>-i<span class="w"> </span>some_script
+
+<span class="c1"># 4. 终止用户 &quot;alice&quot; 的所有 &quot;nginx&quot; 进程</span>
+killall<span class="w"> </span>-u<span class="w"> </span>alice<span class="w"> </span>nginx
+
+<span class="c1"># 5. 使用正则表达式终止所有以 &quot;python3&quot; 开头的进程（如 python3-script）</span>
+killall<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;^python3&#39;</span>
+</code></pre></div>
+<hr />
+<p>Question：<code>killall</code>的<code>-e</code>选项有什么用？？？</p>
+<p><strong><code>-e</code> 或 <code>--exact</code> 选项的作用是：要求进程名必须与提供的名称进行更长、更严格的精确匹配。</strong></p>
+<p>这听起来可能有点绕，因为我们已经知道 <code>killall</code> 默认就是<em>精确匹配</em>。为了理解 <code>-e</code> 的用途，我们需要先理解 Linux 中“进程名”的一个特点。</p>
+<p><strong>核心区别：进程名长度限制</strong></p>
+<p>在 Linux 系统中，进程名（存储在 <code>/proc/&lt;PID&gt;/stat</code> 中）的长度是有限制的（通常为 15 或 16 个字符）。如果启动一个进程的命令行很长，系统会<strong>自动截断</strong>这个命令行，用截断后的结果作为进程名。</p>
+<ul>
+<li>默认的 <code>killall</code>（无 <code>-e</code>）：只比较这个<strong>被截断后的、短的进程名</strong>。</li>
+<li>使用 <code>killall -e</code>：它不仅比较进程名，还会去检查完整的命令行（<code>/proc/&lt;PID&gt;/cmdline</code>），要求<strong>完整的命令行必须与你提供的名字精确匹配</strong>。</li>
+</ul>
+<p><strong>举例说明</strong></p>
+<p>假设我们通过一个非常长的路径和参数启动了一个脚本：</p>
+<div class="highlight"><pre><span></span><code>/opt/my_applications/scripts/very_long_name_process.sh<span class="w"> </span>--config<span class="w"> </span>/home/user/config.cfg
+</code></pre></div>
+<p>由于进程名长度限制，系统会将其截断。用 <code>ps</code> 命令查看时，你可能会看到：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>very_long
+user<span class="w">     </span><span class="m">12345</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.1<span class="w"> </span><span class="m">12345</span><span class="w"> </span><span class="m">6780</span><span class="w"> </span>pts/0<span class="w">    </span>S<span class="w">    </span><span class="m">10</span>:00<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>very_long_name_
+</code></pre></div>
+<p>注意：进程名被截断成了 <code>very_long_name_</code>（15个字符）。</p>
+<p><strong>场景一：使用默认 <code>killall</code>（无 <code>-e</code>）</strong></p>
+<div class="highlight"><pre><span></span><code>killall<span class="w"> </span>very_long_name_
+</code></pre></div>
+<p>这条命令会成功，因为它匹配的是被截断后的进程名 <code>very_long_name_</code>。</p>
+<p><strong>但是，如果你不知道进程名被截断了，尝试用完整的脚本名来终止它：</strong></p>
+<div class="highlight"><pre><span></span><code>killall<span class="w"> </span>very_long_name_process.sh
+</code></pre></div>
+<p>这条命令会失败，并提示 <code>No process found</code>，因为被截断的进程名 (<code>very_long_name_</code>) 和你提供的完整名称 (<code>very_long_name_process.sh</code>) 不匹配。</p>
+<p><strong>场景二：使用 <code>killall -e</code>（有 <code>-e</code>）</strong></p>
+<div class="highlight"><pre><span></span><code>killall<span class="w"> </span>-e<span class="w"> </span>very_long_name_process.sh
+</code></pre></div>
+<p>这条命令会<strong>成功</strong>！<code>-e</code> 选项告诉 <code>killall</code>：“不要只看那个被截断的短名字，去检查完整的命令行，如果完整命令行匹配 <code>very_long_name_process.sh</code>，就终止它。”</p>
+<p>即使进程列表里显示的是 <code>very_long_name_</code>，<code>killall -e</code> 也能通过完整路径找到并杀死它。</p>
+<hr />
+<ul>
+<li><code>pkill</code>:用模式匹配进程名或其他属性（如用户名、终端等）来发送信号。它是 <code>pgrep</code> 的“杀手版”，功能最强大、最灵活。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>pkill<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="o">[</span>signal<span class="o">]</span><span class="w"> </span>&lt;模式&gt;
+<span class="c1"># 这里的 &lt;模式&gt; 是一个模式匹配表达式(通配符 &amp; 正则表达式)，默认会匹配进程名</span>
+<span class="c1"># options:</span>
+<span class="c1"># -f, --full：默认只匹配进程名。加上 -f 后，会匹配整个命令行（包括参数）。这个非常有用！</span>
+<span class="c1"># 例如，你运行了 python3 app.py，用 pkill python3 会杀死所有 Python3 进程，而 pkill -f app.py 则只杀死运行这个特定脚本的进程。</span>
+
+<span class="c1"># -u, --euid：匹配有效用户ID或用户名的进程。</span>
+<span class="c1"># -t, --terminal：匹配指定终端（tty）的进程。例如 -t pts/0 杀死来自第一个终端窗口的所有进程。</span>
+<span class="c1"># -x, --exact：要求进程名必须与模式精确匹配（类似 killall -e）。</span>
+<span class="c1"># -n, --newest：只杀最新（最近启动的）的匹配进程。</span>
+<span class="c1"># -o, --oldest：只杀最旧（最早启动的）的匹配进程。</span>
+<span class="c1"># -&lt;signal&gt;：指定要发送的信号。</span>
+
+e.g.
+<span class="c1"># 1. 终止所有进程名中包含 &quot;chrome&quot; 的进程（比 killall 更灵活）</span>
+pkill<span class="w"> </span>chrome
+
+<span class="c1"># 2. 强制终止用户 &quot;bob&quot; 的所有进程</span>
+pkill<span class="w"> </span>-9<span class="w"> </span>-u<span class="w"> </span>bob
+
+<span class="c1"># 3. 终止在 tty1 终端上运行的所有进程</span>
+pkill<span class="w"> </span>-t<span class="w"> </span>tty1
+
+<span class="c1"># 4. 【经典用法】终止一个特定的 Java 应用，而不杀死其他 Java 进程</span>
+<span class="c1"># 假设启动命令是：java -jar myapp.jar</span>
+pkill<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;myapp.jar&#39;</span>
+
+<span class="c1"># 5. 只终止最老的那个 Python 进程</span>
+pkill<span class="w"> </span>-o<span class="w"> </span>python
+</code></pre></div>
+<p>另外，<code>exit()</code> 函数，return语句和进程终止信号都可以用来结束进程，但它们的工作原理和用途有所不同。<code>exit()</code> 函数是一个库函数，return语句是C语言内置语句，用于正常地终止当前进程；而进程终止信号是一种异步事件，可以由操作系统、其他进程或用户发送给目标进程。</p>
+<div class="highlight"><pre><span></span><code><span class="nb">exit</span><span class="w"> </span><span class="o">[</span>n<span class="o">]</span>
+<span class="c1"># exit命令在图形化终端没有选项，在脚本中只接受一个可选的参数[n]，这个参数表示退出状态。这个状态码可以用来表明程序是正常退出还是因为某种错误或异常而退出。这是一个介于0和255之间的整数。以下是一些常见的退出状态代码及其含义:</span>
+<span class="m">0</span>:<span class="w"> </span>命令成功执行，没有错误。
+<span class="m">1</span>:<span class="w"> </span>通用错误。这是最常用的退出代码，应该被用作各种杂项错误的捕获值。
+<span class="m">2</span>:<span class="w"> </span>shell内置命令的无效使用。内置命令的例子包括alias，echo，和printf。
+<span class="m">126</span>:<span class="w"> </span>无法执行命令。这可能是因为权限问题或者命令不可执行。
+<span class="m">127</span>:<span class="w"> </span>找不到命令。这可能是因为拼写错误或者PATH问题。
+<span class="m">128</span>+n:<span class="w"> </span>程序在接收到一个信号后终止，它将返回一个等于128<span class="w"> </span>+<span class="w"> </span>信号编号的错误代码。例如，当我们通过键入Control-C终止一个程序时，我们实际上向它发送了一个SIGINT信号。这个信号的值是2。因此，程序将停止执行并返回一个值为128<span class="w"> </span>+<span class="w"> </span><span class="nv">2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>130的退出代码。
+</code></pre></div>
+<p><strong>暂停和后台执行进程：</strong></p>
+<p>信号可以让进程做其他的事情，而不仅仅是终止它们。例如，<code>SIGSTOP</code> 会让进程暂停。</p>
+<p>从程序员的角度，我们可以认为进程总是处于以下三种状态之一：</p>
+<ul>
+<li>运行：要么在CPU运行，要么等待被执行且最终会被内核调度</li>
+<li>停止：进程的执行被挂起（停止），且不会被内核调度，直到它收到SIGCONT信号</li>
+<li>终止：进程永远地停止了，停止原因有三种：收到一个信号，该信号默认行为是终止进程；从主程序return返回；调用exit函数</li>
+</ul>
+<p>在终端中，键入 <code>Ctrl-Z</code> 会让 shell 发送 <code>SIGTSTP</code> 信号，<code>SIGTSTP</code> 是 Terminal Stop 的缩写（即 <code>terminal</code> 版本的 SIGSTOP），它会让已经在运行的进程暂停，并挂到后台。</p>
+<p>我们可以使用 <a href="https://www.man7.org/linux/man-pages/man1/fg.1p.html"><code>fg</code></a> 或 <a href="http://man7.org/linux/man-pages/man1/bg.1p.html"><code>bg</code></a> 命令恢复暂停的工作。它们分别表示在前台继续或在后台继续。（注：一个终端内前台只能运行一个进程，后台可以运行若干个）</p>
+<blockquote>
+<p>如何查看后台运行的进程任务？</p>
+<p><a href="http://man7.org/linux/man-pages/man1/jobs.1p.html"><code>jobs</code></a> 命令会列出当前终端会话中尚未完成的全部任务。您可以使用 pid 引用这些任务（也可以用 <a href="https://www.man7.org/linux/man-pages/man1/pgrep.1.html"><code>pgrep</code></a> ，ps等找出 pid）。更加符合直觉的操作是您可以使用百分号 + 任务编号（<code>jobs</code> 会打印任务编号）来选取该任务。如果要选择最近的一个任务，可以使用 <code>$!</code> 这一特殊参数。</p>
+<p>还有一件事情需要掌握，那就是命令中的 <code>&amp;</code> 后缀可以让命令在直接在后台运行，这使得您可以直接在 shell 中继续做其他操作，不过它此时还是会使用 shell 的标准输出，这一点有时会比较恼人（这种情况可以使用 shell 重定向处理）。</p>
+<p>让已经在运行的进程转到后台运行，您可以键入 <code>Ctrl-Z</code> ，然后紧接着再输入 <code>bg</code>。注意，后台的进程仍然是您的终端进程的子进程，一旦您关闭终端（会发送另外一个信号 <code>SIGHUP</code>），这些后台的进程也会终止。为了防止这种情况发生，您可以使用 <a href="https://www.man7.org/linux/man-pages/man1/nohup.1.html"><code>nohup</code></a>（一个用来忽略 <code>SIGHUP</code> 的封装）来运行程序。针对已经运行的程序，可以使用 <code>disown</code> 。但<code>nohup</code>有一些缺点，如输出被定向到一个文件<code>nohup.out</code>，并且运行过程中不能能对它进行任何操作，如输入等。因此，有更好的替代方案，就是使用终端多路复用器来实现。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="nb">jobs</span><span class="w"> </span><span class="o">[</span>-l<span class="w"> </span>-n<span class="w"> </span>-p<span class="w"> </span>-r<span class="w"> </span>-s<span class="o">]</span>
+<span class="c1">#-l:显示进程号（process ID）</span>
+<span class="c1">#-n:只显示上次shell通知后改变了状态的作业</span>
+<span class="c1">#-p:只显示进程号</span>
+<span class="c1">#-r:只显示正在运行的作业</span>
+<span class="c1">#-s:只显示已停止的作业</span>
+</code></pre></div>
+<h3 id="2_1">2. 终端多路复用器<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p><strong>tmux程序</strong></p>
+<p>tmux是一个命令行，Linux命令在其中仍可使用，快捷键不可直接使用，需要先按一个前缀<code>ctrl + b</code>，然后再加快捷键，且快捷键不需要再加<code>ctrl</code>。</p>
+<p>如<code>ctrl + b</code>，再点<code>d</code>,可以退出tmux服务器，然后我们可以再进入（命令<code>tmux a</code>）这个tmux服务器命令行会话，里面的数据不会被清除。因此即使外部终端shell断掉了，tmux中的数据依然会保留。</p>
+<p>另外，还可以在tmux中创建新的命令行，<code>ctrl + b</code> +<code>c</code>，就像浏览器中的多个 tag页面 一样，并且可以把一个窗口分屏。</p>
+<p><strong><em>==摘自 missing-semester-cn==</em></strong></p>
+<p>当您在使用命令行时，您通常会希望同时执行多个任务。举例来说，您可以想要同时运行您的编辑器，并在终端的另外一侧执行程序。尽管再打开一个新的终端窗口也能达到目的，使用终端多路复用器则是一种更好的办法。</p>
+<p>像 <a href="https://www.man7.org/linux/man-pages/man1/tmux.1.html"><code>tmux</code></a> 这类的终端多路复用器可以允许我们基于面板和标签分割出多个终端窗口，这样您便可以同时与多个 shell 会话进行交互。</p>
+<p>不仅如此，终端多路复用使我们可以分离当前终端会话并在将来重新连接。</p>
+<p>这让您操作远端设备时的工作流大大改善，避免了 <code>nohup</code> 和其他类似技巧的使用。</p>
+<p>现在最流行的终端多路器是 <a href="https://www.man7.org/linux/man-pages/man1/tmux.1.html"><code>tmux</code></a>。<code>tmux</code> 是一个高度可定制的工具，您可以使用相关快捷键创建多个标签页并在它们间导航。</p>
+<p><code>tmux</code> 的快捷键需要我们掌握，它们都是类似 <code>&lt;C-b&gt; x</code> 这样的组合，即需要先按下 <code>Ctrl+b</code>，松开后再按下 <code>x</code>。<code>tmux</code> 中对象的继承结构如下：</p>
+<ul>
+<li><strong>会话(sessions)</strong> - 每个会话都是一个独立的工作区，其中包含一个或多个窗口</li>
+<li><code>tmux</code> 开始一个新的会话</li>
+<li><code>tmux new -s NAME</code> 以指定名称开始一个新的会话</li>
+<li><code>tmux ls</code> 列出当前所有会话</li>
+<li>在 <code>tmux</code> 中输入 <code>&lt;C-b&gt; d</code> ，将当前会话分离</li>
+<li><code>tmux a</code> 重新连接最后一个会话。您也可以通过 <code>-t</code> 选项来指定具体的会话</li>
+<li><strong>窗口(windows)</strong> - 相当于编辑器或是浏览器中的标签页，从视觉上将一个会话分割为多个部分</li>
+<li><code>&lt;C-b&gt; c</code> 创建一个新的窗口，使用 <code>&lt;C-d&gt;</code> 关闭</li>
+<li><code>&lt;C-b&gt; N</code> 跳转到第 <em>N</em> 个窗口，注意每个窗口都是有编号的</li>
+<li><code>&lt;C-b&gt; p</code> 切换到前一个窗口</li>
+<li><code>&lt;C-b&gt; n</code> 切换到下一个窗口</li>
+<li><code>&lt;C-b&gt; ,</code> 重命名当前窗口</li>
+<li><code>&lt;C-b&gt; w</code> 列出当前所有窗口</li>
+<li><strong>面板(panes)</strong> - 像 vim 中的分屏一样，面板使我们可以在一个屏幕里显示多个 shell</li>
+<li><code>&lt;C-b&gt; "</code> 水平分割</li>
+<li><code>&lt;C-b&gt; %</code> 垂直分割</li>
+<li><code>&lt;C-b&gt; &lt;方向&gt;</code> 切换到指定方向的面板，&lt;方向&gt; 指的是键盘上的方向键</li>
+<li><code>&lt;C-b&gt; z</code> 切换当前面板的缩放</li>
+<li><code>&lt;C-b&gt; [</code> 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分</li>
+<li><code>&lt;C-b&gt; &lt;空格&gt;</code> 在不同的面板排布间切换</li>
+</ul>
+<h3 id="3_1">3. 个性化命令设置及配置文件管理<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>输入一长串包含许多选项的命令会非常麻烦。因此，大多数 shell 都支持设置别名。shell 的别名相当于一个长命令的缩写，shell 会自动将其替换成原本的命令。例如，bash 中的别名语法如下：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">alias</span><span class="w"> </span><span class="nv">alias_name</span><span class="o">=</span><span class="s2">&quot;command_to_alias -op arg1 arg2&quot;</span>
+<span class="c1"># 起别名，可以带选项、参数</span>
+<span class="nb">unalias</span><span class="w"> </span>alias_name
+<span class="c1"># 禁用别名</span>
+<span class="nb">alias</span><span class="w"> </span>alias_name
+<span class="c1"># 获取别名的定义</span>
+</code></pre></div>
+<p>注意， <code>=</code> 两边是没有空格的，因为 <a href="https://www.man7.org/linux/man-pages/man1/alias.1p.html"><code>alias</code></a> 是一个 shell 命令，它只接受一个参数。</p>
+<p>alias只对当前命令行会话中有效，如何让他们作为一种基础配置保留呢？</p>
+<p>很多程序的配置都是通过纯文本格式的被称作 <em>点文件</em> 的配置文件来完成的（之所以称为点文件，是因为它们的文件名以 <code>.</code> 开头，例如 <code>~/.vimrc</code>。也正因为此，它们默认是隐藏文件，<code>ls</code> 并不会显示它们）。</p>
+<p>该文件会在对应的软件启动的最开始执行，如<code>.vimrc</code>会在vim启动时先执行。shell 的配置也是通过这类文件完成的。在启动时，您的 shell 程序会读取很多文件以加载其配置项。</p>
+<p>对于 <code>bash</code> 来说，在大多数系统下，您可以通过编辑 <code>.bashrc</code> 或 <code>.bash_profile</code> 来进行配置。在文件中您可以添加需要在启动时执行的命令，例如之前我们提到过的别名，或者是您的环境变量。</p>
+<p>例如，很多程序都要求您在 shell 的配置文件中包含一行类似 <code>export PATH="$PATH:/path/to/program/bin"</code> 的命令，这样才能确保之前用过的Linux命令（程序）能够被 shell 找到。</p>
+<p>还有一些其他的工具也可以通过 <em>点文件</em> 进行配置：</p>
+<ul>
+<li><code>bash</code> - <code>~/.bashrc</code>, <code>~/.bash_profile</code></li>
+<li><code>git</code> - <code>~/.gitconfig</code></li>
+<li><code>vim</code> - <code>~/.vimrc</code> 和 <code>~/.vim</code> 目录</li>
+<li><code>ssh</code> - <code>~/.ssh/config</code></li>
+<li><code>tmux</code> - <code>~/.tmux.conf</code></li>
+</ul>
+<p><strong>管理<code>点文件</code></strong></p>
+<p>我们应该如何管理这些配置文件呢，一种较好的方式是它们放在同一个文件夹一般称为<code>dotfiles</code>) 下，并使用版本控制系统进行管理，然后通过脚本将每个点文件 <strong>符号链接</strong> 到各自对应的app文件夹下。这么做有如下好处：</p>
+<ul>
+<li><strong>安装简单</strong>: 如果您登录了一台新的设备，在这台设备上应用您的配置只需要几分钟的时间；</li>
+<li><strong>可移植性</strong>: 您的工具在任何地方都以相同的配置工作</li>
+<li><strong>同步</strong>: 在一处更新配置文件，可以同步到其他所有地方</li>
+<li><strong>变更追踪</strong>: 您可能要在整个程序员生涯中持续维护这些配置文件，而对于长期项目而言，版本历史是非常重要的</li>
+</ul>
+<p>配置文件中需要放些什么？有一种方法就是直接浏览其他人的配置文件：您可以在这里找到无数的 <a href="https://github.com/search?o=desc&amp;q=dotfiles&amp;s=stars&amp;type=Repositories">dotfiles 仓库</a> —— 其中最受欢迎的那些可以在 <a href="https://github.com/mathiasbynens/dotfiles">这里</a> 找到（我们建议您不要直接复制别人的配置）。<a href="https://dotfiles.github.io/">这里</a> 也有一些非常有用的资源。</p>
+<blockquote>
+<p>符号链接 / 软链接 / windows的快捷方式 ：可将文件、文件夹链接到其他位置</p>
+<div class="highlight"><pre><span></span><code>ln<span class="w"> </span>-s<span class="w"> </span>参数1<span class="w"> </span>参数2
+<span class="c1"># -s选项：创建软链接</span>
+<span class="c1"># 它只会在你选定的位置上生成一个镜像，而不会占用磁盘空间，而如果使用ln不带参数的话，则就是硬链接，会在选定的位置上生成一个和源文件大小相同的文件，占用磁盘空间</span>
+<span class="c1"># 参数1：被链接的文件或文件夹</span>
+<span class="c1"># 参数2：要连接去的目的地</span>
+ln<span class="w"> </span>-s<span class="w"> </span>/etc/yum.conf<span class="w"> </span>~/yum.conf
+</code></pre></div>
+</blockquote>
+<h2 id="_5">三. 远端设备控制<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="ssh">SSH连接远程服务器<a class="headerlink" href="#ssh" title="Permanent link">&para;</a></h3>
+<p>SSH全名 Secure shell，是一种协议或者说是一套基于客户端-服务端架构的软件，被设计用来以网络的方式访问使用一台远程的机器。</p>
+<p>在使用前，需保证自己用于连接到远程服务器的设备上有SSH客户端。</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>openssh-client
+</code></pre></div>
+<p>还要保证连接到的远程设备上运行着一个SSH服务端来接受连接。</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>openssh-server
+sudo<span class="w"> </span>service<span class="w"> </span>ssh<span class="w"> </span>start<span class="w">  </span><span class="c1">#一般会自动启动，不需要这步</span>
+</code></pre></div>
+<h4 id="1_2">1. 客户端使用与配置<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<p>通过如下命令，您可以使用 <code>ssh</code> 连接到其他服务器：</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>foo@bar.mit.edu
+</code></pre></div>
+<p>ssh命令的通用格式：</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="o">[</span>user@<span class="o">]</span>hostname<span class="w"> </span><span class="o">[</span>command<span class="o">]</span>
+<span class="c1"># -l user：指定要登录的用户。</span>
+<span class="c1"># -p port：指定连接到远程主机的端口号，默认是22。</span>
+<span class="c1"># -i identity_file：指定身份验证文件（私钥文件）。</span>
+<span class="c1"># -v：详细模式，可以显示调试信息。</span>
+<span class="c1"># -C：启用压缩。</span>
+<span class="c1"># -N：不执行远程命令，只进行端口转发。</span>
+<span class="c1"># -f：后台运行。</span>
+<span class="c1"># -L local_port:remoteHost:remote_port：本地端口转发。</span>
+<span class="c1"># -R remote_port:localHost:local_port：远程端口转发。</span>
+<span class="c1"># -D [bind_address:]port：动态应用程序级端口转发。</span>
+</code></pre></div>
+<p>这里我们尝试以用户名 <code>foo</code> 登录服务器 <code>bar.mit.edu</code>。服务器可以通过 URL 指定（例如 <code>bar.mit.edu</code>），也可以使用 IP 指定（例如 <code>foobar@192.168.1.42</code>）。后面我们会介绍如何修改 ssh 配置文件使我们可以用类似 <code>ssh bar</code> 这样的命令来登录服务器。</p>
+<h5 id="_6">执行命令<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<p><code>ssh</code> 的一个经常被忽视的特性是它可以直接远程执行命令。 <code>ssh foobar@server ls</code> 可以直接在用 foobar 的命令下执行 <code>ls</code> 命令，并自动退出foobar。 想要配合管道来使用也可以， <code>ssh foobar@server ls | grep PATTERN</code> 会在本地查询远端 <code>ls</code> 的输出而 <code>ls | ssh foobar@server grep PATTERN</code> 会在远端对本地 <code>ls</code> 输出的结果进行查询。</p>
+<h5 id="ssh_1">SSH 密钥<a class="headerlink" href="#ssh_1" title="Permanent link">&para;</a></h5>
+<p>基于密钥的验证机制使用了密码学中的公钥通常是 <code>~/.ssh/id_rsa.pub</code> ()，我们只需要向服务器证明客户端持有对应的私钥，而不需要公开其私钥。这样您就可以避免每次登录都输入密码的麻烦了秘密就可以登录。不过，私钥(通常是 <code>~/.ssh/id_rsa</code> 或者 <code>~/.ssh/id_ed25519</code>) 等效于您的密码，所以一定要好好保存它。</p>
+<p><strong>密钥生成:</strong></p>
+<p>使用<code>ssh-keygen</code> 命令可以生成一对密钥。</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen
+</code></pre></div>
+<p><strong>基于密钥的认证机制:</strong></p>
+<p><code>ssh</code> 会查询 <code>.ssh/authorized_keys</code> 来确认那些用户可以被允许登录。您可以通过下面的命令将一个公钥拷贝到这里：</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>.ssh/id_ed25519.pub<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>foobar@remote<span class="w"> </span><span class="s1">&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span>
+</code></pre></div>
+<p>如果支持 <code>ssh-copy-id</code> 的话，可以使用下面这种更简单的解决方案：</p>
+<div class="highlight"><pre><span></span><code>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>.ssh/id_ed25519.pub<span class="w"> </span>foobar@remote
+<span class="c1"># windows操作系统不自带</span>
+<span class="c1"># 服务器必须允许使用密码登录，才能使用ssh-copy-id</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>foo@bar.mit.edu
+<span class="c1"># 再使用ssh连接，就无需输入密码</span>
+ssh<span class="w"> </span>-v<span class="w"> </span>foo@bar.mit.edu
+<span class="c1"># -v:查看ssh试图用哪些文件作为公钥来访问</span>
+<span class="c1">#注意：尽量降低公钥存放文件authorized_keys的权限（一般为 -rw-rw-r--）</span>
+</code></pre></div>
+<p><strong>通过 SSH 复制文件:</strong></p>
+<ul>
+<li>
+<p><code>scp</code> ：当需要拷贝大量的文件或目录时，使用 <code>scp</code> 命令则更加方便，因为它可以方便的遍历相关路径。语法如下：<code>scp path/to/local_file remote_host:path/to/remote_file</code>；</p>
+</li>
+<li>
+<p><code>rsync</code> 对 <code>scp</code> 进行了改进，它可以检测本地和远端的文件以防止重复拷贝。它还可以提供一些诸如符号连接、权限管理等精心打磨的功能。甚至还可以基于 <code>--partial</code> 标记实现断点续传。<code>rsync</code> 的语法和 <code>scp</code> 类似</p>
+</li>
+</ul>
+<p><strong>配置文件记住远程服务器并快速连接：</strong></p>
+<p>在<code>.ssh/config</code>文件中配置，</p>
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>.ssh/config
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Host<span class="w"> </span>vm20<span class="w">   </span><span class="c1">#起一个服务器别名</span>
+<span class="w">    </span>Hostname<span class="w"> </span><span class="m">10</span>.211.55.11<span class="w">   </span><span class="c1">#服务器URL或IP地址</span>
+<span class="w">    </span>USer<span class="w"> </span>yui20<span class="w">             </span><span class="c1">#登录用户名</span>
+<span class="w">    </span>Port:22<span class="w">                </span><span class="c1">#指定端口</span>
+<span class="w">    </span>LocalForward<span class="w"> </span><span class="m">9999</span><span class="w"> </span>localhost:8888<span class="w">    </span><span class="c1">#转发端口</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>vm20
+<span class="c1"># 一步登录</span>
+</code></pre></div>
+<h4 id="2_2">2. 服务端使用与配置<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>IP地址：区分不同机器</p>
+<p>端口：一台机器上有很多程序，通过端口确定其他机器发送信息给这台机器时，机器上的具体哪个程序或服务来响应、交互、进行通讯；端口位数一般为一到五位。</p>
+<p>ssh服务端的端口一般为22，为了安全性一般改为其他端口</p>
+</blockquote>
+<p>服务端配置文件一般在<code>/etc/ssh/sshd_config</code>文件中。</p>
+<h4 id="3_2">3. 端口转发<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h4>
+<p>很多情况下我们都会遇到软件需要监听特定设备的端口。如果是在您的本机，可以使用 <code>localhost:PORT</code> 或 <code>127.0.0.1:PORT</code>。但是如果需要监听远程服务器的端口该如何操作呢？这种情况下远端的端口并不会直接通过网络暴露给您。</p>
+<p>例如远程使用Jupyter，它会运行在远程服务器的8080或8888端口上来监听http协议，使用本机进行消息交互，但远程服务器为了安全性只开放22端口而不会开放此端口（被防火墙屏蔽）。</p>
+<p><strong>端口转发：</strong></p>
+<ul>
+<li>正向转发 / 本地端口转发：把对方服务器上的一个端口映射到自己本地机器上的一个端口，这样传递给本地机器上该端口的流量（信息，请求，...）会被转发到对方服务器上，让操作者觉得是在本地机器上进行操作（实际上进程、服务运行在远程服务器上）</li>
+</ul>
+<p>即远端设备上的服务监听一个端口，而您希望在本地设备上的一个端口建立连接并转发到远程端口上。例如，我们在远端服务器上运行 Jupyter notebook 并监听 <code>8888</code> 端口。 然后，建立从本地端口 <code>9999</code> 的转发，使用 <code>ssh -L 9999:localhost:8888 foobar@remote_server</code> 。这样只需要访问本地的 <code>localhost:9999</code> 即可。</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-L<span class="w"> </span>sourcePort:forwardToHost:onPort<span class="w"> </span>connectToHost
+<span class="c1"># 使用 ssh 连接到 connectToHost ，并将所有到本地 sourcePort 的连接尝试转发到名为 forwardToHost 的机器上的 onPort 端口，该机器可以从 connectToHost 机器访问。</span>
+</code></pre></div>
+<p><img alt="" src="../images/local.png" /></p>
+<ul>
+<li>反向转发 / 远程端口转发：把自己本地机器上的一个端口映射到对方服务器上的一个端口，这样传递给对方服务器上该端口的流量（信息，请求，...）会被转发到你的本地机器上，让操作者觉得是在远程服务器上进行操作（实际上进程、服务运行在本地机器上）</li>
+</ul>
+<p>使用命令<code>ssh -R 80:localhost:80 tinyserver</code>，您指定将与 Tinyserver 80 端口建立的连接转发到您本地计算机的 80 端口。这意味着，如果有人使用 Web 浏览器连接到这台小型且速度较慢的服务器，他将获得您本地计算机上运行的 Web 服务器的响应。由于 Tinyserver 没有足够的磁盘空间来承载大型网站，因此没有运行 Web 服务器。但连接到 Tinyserver 的人却认为如此。</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-R<span class="w"> </span>sourcePort:forwardToHost:onPort<span class="w"> </span>connectToHost
+<span class="c1"># 使用 ssh 连接到 connectToHost ，并将所有到远程 sourcePort 的连接尝试转发到名为 forwardToHost 的机器上的端口 onPort ，该机器可从本地机器访问。</span>
+</code></pre></div>
+<p><img alt="" src="../images/remote.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
