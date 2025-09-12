@@ -351,7 +351,7 @@ hello, runoob ! hello, ${your_name} !
 ```
 
 #### 获取字符串长度
-
+{% raw %}
 ```shell
 string="abcd"
 echo ${#string}   # 输出 4
@@ -363,7 +363,7 @@ echo ${#string}   # 输出 4
 string="abcd"
 echo ${#string[0]}   # 输出 4
 ```
-
+{% endraw %}
 #### 提取子字符串
 
 以下实例从字符串第 **2** 个字符开始截取 **4** 个字符：
@@ -450,7 +450,7 @@ echo ${array_name[@]}
 #### 获取数组的长度
 
 获取数组长度的方法与获取字符串长度的方法相同，例如：
-
+{% raw %}
 ```shell
 # 取得数组元素的个数
 length=${#array_name[@]}
@@ -459,7 +459,7 @@ length=${#array_name[*]}
 # 取得数组单个元素的长度
 length=${#array_name[n]}
 ```
-
+{% endraw %}
 ### Shell注释
 
 以 **#** 开头的行就是注释，会被解释器忽略。

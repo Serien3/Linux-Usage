@@ -1,0 +1,40 @@
+site_name: Linux-Usage
+site_description: 一个记录Linux下常用工具的笔记
+docs_dir: manuscripts
+site_dir: site
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.sections
+    - content.code.copy
+  palette:
+    scheme: default
+
+plugins:
+  - search
+  - macros  
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - attr_list
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+
+nav:
+  - 首页: index.md
+  - 主干内容: 
+    - 01. The Shell: The Shell.md
+    - 02. Shell_Script: Shell_Script.md
+    - 03. Editors(Vim): Editors(Vim).md
+    - 04. Command-line Environment: Command-line Environment.md
+    - 05. Version Control (git): Version Control (git).md
+    - 06. Debugging and Profiling: Debugging and Profiling.md
+    - 07. Metaprogramming: Metaprogramming.md
+  - 分支补充内容:
+    - LinuxManage: LinuxManage.md
+    - Makefile: Makefile.md
