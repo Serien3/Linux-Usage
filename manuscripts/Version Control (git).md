@@ -196,7 +196,7 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
 
 ## Git 的命令行接口
 
-## 基础代码管理
+### 基础代码管理
 
 - `git help <command>`: 获取 git 命令的帮助信息
 
@@ -229,7 +229,7 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
 
 - `git checkout <revision>`: 更新 HEAD 和目前的分支（将HEAD指针转移，指向`<reversion>`提交），并让整个工作目录中的文件和`<revision>`提交完全一致
 
-## 分支和合并
+### 分支和合并
 
 - `git branch`: 显示本地仓库的所有分支（本质上就是引用）
   - `git branch -vv`：显示所有分支的详细信息，包括跟踪的远程分支信息
@@ -241,14 +241,23 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
   - 相当于 `git branch <name>; git checkout <name>`
 - `git switch <name>`：v2.23版本后专门用于**切换分支**的命令。取代 `git checkout <分支名>`。
   - `git switch -c <新分支名>`：创建并切换分支，取代 `git checkout -b`。
-- `git merge <revision>`: 合并到当前分支
+- `git merge <revision>`: 合并到当前分支并创立新提交
+  - `--no-commit`选项：合并的变更会存放在暂存区（Fast-forward不适用，因为它直接移动HEAD指针，而非合并创立新提交）
+
 - `git mergetool`: 使用工具来处理合并冲突
+- **git有三种分支合并方法**
+  - **merge**
+  - **rebase**
+  - **merge and squash**
+
 
 ---
 
-### git并行开发的分支管理
+#### git并行开发的分支管理
 
-分支合并的类型：
+分支合并的类型（三大类）：
+
+1. `merge`
 
 | 类型            | 命令                             | 特点                                                         |
 | --------------- | -------------------------------- | ------------------------------------------------------------ |
@@ -256,13 +265,43 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
 | Recursive       | 默认两路合并                     | 自动合并多个分支的内容，工作原理（Three-way Merge）：Git 会找到两个分支的第一个共同祖先提交（common ancestor），然后对三方（共同祖先、当前分支、要合并的分支）的内容进行合并，并创建一个新的提交来记录这个合并结果，由当前分支指向它。 |
 | Octopus         | `git merge branch1 branch2 ...`  | 多分支同时合并                                               |
 | No-fast-forward | `git merge --no-ff feature/auth` | 显式强制创建合并提交，保留历史结构（**即使可以进行快进合并，也会强制创建一个合并提交**） |
-| Squash压缩合并  | `git merge--squash branch`       | 把 `branch` 的所有提交合并到当前分支，但只产生一个新的合并提交，当前分支的提交历史中不会保留 `branch` 的多次提交记录，即不会记录它和当前分支的合并关系 |
-
 
 ✅ 推荐使用 --no-ff 来保持历史可读性，对于跟踪功能分支的生命周期非常有用，尤其是在主分支合并 feature 分支时。
 
+2. `git merge--squash branch`
 
-**（使用 git mergetool） 解决合并两个分支时出现的冲突**
+   Squash压缩合并：把 `branch` 的所有提交合并到当前分支，但只产生一个新的合并提交，当前分支的提交历史中不会保留 `branch` 的多次提交记录，即不会记录它和当前分支的合并关系。特别地，当我们使用 --squash 选项执行 merge 时，Git 不会像在正常合并中那样在目标分支中创建合并提交，而是把合并后的结果放在缓冲区中（默认 `--no-commit`）。
+
+3. `git rebase branch`
+
+   当在 `feature` 分支上开发时，主分支 `main` 可能已经有了新的提交。为了让 `feature` 分支历史更清晰，可以使用 rebase，将 `feature` 分支的基点从旧的 `main` 提交，移动到 `main` 分支最新的提交之后。
+
+   ```shell
+   git rebase main
+   # 这条命令的意思是：“找到当前分支 feature 和 main 分支的共同祖先，然后取出自从那个祖先之后我们在 feature 分支上的所有提交，并把它们重新应用到 main 分支的最新提交上。”
+   ```
+
+   **图示过程：**
+
+   初始状态：
+
+   ```text
+             A---B---C feature
+            /
+       D---E---F---G main
+   ```
+
+   执行 `git rebase main` 后：
+
+   ```text
+                         A'--B'--C' feature
+                        /
+       D---E---F---G main
+   ```
+
+
+
+#### （使用 git mergetool） 解决合并两个分支时出现的冲突
 
 Git 使用三路合并算法（Three-way Merge），基于以下三个版本进行合并：
 
@@ -368,6 +407,8 @@ Git 使用三路合并算法（Three-way Merge），基于以下三个版本进�
      2. **解决冲突**：VSCode提供了多个选项帮助解决冲突，例如“Accept Current Change”（接受当前更改）、“Accept Incoming Change”（接受传入更改）、“Accept Both Changes”（接受两者），或者手动编辑冲突部分。
      3. **标记冲突已解决**：解决冲突后，保存文件，并在终端或VSCode的源代码控制面板中提交快照。
    - **优点**：无需额外配置，适合日常开发环境。
+
+#### 一个解决合并冲突的场景示例
 
 **现在，我们从示例开始演示分支管理操作：**
 
@@ -542,6 +583,7 @@ Creating a new branch is quick and simple.
 ```bash
 $ git add readme.txt 
 $ git commit -m "conflict fixed"
+# 现在更建议使用 git merge --continue，而非commit，因为它会检查你是否真的处于一个合并中间状态
 [master cf810e4] conflict fixed
 ```
 
@@ -556,13 +598,11 @@ $ git branch -d feature1
 Deleted branch feature1 (was 14096d0).
 ```
 
-
-
 ---
 
 
 
-## 远端操作
+### 远端操作
 
 - `git remote`: 列出当前仓库的远端
 
@@ -620,7 +660,7 @@ Deleted branch feature1 (was 14096d0).
   - `--single-branch`：只克隆**一个分支**的完整历史（默认是远程的默认分支，也可与 `-b` 联用指定其他分支）。这比 `--depth` 更能减少下载数据量。
   - `-o <名称>` 或 `--origin <名称>`：自定义远程仓库的**简称**。默认的简称是 `origin`，我们可以用它改成别的。
 
-## 撤销与改变工作目录
+### 撤销与改变工作目录
 
 - `git commit --amend`: 修改最近的一次提交（实际工作方式是**创建一个新的提交来替换掉最新的提交**，而不是在原提交上打补丁，因此，它会改变提交的哈希值）
 
@@ -648,11 +688,30 @@ Deleted branch feature1 (was 14096d0).
 
   - `git reset --hard <revision>`：最危险的重置（**全动**）。它移动分支指针（HEAD 和 分支 移动到目标提交）；暂存区被重置到`<revision>`那次提交的状态（那之后 `git add` 的东西没了）；工作目录被强制覆盖，所有未提交的更改（包括未暂存和已暂存的）都将永久丢失。
 
-- `git checkout <revision> -- <file>`: 丢弃`<file>`中做的修改，将它恢复到某个历史状态，这不会改变 `HEAD` 指针的位置。
+- `git revert`: 是一个**安全地撤销更改**的命令。它通过**创建一个新的提交**来抵消指定提交的更改，而不是从历史中删除任何内容。
 
+  当执行 `git revert <commit-hash>` 时：
+
+  1. **分析指定提交**：Git 分析你要撤销的提交引入了哪些更改
+  2. **创建反向补丁**：Git 计算如何反向应用这些更改
+  3. **生成新提交**：创建一个新的提交，其中的更改正好抵消原提交
+  4. **添加到历史**：这个新提交被添加到提交历史中
+
+  **效果**：代码内容回到了该提交之前的状态，但历史记录中保留了原提交和撤销提交。
+
+---
+
+**黄金法则：永远不要对改变推送到公共仓库（与他人共享）的公共分支的commit**
+
+如果你重写了已经推送到远程仓库的提交（git会提示不要这样做，但你可以通过`git push --force-with-lease`或`git push -f`强制推送），那么你的本地历史就和远程历史分叉了。当其他人尝试拉取你的分支时，他们会看到令人困惑的冲突，因为 Git 看到了两套不同的、包含相同变更的提交。
+
+这就是为什么`git revert`更安全，而事实上`git reset`只适合用于自己的本地、私有分支。
+
+---
+
+- `git checkout <revision> -- <file>`: 丢弃`<file>`中做的修改，将它恢复到某个历史状态，这不会改变 `HEAD` 指针的位置。
   - 由于`git checkout`身兼两职（切换分支和恢复文件）容易让人混淆，Git 在 2.23 版本引入了两个更科学、更安全的新命令来拆分它的功能：`git switch`和`git restore`。
   - 如果省略 `<revision>`（通常是提交哈希、分支名或标签），则默认从 暂存区（Stage） 恢复。如果暂存区没有，就从 `HEAD` 恢复。
-
 - `git restore`: git2.32 版本后取代 `git reset`和`git checkout`进行许多撤销操作；将工作目录或暂存区中的文件恢复到某个指定的历史状态。
 
   - `git restore --source=<revision> -- <file>`：从指定提交恢复文件。
@@ -816,6 +875,85 @@ git config --global alias.graph "log --all --graph --decorate --oneline" # 图�
 - `git add -p`: 交互式暂存文件的片段
   - 回答`s`表示分开暂存，例如可以把调试print语句不暂存，只保留更改代码。
 - `git rebase`: 将一系列补丁变基（rebase）为新的基线
+
+---
+
+**`git rebase`的两种用法：**
+
+1. **整理本地分支（尤其是与远程分支同步的场景）**
+
+   当在 `feature` 分支上开发时，主分支 `main` 可能已经有了新的提交。为了让 `feature` 分支历史更清晰，可以使用 rebase，将 `feature` 分支的基点从旧的 `main` 提交，移动到 `main` 分支最新的提交之后。
+
+   ```shell
+   git rebase main
+   # 这条命令的意思是：“找到当前分支 feature 和 main 分支的共同祖先，然后取出自从那个祖先之后我们在 feature 分支上的所有提交，并把它们重新应用到 main 分支的最新提交上。”
+   ```
+
+   **图示过程：**
+
+   初始状态：
+
+   ```text
+             A---B---C feature
+            /
+       D---E---F---G main
+   ```
+
+   执行 `git rebase main` 后：
+
+   ```text
+                         A'--B'--C' feature
+                        /
+       D---E---F---G main
+   ```
+
+   
+
+   注意，原来的提交 A, B, C 变成了 A', B', C'。这是因为它们是新的提交，虽然代码变更相同，但它们的提交ID（SHA-1哈希值）、提交时间、父提交都发生了变化。
+
+2. **整理提交历史（交互式变基）**
+
+   它允许在重新应用提交时，对它们进行编辑、合并、删除、重新排序等操作；这常用于在将代码推送到远程仓库前，清理本地提交历史，合并多个琐碎的提交为一个有意义的提交，或者修改某次提交的注释。
+
+   **操作：**
+
+   使用 `git rebase -i <commit>` 命令。`<commit>` 是想重写的提交的**父提交**。
+
+   例如，想整理最近的 3 次提交：
+
+   ```bash
+   git rebase -i HEAD~3
+   ```
+
+   这会打开一个交互式界面（通常是你的默认编辑器，如 Vim 或 VSCode），列出要操作的提交：
+
+   ```text
+   pick 1a2b3c4 Commit message for commit 1
+   pick 5d6e7f8 Commit message for commit 2
+   pick 9g0h1i2 Commit message for commit 3
+   
+   # 命令说明:
+   # p, pick <提交> = 使用提交
+   # r, reword <提交> = 使用提交，但修改提交信息
+   # e, edit <提交> = 使用提交，但停下来修改补丁
+   # s, squash <提交> = 使用提交，但将提交融合到前一个提交中
+   # f, fixup <提交> = 类似于 "squash"，但丢弃提交日志信息
+   # d, drop <提交> = 移除提交
+   ```
+
+   **常用操作：**
+
+   - **合并提交**：将第二、三行的 `pick` 改为 `squash`（或 `s`）或 `fixup`（`f`）。`squash` 会保留提交信息让你编辑，`fixup` 则直接丢弃被合并的提交信息。
+   - **修改提交信息**：将某行的 `pick` 改为 `reword`（或 `r`），保存后 Git 会让你重新输入提交信息。
+   - **删除提交**：直接删除对应行，或者将 `pick` 改为 `drop`（或 `d`）。
+   - **调整顺序**：直接上下移动行即可改变提交的顺序。
+
+   保存并关闭编辑器后，Git 会按照你的指令重新上演这些提交。
+
+---
+
+
+
 - `git blame`: 查看最后修改某行的人
 - `git stash`: 暂时移除工作目录下的修改内容，即将工作目录恢复到上一次提交的状态
   - `git stash pop`：恢复刚刚所做的更改

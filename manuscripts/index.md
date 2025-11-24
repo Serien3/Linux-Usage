@@ -37,9 +37,11 @@
 
 ```
 Linux-Usage/                    
-├── manuscripts/     # Linux-Usage的markdown手稿
-│   ├─ images/          # 存放manuscripts中用到的图片 
-├── release/         # Linux-Usage的pdf稿件
+├── manuscripts/    # Linux-Usage的markdown手稿
+│   ├─ images/    # 存放manuscripts中用到的图片 
+├── release/    # Linux-Usage的pdf稿件
+├── .github    # 用来部署pages的workflow
+├── mkdocs.yml    # 将manuscripts转换为pages 
 ├── README.md
 ├── LICENSE
 ```
