@@ -233,18 +233,45 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
 
 - `git branch`: 显示本地仓库的所有分支（本质上就是引用）
   - `git branch -vv`：显示所有分支的详细信息，包括跟踪的远程分支信息
-- `git branch <name>`: 创建分支（本质上就是一个引新的用）
+  
+  - `git branch -a`：列出所有本地和远程跟踪分支（远程分支以 `remotes/` 开头，显示的是Git 本地缓存的远程跟踪分支）
+  
+  - 注意：分支大致可以分为本地分支和远程跟踪分支。远程跟踪分支是远程仓库中的分支的引用，它们缓存在本地仓库中，可以与本地分支关联绑定。这些远程分支在本地是只读的引用，不能直接在上面提交更改。
+  
+    | 特性         | `git branch -a`       | `git branch -vv`           |
+    | :----------- | :-------------------- | :------------------------- |
+    | **显示内容** | 所有分支（本地+远程） | 仅本地分支                 |
+    | **跟踪信息** | ❌ 不显示              | ✅ 显示跟踪的远程分支       |
+    | **提交状态** | ❌ 不显示              | ✅ 显示ahead/behind状态     |
+    | **提交信息** | ❌ 不显示              | ✅ 显示最新提交             |
+    | **远程分支** | ✅ 显示远程跟踪分支    | ❌ 不单独显示远程分支       |
+    | **常用场景** | 查看所有可用分支      | 检查分支跟踪状态和同步情况 |
+  
+- `git branch <name>`: 创建分支（本质上就是一个新的引用）
+
+  - `git branch <name> <start_revision>`：这是完全体，基于一个指定起点创建分支
+
+  - 完全体最常用的情况是，基于远程分支创建本地分支，并且当使用远程分支作为起点时，Git会自动设置关联本地分支和远程分支。
+
+    e.g.  `git branch -b feature/login origin/feature/login`
+
 - `git branch -d <name>`:删除分支（本质上是删除一个引用）
   - 在 Git 中，分支只是提交的有向无环图 (DAG) 中提交的指针（引用）。这意味着删除分支只会删除对提交的引用，这可能会使 DAG 中的某些提交无法访问，从而不可见。但是，在已删除分支上的所有提交仍将在存储库中，至少在无法访问的提交被修剪之前（例如使用`git gc`）
   - 如果分支在被删除之前被合并到另一个分支，那么当第一个分支被删除时，所有提交仍然可以从另一个分支访问。它们保持原样；如果分支在没有被合并到另一个分支的情况下被删除，那么该分支中的提交（直到仍然可以访问的提交的分叉点）将不再可见。后者这种情况下使用`git branch -d`将拒绝删除分支，使用 strong的`git branch -D`可强制删除分支.
-- `git checkout -b <name>`: 创建分支并切换到该分支
+
+- `git checkout -b <name> [<start_revision>]`: 创建分支并切换到该分支
+
   - 相当于 `git branch <name>; git checkout <name>`
+  - e.g.  `git checkout -b feature/login origin/feature/login`：后面跟两个参数的情况，很常用。
+
 - `git switch <name>`：v2.23版本后专门用于**切换分支**的命令。取代 `git checkout <分支名>`。
   - `git switch -c <新分支名>`：创建并切换分支，取代 `git checkout -b`。
+
 - `git merge <revision>`: 合并到当前分支并创立新提交
   - `--no-commit`选项：合并的变更会存放在暂存区（Fast-forward不适用，因为它直接移动HEAD指针，而非合并创立新提交）
 
 - `git mergetool`: 使用工具来处理合并冲突
+
 - **git有三种分支合并方法**
   - **merge**
   - **rebase**
@@ -618,17 +645,32 @@ Deleted branch feature1 (was 14096d0).
 - `git push <remote> <local branch>:<remote branch>`: 将对象传送至远端并更新远端引用
 
   - 该命令会在远程仓库创建一个新分支或更新上面的一个分支
-    - 省略`<remote branch>`：本地分支名和远程分支名一样的情况下，可以省略；如果远程主机中不存在该分支，那么会被创建。
-  - `git push --all <remote_name>`：不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机`<remote_name>`，这时需要使用–all选项。
+    - 省略`:<remote branch>`：本地分支名和远程分支名一样的情况下，可以省略；如果远程主机中不存在该分支，那么会被创建。
+
+  - `git push --all <remote_name>`：不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机`<remote_name>`，这时需要使用`-–all`选项。
+
   - `git push origin :master` 等价于 `git push origin --delete master`：如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支。
 
   - Git可以用一些方法维护自己本地仓库的分支和远程仓库某分支的关联，这样`git push`就可以简化输入，它会知道当前分支对应的远端分支并自动扩展所有的参数。
-    - `git branch --set-upstream-to=<remote/remote branch>` (`<remote/remote branch>`,例如`origin/master`，)：设置当前分支跟踪来自origin的master分支。
+    - `git branch --set-upstream-to=<remote/remote branch>` (`<remote/remote branch>`,例如`origin/master`)：设置当前分支跟踪来自origin的master分支。
     - 最初使用`git push`完整命令时，顺便添加选项`-u`或`--set-upstream`，这会将本地分支与远程分支关联。
     - `git branch --unset-upstream <branch name>`: 解除关联
     - `git branch -vv`: 查看本地分支与远程分支的关联关系
 
-- `git fetch <remote>`: 与远程仓库通信，从远端获取对象/索引但不改变当前本地的对象与引用（若只有一个远程仓库，则`<remote>`默认直接使用它）
+  - **强制推送**：使用 `git push --force` 或 `git push -f` 将本地分支强制覆盖远程分支的操作。它会无视远程分支的提交历史差异，用本地分支完全替换远程分支。实际开发更推荐使用 `--force-with-lease`，这个选项会检查远程分支在你拉取后是否被他人修改过，大多数情况下，你可能忘记拉取远程最新状态（比如同事偷偷推送了更新，但你没注意），此时 `--force` 会直接覆盖别人的代码；而 `--force-with-lease` 会多一层保护，只有远程分支和你本地认知的「最后状态」一致时，才会执行覆盖，大幅降低误伤风险。
+
+    可使用场景：
+
+    - 本地分支变基（rebase）后
+    - 修改了最近提交信息（`git commit --amend`），重新整理了本地提交历史（`git rebase -i`），删除敏感信息提交后
+    - 分支清理，合并了多次小提交为有意义提交
+    - 远程分支有错误提交，回退到早期状态
+
+- `git fetch <remote>`: 与远程仓库通信，从远端获取对象/索引但不改变当前本地的对象与引用（提交，分支，标签，更新本地远程跟踪分支）。若只有一个远程仓库，则`<remote>`默认直接使用它。
+
+  - 查看他人进度，但不合并
+  - 远端仓库中某个分支已删除，但本地仍缓存着这个远程分支。`git fetch --prune`或`git fetch -p`：在获取远程更新的同时，删除本地已失效的远程跟踪分支
+  - 只获取特定分支。e.g.  `git fetch origin dev`
 
 - `git pull`: （参数同`git push`）相当于 `git fetch; git merge`
 
@@ -654,6 +696,8 @@ Deleted branch feature1 (was 14096d0).
        a. **确定目标**：默认情况下，它会找到远程仓库的**默认分支**（通常是 `origin/main` 或 `origin/master`）。
        b. **创建并切换分支**：它会在本地创建一个**同名的分支**（`main` 或 `master`），并将这个本地分支**指向**刚刚下载的 `origin/main` 所指向的那个最新提交。
        c. **更新工作目录**：最后，Git 将那个最新提交所对应的所有文件（代码、文档等）**提取出来**，并放置到你的工作目录中。这样，你就能看到一个完整的、可编译、可运行的项目代码了。
+       
+       d.**克隆项目后如何切换至指定分支？**首先使用`git branch -a`看一下远端分支是否被抓取缓存到本地，接着`git checkout -b <branch> <remote_branch> ` 即可基于某个远程分支创建本地分支并关联起来。
 
   - `-b <分支名>` 或 `--branch <分支名>`：指定要克隆后**立即检出**的特定分支，而不是远程的默认分支。
   - `--depth <数字>`：进行**浅克隆**。只下载最近的 n 次提交历史，而不是整个历史。这可以极大加快克隆速度，特别适用于历史非常悠久的大型项目。
@@ -741,7 +785,7 @@ git config [<级别>] <配置项> <值>
 
 其中 `[<级别>]` 是可选参数，用于指定配置级别，分别是 `--local`, `--global`, `--system`。如果省略，默认使用 `--local`。
 
-#### 1. 查看配置
+##### 1. 查看配置
 
 - **列出所有当前生效的配置**：
 
@@ -765,7 +809,7 @@ git config [<级别>] <配置项> <值>
   git config --global user.email # 查看全局配置的邮箱
   ```
 
-#### 2. 设置配置
+##### 2. 设置配置
 
 这是最常用的功能。
 
@@ -808,7 +852,7 @@ git config [<级别>] <配置项> <值>
   git config --global diff.tool vimdiff  # 例如设置为 vimdiff
   ```
 
-#### 3. 编辑配置
+##### 3. 编辑配置
 
 你也可以直接用编辑器修改配置文件，这样更容易管理多个设置。
 
@@ -825,7 +869,7 @@ git config [<级别>] <配置项> <值>
   git config --local --edit
   ```
 
-#### 4. 删除配置
+##### 4. 删除配置
 
 如果想移除某个设置，可以使用 `--unset` 选项。
 
@@ -835,7 +879,7 @@ git config [<级别>] <配置项> <值>
   git config --global --unset user.name
   ```
 
-#### 5. 常用配置项
+##### 5. 常用配置项
 
 ```shell
 # 1. 用户身份 (必设)
@@ -962,7 +1006,7 @@ git config --global alias.graph "log --all --graph --decorate --oneline" # 图�
 
 ---
 
-#### 1. 创建 `.gitignore` 文件
+##### 1. 创建 `.gitignore` 文件
 
 - **位置**：通常放在 Git 仓库的**根目录**下。但也可以在子目录中创建，其规则仅对该子目录及其子目录生效。
 
@@ -979,7 +1023,7 @@ git config --global alias.graph "log --all --graph --decorate --oneline" # 图�
 
   也可以直接用代码编辑器（如 VSCode）新建该文件。
 
-#### 2. 编写忽略规则
+##### 2. 编写忽略规则
 
 打开 `.gitignore` 文件，每一行写一个忽略模式（pattern）。语法非常简单但也非常强大。
 
@@ -1007,7 +1051,7 @@ git config --global alias.graph "log --all --graph --decorate --oneline" # 图�
 - `[abc]`：匹配方括号中的任何一个字符。
   - `[abc].txt`：忽略 `a.txt`，`b.txt`，`c.txt`。
 
-#### 3. 生效
+##### 3. 生效
 
 `.gitignore` 文件本身需要被提交到版本库中，这样所有克隆这个仓库的人都会共享同样的忽略规则。
 
@@ -1024,7 +1068,7 @@ git rm --cached <file>  # 从暂存区删除，停止跟踪，但保留本地文
 git commit -m "Stop tracking <file>"
 ```
 
-#### 4. 常用配置项
+##### 4. 常用配置项
 
 下面是一个非常典型的 `.gitignore` 文件内容，适用于多种语言的项目：
 
@@ -1124,7 +1168,7 @@ Github flow 的最大优点就是简单，对于"持续发布"，“改动即部
 
 问题在于它的假设：`master`分支的更新与产品的发布是一致的。也就是说，`master`分支的最新代码，默认就是当前的线上代码。可是，有些时候并非如此，代码合并进入`master`分支，并不代表它就能立刻发布。比如，苹果商店的APP提交审核以后，等一段时间才能上架。这时，如果还有新的代码提交，`master`分支就会与刚发布的版本不一致。另一个例子是，有些公司有发布窗口，只有指定时间才能发布，这也会导致线上版本落后于`master`分支。
 
-上面这种情况，只有`master`一个主分支就不够用了。通常，你不得不在`master`分支以外，另外新建一个`production`分支跟踪线上版本；或者结合简化Git Flow工作流 / 丰富功能分支工作流，提前做好约定；或者利用Github的标签 + release功能定期发布线上版本源代码与程序，而`master`只是用来存储和展示最新代码的。
+上面这种情况，只有`master`一个主分支就不够用了。通常，你不得不在`master`分支以外，另外新建一个`production`分支跟踪线上版本；或者结合简化Git Flow工作流 / 丰富功能分支工作流，提前做好约定；或者利用Github的**标签 + release**功能定期发布线上版本源代码与程序，而`master`只是用来存储和展示最新代码的。
 
 可以参考如下视频：
 
